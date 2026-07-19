@@ -13,6 +13,8 @@
 body { font-family: 'Inter', sans-serif; background: #FAFAF7; }
 .soft-elevation { box-shadow: 0px 4px 20px rgba(31,41,55,0.04); }
 .transition-lift:hover { transform: translateY(-2px); box-shadow: 0px 8px 24px rgba(15,76,76,0.06); }
+.ad-placeholder { background: #E8E8E3; border: 1px dashed #B0B0A8; display: flex; align-items: center; justify-content: center; color: #8A8A80; font-size: 0.75rem; letter-spacing: 0.05em; }
+.ad-placeholder::before { content: attr(data-label); }
 </style>
 </head>
 <body class="text-on-surface font-body-md overflow-x-hidden">
@@ -54,6 +56,9 @@ body { font-family: 'Inter', sans-serif; background: #FAFAF7; }
       </div>
     </div>
   </section>
+
+  <div class="ad-placeholder w-full max-w-[728px] h-[90px] mx-auto mb-12 rounded-lg" data-label="Reklam Alanı - 728x90"></div>
+
   <section class="mb-12 grid grid-cols-1 md:grid-cols-3 gap-6" id="tools">
     <div class="flex items-center gap-4 p-6 bg-surface-container-lowest rounded-xl soft-elevation border-l-4 border-[#F4972B]">
       <span class="material-symbols-outlined text-tertiary-container text-3xl">update</span>
@@ -132,6 +137,57 @@ body { font-family: 'Inter', sans-serif; background: #FAFAF7; }
       </div>
     </a>
   </section>
+
+  <div class="flex flex-col md:flex-row items-start gap-8 mb-12">
+    <div class="w-full md:w-2/3">
+      <section class="space-y-6">
+        <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">FinansMatik Nedir?</h2>
+        <p class="text-on-surface-variant leading-relaxed">FinansMatik, Türkiye'de yaşayan bireylerin günlük finansal hesaplamalarını kolay, hızlı ve güvenilir bir şekilde yapabilmesi için tasarlanmış bir platformdur. Kira artışından kıdem tazminatına, enflasyon düzeltmesinden döviz bütçe planlamasına kadar ihtiyacınız olan tüm finansal araçları tek bir çatı altında toplar.</p>
+        <p class="text-on-surface-variant leading-relaxed">TÜİK tarafından yayımlanan güncel enflasyon verileri ve TCMB döviz kurları ile uyumlu çalışan hesaplayıcılarımız sayesinde, manuel hesaplama hatalarını ortadan kaldırır ve dakikalar içinde doğru sonuçlara ulaşmanızı sağlar. Kayıt olmadan, reklamsız ve ücretsiz olarak tüm araçları kullanabilirsiniz.</p>
+        <p class="text-on-surface-variant leading-relaxed">Amacımız, finansal okuryazarlığı artırmak ve herkesin bütçesini bilinçli yönetmesine katkıda bulunmaktır. FinansMatik ile kararlarınızı verilere dayandırın, geleceğinizi güvence altına alın.</p>
+      </section>
+    </div>
+    <div class="w-full md:w-1/3">
+      <div class="ad-placeholder w-full h-[250px] rounded-lg" data-label="Reklam - 300x250"></div>
+    </div>
+  </div>
+
+  <section class="mb-12 bg-surface-container-low rounded-xl p-8 md:p-10">
+    <h2 class="font-headline-lg text-headline-lg-mobile md:text-[28px] text-primary mb-8 text-center">Neden FinansMatik?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="flex items-start gap-4">
+        <span class="material-symbols-outlined text-primary text-3xl flex-shrink-0">verified</span>
+        <div><h3 class="font-bold text-primary mb-1">Resmî Verilerle Uyumlu</h3><p class="text-body-sm text-on-surface-variant">Tüm hesaplamalar TÜİK, TCMB ve Hazine gibi resmî kaynakların güncel verilerine dayanır.</p></div>
+      </div>
+      <div class="flex items-start gap-4">
+        <span class="material-symbols-outlined text-primary text-3xl flex-shrink-0">timer</span>
+        <div><h3 class="font-bold text-primary mb-1">Saniyeler İçinde Sonuç</h3><p class="text-body-sm text-on-surface-variant">Karmaşık formüllerle uğraşmadan, tek tıkla anında hesaplama yapın.</p></div>
+      </div>
+      <div class="flex items-start gap-4">
+        <span class="material-symbols-outlined text-primary text-3xl flex-shrink-0">devices</span>
+        <div><h3 class="font-bold text-primary mb-1">Her Cihazda Çalışır</h3><p class="text-body-sm text-on-surface-variant">Mobil, tablet veya masaüstü fark etmeksizin tüm araçlara her yerden erişin.</p></div>
+      </div>
+      <div class="flex items-start gap-4">
+        <span class="material-symbols-outlined text-primary text-3xl flex-shrink-0">lock</span>
+        <div><h3 class="font-bold text-primary mb-1">%100 Gizlilik</h3><p class="text-body-sm text-on-surface-variant">Hiçbir veriniz sunuculara gönderilmez, tüm hesaplamalar tarayıcınızda yapılır.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-6 text-center">En Çok Kullanılan Hesaplayıcılar</h2>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="/kira-artis" class="px-5 py-2 bg-surface-container-lowest rounded-full soft-elevation text-sm font-medium text-secondary hover:text-primary hover:bg-primary-container/10 transition-all">Kira Artış</a>
+      <a href="/enflasyon-zam" class="px-5 py-2 bg-surface-container-lowest rounded-full soft-elevation text-sm font-medium text-secondary hover:text-primary hover:bg-primary-container/10 transition-all">Enflasyon Hesaplama</a>
+      <a href="/kidem-tazminati" class="px-5 py-2 bg-surface-container-lowest rounded-full soft-elevation text-sm font-medium text-secondary hover:text-primary hover:bg-primary-container/10 transition-all">Kıdem Tazminatı</a>
+      <a href="/doviz-butce" class="px-5 py-2 bg-surface-container-lowest rounded-full soft-elevation text-sm font-medium text-secondary hover:text-primary hover:bg-primary-container/10 transition-all">Döviz Bütçe</a>
+      <a href="/kredi" class="px-5 py-2 bg-surface-container-lowest rounded-full soft-elevation text-sm font-medium text-secondary hover:text-primary hover:bg-primary-container/10 transition-all">Kredi Hesaplama</a>
+      <a href="/mevduat" class="px-5 py-2 bg-surface-container-lowest rounded-full soft-elevation text-sm font-medium text-secondary hover:text-primary hover:bg-primary-container/10 transition-all">Mevduat Getirisi</a>
+      <a href="/maas" class="px-5 py-2 bg-surface-container-lowest rounded-full soft-elevation text-sm font-medium text-secondary hover:text-primary hover:bg-primary-container/10 transition-all">Maaş Hesaplama</a>
+    </div>
+  </section>
+
+  <div class="ad-placeholder w-full max-w-[728px] h-[90px] mx-auto rounded-lg" data-label="Reklam Alanı - 728x90"></div>
 </main>
 <footer class="bg-surface-container-lowest border-t border-outline-variant">
   <div class="flex flex-col md:flex-row justify-between items-center py-8 px-4 md:px-10 w-full max-w-[1200px] mx-auto gap-4">

@@ -10,197 +10,273 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 <style>
 .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-body { font-family: 'Inter', sans-serif; background: #FAFAF7; }
+body { font-family: 'Inter', sans-serif; background: #FAFAF7; min-height: max(884px, 100dvh); }
 .calculator-card { background: #fff; box-shadow: 0px 4px 20px rgba(31,41,55,0.04); border-radius: 1rem; }
 .result-card { background: #fff; box-shadow: 0px 10px 30px rgba(15,76,76,0.08); border-top: 4px solid #1B6B6B; border-radius: 1rem; }
 .tab-num { font-variant-numeric: tabular-nums; }
 input:focus, select:focus { outline: none; border-color: #1B6B6B !important; }
+.faq-item[open] .faq-icon { transform: rotate(180deg); }
+.ad-placeholder { background-color: #F3F4F1; border: 1px dashed #bfc8c8; display: flex; align-items: center; justify-content: center; flex-direction: column; color: #707978; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; }
 </style>
 </head>
 <body class="text-on-surface">
 <header class="bg-surface shadow-[0px_4px_20px_rgba(31,41,55,0.04)] sticky top-0 z-50">
-  <div class="flex justify-between items-center px-4 md:px-10 h-16 w-full max-w-[1200px] mx-auto">
-    <a href="/" class="flex items-center gap-2">
-      <span class="material-symbols-outlined text-primary text-3xl">account_balance</span>
-      <span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span>
-    </a>
-    <div class="hidden md:flex items-center gap-6">
-      <a href="/kira-artis" class="font-label-md text-sm text-primary font-bold border-b-2 border-primary pb-1">Kira Artış</a>
-      <a href="/enflasyon-zam" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Enflasyon</a>
-      <a href="/kidem-tazminati" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Tazminat</a>
-      <a href="/doviz-butce" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Döviz Bütçe</a>
-      <a href="/kredi" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Kredi</a>
-      <a href="/mevduat" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Mevduat</a>
-      <a href="/maas" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Maaş</a>
-    </div>
-    <button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant/50 p-2 rounded-full md:hidden" id="menuBtn">menu</button>
-  </div>
+<div class="flex justify-between items-center px-4 md:px-10 h-16 w-full max-w-[1200px] mx-auto">
+<a href="/" class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">account_balance</span>
+<span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span>
+</a>
+<div class="hidden md:flex items-center gap-6">
+<a href="/kira-artis" class="font-label-md text-sm text-primary font-bold border-b-2 border-primary pb-1">Kira Artış</a>
+<a href="/enflasyon-zam" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Enflasyon</a>
+<a href="/kidem-tazminati" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Tazminat</a>
+<a href="/doviz-butce" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Döviz Bütçe</a>
+<a href="/kredi" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Kredi</a>
+<a href="/mevduat" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Mevduat</a>
+<a href="/maas" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Maaş</a>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant/50 p-2 rounded-full md:hidden transition-colors" id="menuBtn_kira">menu</button>
+</div>
 </header>
-<nav id="mobileMenu" class="hidden fixed inset-0 z-40 bg-surface/95 backdrop-blur-md pt-24">
-  <div class="flex flex-col items-center gap-6 p-8 text-lg">
-    <a href="/" class="font-headline-md text-primary">Ana Sayfa</a>
-    <a href="/kira-artis" class="font-headline-md text-on-surface-variant">Kira Artış</a>
-    <a href="/enflasyon-zam" class="font-headline-md text-on-surface-variant">Enflasyon</a>
-    <a href="/kidem-tazminati" class="font-headline-md text-on-surface-variant">Tazminat</a>
-    <a href="/doviz-butce" class="font-headline-md text-on-surface-variant">Döviz Bütçe</a>
-    <a href="/kredi" class="font-headline-md text-on-surface-variant">Kredi</a>
-    <a href="/mevduat" class="font-headline-md text-on-surface-variant">Mevduat</a>
-    <a href="/maas" class="font-headline-md text-on-surface-variant">Maaş</a>
-  </div>
+<nav id="mobileMenu_kira" class="hidden fixed inset-0 z-40 bg-surface/95 backdrop-blur-md pt-24">
+<div class="flex flex-col items-center gap-6 p-8 text-lg">
+<a href="/" class="font-headline-md text-primary">Ana Sayfa</a>
+<a href="/kira-artis" class="font-headline-md text-primary font-bold">Kira Artış</a>
+<a href="/enflasyon-zam" class="font-headline-md text-on-surface-variant">Enflasyon</a>
+<a href="/kidem-tazminati" class="font-headline-md text-on-surface-variant">Tazminat</a>
+<a href="/doviz-butce" class="font-headline-md text-on-surface-variant">Döviz Bütçe</a>
+<a href="/kredi" class="font-headline-md text-on-surface-variant">Kredi</a>
+<a href="/mevduat" class="font-headline-md text-on-surface-variant">Mevduat</a>
+<a href="/maas" class="font-headline-md text-on-surface-variant">Maaş</a>
+</div>
 </nav>
+<div class="max-w-[1200px] mx-auto px-4 md:px-10 mt-4">
+<div class="ad-placeholder w-full max-w-[320px] h-[50px] mx-auto rounded-lg">
+<span class="material-symbols-outlined text-sm mb-1">ads_click</span>AdSense Reklam Alanı (320x50)
+</div>
+</div>
 <main class="max-w-[1200px] mx-auto px-4 md:px-10 py-8">
-  <section class="mb-12">
-    <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">Kira Artış Hesaplayıcı</h1>
-    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Yasal TÜFE oranlarına göre kira artışınızı profesyonel algoritmalarımızla saniyeler içinde hesaplayın.</p>
-  </section>
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
-    <div class="lg:col-span-5 calculator-card p-8 h-fit">
-      <form class="space-y-6" id="rentForm">
-        <div>
-          <label class="block font-label-md text-label-md text-on-surface-variant mb-2">Mevcut Kira Bedeli (TL)</label>
-          <div class="relative">
-            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-outline">₺</span>
-            <input class="w-full pl-10 pr-4 py-3 border border-outline-variant rounded-xl font-body-md transition-all" id="current_rent" placeholder="0.00" required type="number">
-          </div>
-        </div>
-        <div>
-          <label class="block font-label-md text-label-md text-on-surface-variant mb-3">Artış Yöntemi</label>
-          <div class="grid grid-cols-2 gap-4">
-            <label class="flex flex-col items-center justify-center p-4 border border-outline-variant rounded-xl cursor-pointer hover:border-secondary transition-all has-[:checked]:border-secondary has-[:checked]:bg-secondary/5">
-              <input checked class="sr-only" name="increase_type" type="radio" value="tufe">
-              <span class="font-label-md text-label-md group-has-[:checked]:text-secondary">TÜFE Oranı</span>
-            </label>
-            <label class="flex flex-col items-center justify-center p-4 border border-outline-variant rounded-xl cursor-pointer hover:border-secondary transition-all has-[:checked]:border-secondary has-[:checked]:bg-secondary/5">
-              <input class="sr-only" name="increase_type" type="radio" value="manual">
-              <span class="font-label-md text-label-md">Manuel Oran</span>
-            </label>
-          </div>
-        </div>
-        <div class="hidden" id="manual_rate_container">
-          <label class="block font-label-md text-label-md text-on-surface-variant mb-2">Yüzde Kaç Artış? (%)</label>
-          <input class="w-full px-4 py-3 border border-outline-variant rounded-xl font-body-md" id="manual_rate" placeholder="Örn: 25" type="number">
-        </div>
-        <div class="flex items-center gap-2 text-body-sm text-on-surface-variant bg-surface-container-low p-3 rounded-lg">
-          <span class="material-symbols-outlined text-secondary text-lg">info</span>
-          <span>Güncel TÜFE oranı: <strong id="currentTufeRate">yükleniyor...</strong></span>
-        </div>
-        <button class="w-full bg-[#F4972B] hover:bg-[#e08924] text-white font-headline-md text-[20px] py-4 rounded-xl shadow-lg transition-transform active:scale-[0.98]" type="submit">Hesapla</button>
-      </form>
-    </div>
-    <div class="lg:col-span-7 flex flex-col gap-6">
-      <div class="hidden space-y-6" id="results">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="result-card p-6 flex flex-col">
-            <span class="font-label-sm text-label-sm text-on-surface-variant mb-2">Yeni Kira Bedeli</span>
-            <span class="font-display-num text-display-num text-primary tab-num" id="new_rent_val">₺0</span>
-          </div>
-          <div class="result-card p-6 flex flex-col" style="border-top-color:#176969">
-            <span class="font-label-sm text-label-sm text-on-surface-variant mb-2">Artış Tutarı</span>
-            <span class="font-display-num text-display-num text-secondary tab-num" id="increase_val">₺0</span>
-          </div>
-          <div class="result-card p-6 flex flex-col" style="border-top-color:#663900">
-            <span class="font-label-sm text-label-sm text-on-surface-variant mb-2">Artış Oranı</span>
-            <span class="font-display-num text-display-num text-tertiary tab-num" id="rate_val">%0</span>
-          </div>
-        </div>
-        <div class="p-6 bg-surface-container-low rounded-xl border border-secondary/20">
-          <h4 class="font-headline-md text-[20px] text-primary mb-2 flex items-center gap-2">
-            <span class="material-symbols-outlined">info</span> Bilgilendirme
-          </h4>
-          <p class="font-body-sm text-body-sm text-on-surface-variant">Yukarıdaki hesaplama, TÜİK tarafından açıklanan en güncel TÜFE 12 aylık ortalama verilerine dayanmaktadır.</p>
-        </div>
-      </div>
-      <div id="placeholder" class="calculator-card p-12 flex flex-col items-center justify-center text-center">
-        <span class="material-symbols-outlined text-5xl text-outline mb-4">real_estate_agent</span>
-        <p class="text-on-surface-variant">Mevcut kira bedelinizi ve artış yönteminizi seçip hesaplayın.</p>
-      </div>
-    </div>
-  </div>
-  <section class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
-    <div>
-      <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-6">Nasıl hesaplanır?</h2>
-      <div class="space-y-4 font-body-md text-body-md text-on-surface-variant">
-        <p>Kira artış oranları, Borçlar Kanunu uyarınca her yıl TÜİK tarafından yayımlanan Tüketici Fiyat Endeksi (TÜFE) üzerinden belirlenir.</p>
-        <p>Konut kiralamalarında son dönemde uygulanan %25'lik sabit sınır uygulamasının sona ermesiyle birlikte, tekrar TÜFE endeksli hesaplama modeline geçilmiştir.</p>
-      </div>
-    </div>
-    <div class="space-y-4">
-      <h3 class="font-headline-md text-[20px] text-primary mb-6">Sıkça Sorulan Sorular</h3>
-      <div class="bg-surface-container-lowest border border-outline-variant/30 rounded-lg overflow-hidden">
-        <button class="w-full p-4 text-left flex justify-between items-center hover:bg-surface-container transition-colors" onclick="toggleFaq(this)">
-          <span class="font-label-md text-label-md text-on-surface">TÜFE kira artış oranı nedir?</span>
-          <span class="material-symbols-outlined transition-transform">expand_more</span>
-        </button>
-        <div class="faq-content hidden p-4 pt-0 text-body-sm text-on-surface-variant">TÜFE kira artış oranı, Tüketici Fiyat Endeksi'nin 12 aylık ortalamasına göre belirlenen yasal tavan fiyat artış sınırıdır.</div>
-      </div>
-      <div class="bg-surface-container-lowest border border-outline-variant/30 rounded-lg overflow-hidden">
-        <button class="w-full p-4 text-left flex justify-between items-center hover:bg-surface-container transition-colors" onclick="toggleFaq(this)">
-          <span class="font-label-md text-label-md text-on-surface">Yasal sınır nedir?</span>
-          <span class="material-symbols-outlined transition-transform">expand_more</span>
-        </button>
-        <div class="faq-content hidden p-4 pt-0 text-body-sm text-on-surface-variant">Temmuz 2024 itibarıyla konutlardaki %25'lik tavan fiyat uygulaması sona ermiştir. Yeni dönemde yasal sınır, TÜFE'nin 12 aylık ortalamasıdır.</div>
-      </div>
-      <div class="bg-surface-container-lowest border border-outline-variant/30 rounded-lg overflow-hidden">
-        <button class="w-full p-4 text-left flex justify-between items-center hover:bg-surface-container transition-colors" onclick="toggleFaq(this)">
-          <span class="font-label-md text-label-md text-on-surface">Ticari mülklerde artış nasıl olur?</span>
-          <span class="material-symbols-outlined transition-transform">expand_more</span>
-        </button>
-        <div class="faq-content hidden p-4 pt-0 text-body-sm text-on-surface-variant">İş yerleri ve ticari mülklerde kira artış oranı her zaman TÜFE 12 aylık ortalaması üzerinden hesaplanır.</div>
-      </div>
-    </div>
-  </section>
+<div class="w-full flex justify-center mb-12">
+<div class="ad-placeholder w-[728px] h-[90px] rounded-lg">Reklam Alanı (728x90)</div>
+</div>
+<section class="mb-12">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">Kira Artış Hesaplayıcı</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Yasal TÜFE oranlarına göre kira artışınızı profesyonel algoritmalarımızla saniyeler içinde hesaplayın.</p>
+</section>
+<div class="flex flex-col md:flex-row gap-6 items-start">
+<div class="w-full md:w-2/3 space-y-6">
+<section class="calculator-card overflow-hidden">
+<div class="h-1 bg-primary w-full"></div>
+<div class="p-8">
+<h2 class="font-headline-md text-headline-md mb-2">Kira Artış Hesaplama</h2>
+<p class="text-on-surface-variant mb-8 font-body-md">Mevcut kiranızı ve artış oranını girerek yeni dönem kira bedelinizi anında hesaplayın.</p>
+<form class="space-y-6" id="rentForm">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block font-label-md text-label-md mb-2 text-on-surface" for="currentRent">Mevcut Kira Bedeli (TL)</label>
+<div class="relative">
+<input class="w-full h-12 px-4 pr-12 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary bg-surface transition-all" id="currentRent" placeholder="0.00" type="number">
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-outline font-bold">₺</span>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md mb-2 text-on-surface" for="increaseRate">Artış Oranı (%)</label>
+<div class="relative">
+<input class="w-full h-12 px-4 pr-12 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary bg-surface transition-all" id="increaseRate" placeholder="65.07" type="number" value="65.07">
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-outline font-bold">%</span>
+</div>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md mb-2 text-on-surface">Popüler Oranlar (TÜFE 12 Aylık Ort.)</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 rounded-full bg-secondary-container/30 text-secondary font-label-md hover:bg-secondary-container transition-all" onclick="setRate(65.07)" type="button">Haziran 2024 (%65.07)</button>
+<button class="px-4 py-2 rounded-full bg-secondary-container/30 text-secondary font-label-md hover:bg-secondary-container transition-all" onclick="setRate(25.00)" type="button">Yasal Sınır Konut (%25)</button>
+<button class="px-4 py-2 rounded-full bg-secondary-container/30 text-secondary font-label-md hover:bg-secondary-container transition-all" onclick="setRate(59.64)" type="button">Mayıs 2024 (%59.64)</button>
+</div>
+</div>
+<div class="flex items-center gap-2 text-body-sm text-on-surface-variant bg-surface-container-low p-3 rounded-lg">
+<span class="material-symbols-outlined text-secondary text-lg">info</span>
+<span>Güncel TÜFE oranı: <strong id="currentTufeRate">yükleniyor...</strong></span>
+</div>
+<button class="w-full bg-[#F4972B] hover:bg-[#e08924] text-white font-headline-md text-[20px] py-4 rounded-xl shadow-lg transition-transform active:scale-[0.98]" type="submit">Hesapla</button>
+</form>
+</div>
+</section>
+<section class="hidden" id="resultCard">
+<div class="calculator-card p-8">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-secondary text-[32px]">task_alt</span>
+<h2 class="font-headline-md text-headline-md">Hesaplama Sonucu</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface p-4 rounded-lg">
+<span class="block text-body-sm text-on-surface-variant mb-1">Artış Tutarı</span>
+<span class="font-display-num text-display-num text-on-surface tab-num" id="increaseAmount">0,00 ₺</span>
+</div>
+<div class="bg-primary p-4 rounded-lg">
+<span class="block text-body-sm text-primary-fixed-dim mb-1">Yeni Kira Bedeli</span>
+<span class="font-display-num text-display-num text-white tab-num" id="newRent">0,00 ₺</span>
+</div>
+<div class="bg-surface p-4 rounded-lg">
+<span class="block text-body-sm text-on-surface-variant mb-1">Yıllık Toplam</span>
+<span class="font-display-num text-display-num text-on-surface tab-num" id="totalYearly">0,00 ₺</span>
+</div>
+</div>
+<div class="mt-8 p-4 bg-surface-container-low rounded-lg border border-outline-variant/30 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">info</span>
+<p class="text-body-sm text-on-surface-variant">Bu hesaplama, girdiğiniz artış oranına göre yapılmıştır. Konut kiralarında 1 Temmuz 2024'e kadar geçerli olan %25 artış sınırını unutmayınız.</p>
+</div>
+</div>
+<div class="mt-6">
+<div class="ad-placeholder w-full max-w-[300px] h-[250px] mx-auto rounded-xl">
+<span class="material-symbols-outlined text-2xl mb-2">ads_click</span>AdSense Reklam Alanı (300x250)
+</div>
+</div>
+</section>
+<article class="calculator-card p-8 space-y-6">
+<h2 class="font-headline-lg text-headline-lg">Kira Artış Oranı Nasıl Hesaplanır?</h2>
+<p class="font-body-md text-on-surface-variant leading-relaxed">Kira artış oranları, Borçlar Kanunu uyarınca belirlenmektedir. Normal şartlarda kira artışı, sözleşmenin yenilendiği ay açıklanan 12 aylık TÜFE (Tüketici Fiyat Endeksi) ortalamasını geçemez. Ancak, konut kiraları için getirilen geçici düzenleme ile bu oran %25 ile sınırlandırılmıştır.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-4">
+<h3 class="font-headline-md text-headline-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">apartment</span>Konut Kiraları
+</h3>
+<p class="font-body-sm text-on-surface-variant">Konutlarda 1 Temmuz 2024 tarihine kadar yapılacak yenilemelerde kira artış oranı en fazla %25 olabilir. Bu oran kanuni üst sınırdır.</p>
+</div>
+<div class="space-y-4">
+<h3 class="font-headline-md text-headline-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">store</span>İşyeri Kiraları
+</h3>
+<p class="font-body-sm text-on-surface-variant">İşyerlerinde %25 sınırı uygulanmaz. Artış oranı, o ay açıklanan 12 aylık TÜFE ortalaması üzerinden hesaplanır.</p>
+</div>
+</div>
+<div class="ad-placeholder w-full h-[120px] rounded-xl my-6">
+<span class="material-symbols-outlined text-2xl mb-2">ads_click</span>AdSense Yerel Reklam Alanı
+</div>
+</article>
+<section class="space-y-4">
+<h2 class="font-headline-lg text-headline-lg mb-6">Sıkça Sorulan Sorular</h2>
+<div class="space-y-2">
+<details class="faq-item group calculator-card cursor-pointer">
+<summary class="flex justify-between items-center p-5 list-none font-label-md text-label-md text-on-surface hover:bg-surface transition-colors">
+Kira artışı ne zaman yapılır?
+<span class="material-symbols-outlined faq-icon transition-transform duration-300">expand_more</span>
+</summary>
+<div class="px-5 pb-5 text-body-md text-on-surface-variant">Kira artışı, kira sözleşmesinin bitiminden sonraki yeni dönem başlangıcında yapılır. Genellikle yıllık olarak güncellenir.</div>
+</details>
+<details class="faq-item group calculator-card cursor-pointer">
+<summary class="flex justify-between items-center p-5 list-none font-label-md text-label-md text-on-surface hover:bg-surface transition-colors">
+TÜFE oranı nedir, neden önemlidir?
+<span class="material-symbols-outlined faq-icon transition-transform duration-300">expand_more</span>
+</summary>
+<div class="px-5 pb-5 text-body-md text-on-surface-variant">TÜFE (Tüketici Fiyat Endeksi), yaşam maliyetindeki değişimi ölçer. Kira kanununa göre artış üst sınırı 12 aylık TÜFE ortalamasıdır.</div>
+</details>
+<details class="faq-item group calculator-card cursor-pointer">
+<summary class="flex justify-between items-center p-5 list-none font-label-md text-label-md text-on-surface hover:bg-surface transition-colors">
+Mal sahibi %25'ten fazla artış isteyebilir mi?
+<span class="material-symbols-outlined faq-icon transition-transform duration-300">expand_more</span>
+</summary>
+<div class="px-5 pb-5 text-body-md text-on-surface-variant">Kanuni düzenleme gereği konutlarda mal sahibi %25'in üzerinde bir artış talep edemez, ancak taraflar anlaşırsa farklı oranlar uygulanabilir.</div>
+</details>
+</div>
+</section>
+</div>
+<aside class="w-full md:w-1/3 space-y-6">
+<div class="w-full flex justify-center">
+<div class="ad-placeholder w-[300px] h-[250px] rounded-lg">
+<span class="material-symbols-outlined text-2xl mb-1">ads_click</span>Reklam Alanı (300x250)
+</div>
+</div>
+<div class="bg-surface-container p-6 rounded-xl space-y-6">
+<h3 class="font-headline-md text-headline-md">Diğer Hesaplayıcılar</h3>
+<ul class="space-y-3">
+<li>
+<a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/kredi">
+<span class="material-symbols-outlined text-secondary">calculate</span>
+<span class="font-label-md text-label-md group-hover:text-primary">Kredi Ödeme Planı</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/mevduat">
+<span class="material-symbols-outlined text-secondary">savings</span>
+<span class="font-label-md text-label-md group-hover:text-primary">Mevduat Getirisi</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/enflasyon-zam">
+<span class="material-symbols-outlined text-secondary">trending_up</span>
+<span class="font-label-md text-label-md group-hover:text-primary">Enflasyon Hesaplama</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/kidem-tazminati">
+<span class="material-symbols-outlined text-secondary">receipt_long</span>
+<span class="font-label-md text-label-md group-hover:text-primary">Kıdem Tazminatı</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="sticky top-24">
+<div class="ad-placeholder w-full h-[600px] rounded-lg">
+<span class="material-symbols-outlined text-2xl mb-1">ads_click</span>Dikey Reklam Alanı (300x600)
+</div>
+</div>
+</aside>
+</div>
+<div class="w-full flex justify-center mt-12">
+<div class="ad-placeholder w-[728px] h-[90px] rounded-lg">Reklam Alanı (728x90)</div>
+</div>
 </main>
-<footer class="bg-surface-container-lowest border-t border-outline-variant">
-  <div class="flex flex-col md:flex-row justify-between items-center py-8 px-4 md:px-10 w-full max-w-[1200px] mx-auto gap-4">
-    <div class="flex items-center gap-2">
-      <span class="material-symbols-outlined text-primary text-2xl">account_balance</span>
-      <span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span>
-      <span class="text-body-sm text-on-surface-variant ml-4">© 2024 FinansMatik</span>
-    </div>
-    <div class="flex gap-6">
-      <a href="/hakkimizda" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">Hakkımızda</a>
-      <a href="/gizlilik" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">Gizlilik</a>
-      <a href="/iletisim" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">İletişim</a>
-    </div>
-  </div>
+<footer class="bg-surface-container-lowest border-t border-outline-variant mt-12">
+<div class="flex flex-col md:flex-row justify-between items-center py-8 px-4 md:px-10 w-full max-w-[1200px] mx-auto gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-2xl">account_balance</span>
+<span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span>
+<span class="text-body-sm text-on-surface-variant ml-4">© 2024 FinansMatik</span>
+</div>
+<div class="flex gap-6">
+<a href="/hakkimizda" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">Hakkımızda</a>
+<a href="/gizlilik" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">Gizlilik</a>
+<a href="/iletisim" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">İletişim</a>
+</div>
+</div>
 </footer>
 <script>
-function toggleFaq(btn) {
-  const content = btn.nextElementSibling;
-  const icon = btn.querySelector('.material-symbols-outlined');
-  document.querySelectorAll('.faq-content').forEach(el => { if(el !== content) el.classList.add('hidden'); });
-  document.querySelectorAll('.faq-content + .material-symbols-outlined, .faq-content ~ .material-symbols-outlined').forEach(el => { el.style.transform = 'rotate(0deg)'; });
-  content.classList.toggle('hidden');
-  icon.style.transform = content.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
-}
-document.getElementById('menuBtn')?.addEventListener('click', () => document.getElementById('mobileMenu')?.classList.toggle('hidden'));
-
+const formatCurrency = (num) => new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(num) + ' ₺';
+const formatCurrencyInt = (num) => new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(num) + ' ₺';
+function setRate(val) { document.getElementById('increaseRate').value = val; }
 let tufeRate = 65.07;
 fetch('https://gbgsykjrozmpkpsqukcp.supabase.co/rest/v1/inflation_data?select=*&order=month.desc&limit=1', {
-  headers: { 'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdiZ3N5a2pyb3ptcGtwc3F1a2NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM3MDg4NjMsImV4cCI6MjA5OTI4NDg2M30.r9wAql8KLX-TfRdu1PFRjgnuLSV2JjhYlAMV8rcN_1c' }
+headers: { 'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdiZ3N5a2pyb3ptcGtwc3F1a2NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM3MDg4NjMsImV4cCI6MjA5OTI4NDg2M30.r9wAql8KLX-TfRdu1PFRjgnuLSV2JjhYlAMV8rcN_1c' }
 }).then(r => r.json()).then(data => {
-  if (data.length > 0) { tufeRate = data[0].yearly_avg_rate || data[0].yearly_rate || 65.07; document.getElementById('currentTufeRate').textContent = '%' + tufeRate.toFixed(2); }
+if (data.length > 0) { tufeRate = data[0].yearly_avg_rate || data[0].yearly_rate || 65.07; document.getElementById('currentTufeRate').textContent = '%' + tufeRate.toFixed(2); }
 }).catch(() => {});
-
-document.querySelectorAll('input[name="increase_type"]').forEach(r => r.addEventListener('change', function() {
-  document.getElementById('manual_rate_container').classList.toggle('hidden', this.value !== 'manual');
-  document.getElementById('manual_rate').required = this.value === 'manual';
-}));
-
+document.getElementById('menuBtn_kira')?.addEventListener('click', () => document.getElementById('mobileMenu_kira')?.classList.toggle('hidden'));
 document.getElementById('rentForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const c = parseFloat(document.getElementById('current_rent').value);
-  const t = document.querySelector('input[name="increase_type"]:checked').value;
-  let r = tufeRate;
-  if (t === 'manual') r = parseFloat(document.getElementById('manual_rate').value);
-  if (isNaN(c) || isNaN(r)) return;
-  const inc = c * r / 100, n = c + inc;
-  document.getElementById('results').classList.remove('hidden');
-  document.getElementById('placeholder').classList.add('hidden');
-  const fmt = n => '₺' + new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2 }).format(n);
-  let p = 0, s = performance.now();
-  const anim = (now) => { const t = Math.min((now - s) / 700, 1); document.getElementById('new_rent_val').textContent = fmt(n * t); document.getElementById('increase_val').textContent = fmt(inc * t); document.getElementById('rate_val').textContent = '%' + (r * t).toFixed(2); if (t < 1) requestAnimationFrame(anim); };
-  requestAnimationFrame(anim);
+e.preventDefault();
+const current = parseFloat(document.getElementById('currentRent').value);
+const rate = parseFloat(document.getElementById('increaseRate').value);
+if (isNaN(current) || isNaN(rate)) return;
+const amount = (current * rate) / 100;
+const total = current + amount;
+const yearly = total * 12;
+const resultCard = document.getElementById('resultCard');
+resultCard.classList.remove('hidden');
+resultCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+const startTime = performance.now();
+const duration = 800;
+const animate = (now) => {
+const progress = Math.min((now - startTime) / duration, 1);
+const cAmount = amount * progress;
+const cTotal = total * progress;
+const cYearly = yearly * progress;
+document.getElementById('increaseAmount').textContent = formatCurrency(cAmount);
+document.getElementById('newRent').textContent = formatCurrency(cTotal);
+document.getElementById('totalYearly').textContent = formatCurrencyInt(cYearly);
+if (progress < 1) requestAnimationFrame(animate);
+};
+requestAnimationFrame(animate);
 });
 </script>
 </body>

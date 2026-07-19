@@ -13,6 +13,7 @@ body { font-family: 'Inter', sans-serif; background: #FAFAF7; }
 .calc-card { background: #fff; box-shadow: 0px 4px 20px rgba(31,41,55,0.04); border-radius: 1rem; }
 .tab-num { font-variant-numeric: tabular-nums; }
 input:focus { outline: none; border-color: #1B6B6B !important; }
+.ad-placeholder { background: #F3F4F1; border: 1px dashed #C2C2B8; display: flex; align-items: center; justify-content: center; color: #6F6F66; font-size: 0.8rem; text-align: center; }
 </style>
 </head>
 <body class="text-on-surface">
@@ -43,6 +44,11 @@ input:focus { outline: none; border-color: #1B6B6B !important; }
     <a href="/maas" class="font-headline-md text-on-surface-variant">Maaş</a>
   </div>
 </nav>
+
+<div class="max-w-[1200px] mx-auto px-4 md:px-10 py-4 flex justify-center">
+  <div class="ad-placeholder w-[320px] h-[50px] md:w-[728px] md:h-[90px]">Reklam Alanı</div>
+</div>
+
 <main class="max-w-[1200px] mx-auto px-4 md:px-10 py-8">
   <header class="mb-8">
     <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">Brüt-Net Maaş Hesaplama</h1>
@@ -69,12 +75,83 @@ input:focus { outline: none; border-color: #1B6B6B !important; }
           <div class="bg-surface-container p-4 rounded-xl"><span class="material-symbols-outlined text-tertiary text-2xl mb-2">receipt</span><p class="font-label-sm text-label-sm text-on-surface-variant">Gelir Vergisi</p><p class="font-headline-md text-headline-md text-tertiary tab-num" id="taxDeduction">₺0</p></div>
           <div class="bg-surface-container p-4 rounded-xl"><span class="material-symbols-outlined text-tertiary text-2xl mb-2">stamp</span><p class="font-label-sm text-label-sm text-on-surface-variant">Damga Vergisi</p><p class="font-headline-md text-headline-md text-tertiary tab-num" id="stampDeduction">₺0</p></div>
         </div>
+        <div class="flex justify-center pt-2">
+          <div class="ad-placeholder w-[300px] h-[250px]">Reklam Alanı</div>
+        </div>
       </div>
       <div id="placeholder" class="calc-card p-12 text-center"><span class="material-symbols-outlined text-5xl text-outline mb-4">percent</span><p class="text-on-surface-variant">Brüt maaşınızı girip hesaplayın.</p></div>
     </div>
   </div>
+
+  <section class="mt-16 space-y-6">
+    <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">Brütten Nete Maaş Hesaplama Nasıl Yapılır?</h2>
+    <p class="text-body-md text-on-surface-variant leading-relaxed">Brüt maaştan net maaşa ulaşmak için SGK işçi payı, işsizlik sigortası primi, gelir vergisi ve damga vergisi olmak üzere dört temel kesinti yapılır. SGK işçi payı brüt maaşın <strong>%14'ü</strong>, işsizlik sigortası primi ise <strong>%1'i</strong> oranındadır. Bu iki kesinti doğrudan brüt tutardan düşülerek vergi matrahı bulunur.</p>
+
+    <div class="flex justify-center my-4">
+      <div class="ad-placeholder w-full h-[120px]">Reklam Alanı</div>
+    </div>
+
+    <p class="text-body-md text-on-surface-variant leading-relaxed">Vergi matrahına, 2024 yılı için belirlenen artan oranlı gelir vergisi dilimleri uygulanır. İlk dilim <strong>%15</strong> olup, matrah büyüdükçe oran kademeli olarak <strong>%20, %27, %35 ve %40</strong>'a kadar yükselir. Son olarak brüt maaşın <strong>binde 7,59'u (%0,759)</strong> oranındaki damga vergisi eklenir. Tüm bu kesintilerin toplamı brüt maaştan çıkarıldığında net maaş elde edilir.</p>
+    <p class="text-body-md text-on-surface-variant leading-relaxed">Hesaplama yaparken dikkat edilmesi gereken en önemli nokta, gelir vergisi dilimlerinin yıl içinde aşılabileceğidir. Özellikle yüksek maaşlı çalışanlar, yılın belirli dönemlerinde üst dilime geçtiklerinde daha yüksek vergi oranına tabi olurlar. Bu nedenle brütten nete hesaplama yaparken güncel vergi dilimlerinin kullanılması büyük önem taşır.</p>
+
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+      <div class="bg-primary-container/30 rounded-xl p-4 text-center border border-primary/20">
+        <p class="font-headline-md text-primary text-lg">0 - ₺110.000</p>
+        <p class="font-label-sm text-on-surface-variant">%15</p>
+      </div>
+      <div class="bg-primary-container/30 rounded-xl p-4 text-center border border-primary/20">
+        <p class="font-headline-md text-primary text-lg">₺110K - ₺230K</p>
+        <p class="font-label-sm text-on-surface-variant">%20</p>
+      </div>
+      <div class="bg-primary-container/30 rounded-xl p-4 text-center border border-primary/20">
+        <p class="font-headline-md text-primary text-lg">₺230K - ₺580K</p>
+        <p class="font-label-sm text-on-surface-variant">%27</p>
+      </div>
+      <div class="bg-primary-container/30 rounded-xl p-4 text-center border border-primary/20">
+        <p class="font-headline-md text-primary text-lg">₺580K - ₺3M</p>
+        <p class="font-label-sm text-on-surface-variant">%35</p>
+      </div>
+      <div class="bg-primary-container/30 rounded-xl p-4 text-center border border-primary/20">
+        <p class="font-headline-md text-primary text-lg">₺3M+</p>
+        <p class="font-label-sm text-on-surface-variant">%40</p>
+      </div>
+    </div>
+
+    <div class="bg-[#FFF8F0] border-l-4 border-[#F4972B] rounded-xl p-6">
+      <div class="flex gap-4">
+        <span class="material-symbols-outlined text-[#F4972B] text-3xl shrink-0">info</span>
+        <div>
+          <p class="font-headline-md text-[#F4972B] mb-1">Bilgi</p>
+          <p class="text-body-md text-on-surface-variant">2024 yılı gelir vergisi dilimleri ücret gelirleri için yukarıdaki gibidir. Damga vergisi oranı ise 2024'te %0,759 olarak uygulanmaktadır. Bu oranlar Hazine ve Maliye Bakanlığı tarafından her yıl güncellenmektedir.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mt-12 space-y-6">
+    <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">Sıkça Sorulan Sorular</h2>
+    <div class="space-y-3">
+      <details class="calc-card p-5 group open:border-primary open:border-2 transition-all">
+        <summary class="font-headline-md text-headline-md text-on-surface cursor-pointer list-none flex items-center justify-between"><span>Hangi kesintiler maaştan düşülür?</span><span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span></summary>
+        <p class="mt-4 text-body-md text-on-surface-variant">Maaşınızdan dört temel kesinti yapılır: SGK işçi payı (%14), işsizlik sigortası primi (%1), gelir vergisi (artan oranlı dilimlerle %15-%40 arası) ve damga vergisi (%0,759). Bu kesintilerin toplamı brüt maaşınızdan düşüldükten sonra kalan tutar net maaşınız olarak elinize geçer.</p>
+      </details>
+      <details class="calc-card p-5 group open:border-primary open:border-2 transition-all">
+        <summary class="font-headline-md text-headline-md text-on-surface cursor-pointer list-none flex items-center justify-between"><span>Gelir vergisi dilimleri nasıl işler?</span><span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span></summary>
+        <p class="mt-4 text-body-md text-on-surface-variant">Türkiye'de gelir vergisi artan oranlı bir sistemle hesaplanır. Yani kazancınız arttıkça vergi oranınız da yükselir. 2024 yılı için ilk 110.000 TL %15, sonraki 120.000 TL %20, sonraki 350.000 TL %27, sonraki 2.420.000 TL %35 ve üzeri %40 oranında vergilendirilir. Her dilimde sadece o dilime giren kısım ilgili oranda vergilendirilir.</p>
+      </details>
+      <details class="calc-card p-5 group open:border-primary open:border-2 transition-all">
+        <summary class="font-headline-md text-headline-md text-on-surface cursor-pointer list-none flex items-center justify-between"><span>Asgari geçim indirimi (AGİ) nedir?</span><span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span></summary>
+        <p class="mt-4 text-body-md text-on-surface-variant">Asgari Geçim İndirimi (AGİ), çalışanın kendisi ve bakmakla yükümlü olduğu aile bireyleri için hesaplanan, ödenmesi gereken gelir vergisinden mahsup edilen bir tutardı. 2022 yılında asgari ücretin vergi dışı bırakılmasıyla birlikte AGİ uygulaması fiilen sona ermiştir. Güncel hesaplamalarda AGİ dikkate alınmamaktadır.</p>
+      </details>
+    </div>
+  </section>
 </main>
-<footer class="bg-surface-container-lowest border-t border-outline-variant mt-12">
+
+<div class="max-w-[1200px] mx-auto px-4 md:px-10 py-6 flex justify-center">
+  <div class="ad-placeholder w-[728px] h-[90px] max-w-full">Reklam Alanı</div>
+</div>
+
+<footer class="bg-surface-container-lowest border-t border-outline-variant mt-6">
   <div class="flex flex-col md:flex-row justify-between items-center py-8 px-4 md:px-10 w-full max-w-[1200px] mx-auto gap-4">
     <div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-2xl">account_balance</span><span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span><span class="text-body-sm text-on-surface-variant ml-4">© 2024 FinansMatik</span></div>
     <div class="flex gap-6">
@@ -86,6 +163,23 @@ input:focus { outline: none; border-color: #1B6B6B !important; }
 </footer>
 <script>
 document.getElementById('menuBtn_maas')?.addEventListener('click', () => document.getElementById('mobileMenu_maas')?.classList.toggle('hidden'));
+
+function formatCurrency(n) {
+  return '₺' + new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2 }).format(n);
+}
+
+function animateValue(el, start, end, duration) {
+  const d = duration || 800;
+  const startTime = performance.now();
+  function ease(t) { return 1 - Math.pow(1 - t, 3); }
+  function update(now) {
+    const p = Math.min((now - startTime) / d, 1);
+    el.textContent = formatCurrency(start + (end - start) * ease(p));
+    if (p < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
 document.getElementById('salaryForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const b = parseFloat(document.getElementById('grossSalary').value);
@@ -98,9 +192,13 @@ document.getElementById('salaryForm').addEventListener('submit', function(e) {
   else if (mat <= 3000000) v = 135000 + (mat - 580000) * 0.35;
   else v = 982000 + (mat - 3000000) * 0.40;
   const dv = b * 0.00759, net = b - sgk - iss - v - dv;
-  const fmt = n => '₺' + new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2 }).format(n);
-  document.getElementById('results').classList.remove('hidden'); document.getElementById('placeholder').classList.add('hidden');
-  document.getElementById('netSalary').textContent = fmt(net); document.getElementById('sgkDeduction').textContent = fmt(sgk); document.getElementById('unemploymentDeduction').textContent = fmt(iss); document.getElementById('taxDeduction').textContent = fmt(v); document.getElementById('stampDeduction').textContent = fmt(dv);
+  document.getElementById('results').classList.remove('hidden');
+  document.getElementById('placeholder').classList.add('hidden');
+  animateValue(document.getElementById('netSalary'), 0, net, 800);
+  animateValue(document.getElementById('sgkDeduction'), 0, sgk, 600);
+  animateValue(document.getElementById('unemploymentDeduction'), 0, iss, 600);
+  animateValue(document.getElementById('taxDeduction'), 0, v, 700);
+  animateValue(document.getElementById('stampDeduction'), 0, dv, 700);
 });
 </script>
 </body>

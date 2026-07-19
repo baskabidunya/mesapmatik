@@ -14,6 +14,7 @@ body { font-family: 'Inter', sans-serif; background: #FAFAF7; }
 .result-card { background: #fff; box-shadow: 0px 10px 30px rgba(15,76,76,0.08); border-top: 4px solid #176969; border-radius: 1rem; }
 .tab-num { font-variant-numeric: tabular-nums; }
 input:focus, select:focus { outline: none; border-color: #1B6B6B !important; }
+.ad-placeholder { background: #e8ecef; border: 2px dashed #bcc3cb; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; color: #6f7885; font-size: 0.875rem; font-weight: 500; margin: 1.5rem 0; }
 </style>
 </head>
 <body class="text-on-surface">
@@ -44,6 +45,7 @@ input:focus, select:focus { outline: none; border-color: #1B6B6B !important; }
     <a href="/maas" class="font-headline-md text-on-surface-variant">Maaş</a>
   </div>
 </nav>
+<div class="ad-placeholder mx-auto max-w-[320px] h-[50px]" id="adSlot1">Reklam Alanı 320x50</div>
 <main class="max-w-[1200px] mx-auto px-4 md:px-10 py-8">
   <header class="mb-8">
     <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">Mevduat Getirisi Hesaplama</h1>
@@ -72,11 +74,48 @@ input:focus, select:focus { outline: none; border-color: #1B6B6B !important; }
           <div class="result-card p-6" style="border-top-color:#663900"><span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Brüt Faiz</span><span class="font-display-num text-display-num text-tertiary tab-num" id="grossInterest">₺0</span></div>
           <div class="result-card p-6" style="border-top-color:#F4972B"><span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Vade Sonu Bakiye</span><span class="font-display-num text-display-num text-[#F4972B] tab-num" id="maturityBalance">₺0</span></div>
         </div>
+        <div class="ad-placeholder mx-auto max-w-[336px] h-[280px]" id="adSlot2">Reklam Alanı 336x280</div>
       </div>
       <div id="placeholder" class="calc-card p-12 text-center"><span class="material-symbols-outlined text-5xl text-outline mb-4">savings</span><p class="text-on-surface-variant">Anapara, faiz ve vade bilgilerini girip hesaplayın.</p></div>
     </div>
   </div>
+  <div class="ad-placeholder max-w-[728px] h-[90px] mx-auto" id="adSlot3">Reklam Alanı 728x90</div>
+  <section class="mt-12 space-y-8">
+    <div class="calc-card p-8">
+      <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">Mevduat Getirisi Nasıl Hesaplanır?</h2>
+      <p class="text-on-surface-variant mb-4 leading-relaxed">Mevduat faizi hesaplamasında öncelikle anapara, yıllık faiz oranı ve vade gün sayısı kullanılarak <strong>brüt faiz</strong> bulunur. Brüt faiz = (Anapara × Yıllık Faiz Oranı × Vade Günü) / 36500 formülü ile hesaplanır. Elde edilen bu tutar, vade sonunda hesabınıza yansıyacak olan ham faiz getirisidir.</p>
+      <p class="text-on-surface-variant mb-6 leading-relaxed">Brüt faiz üzerinden %10 oranında <strong>stopaj (vergi kesintisi)</strong> uygulanır. Stopaj oranı, vade uzunluğuna göre değişiklik gösterebilir ancak bu hesaplamada standart %10 oranı baz alınmıştır. Kalan tutar <strong>net getiri</strong> olarak anaparanıza eklenir ve <strong>vade sonu bakiye</strong>niz ortaya çıkar.</p>
+      <div class="bg-[#F4972B]/10 border-l-4 border-[#F4972B] p-5 rounded-r-xl mb-8">
+        <p class="font-semibold text-[#F4972B] text-sm uppercase tracking-wide mb-1">Hatırlatma</p>
+        <p class="text-on-surface-variant text-sm leading-relaxed">Mevduat getirinizi hesaplarken güncel stopaj oranlarını ve bankaların sunduğu kampanyalı faiz oranlarını dikkate almanız önerilir. Bu araç bilgilendirme amaçlıdır, kesin taahhüt içermez.</p>
+      </div>
+      <div class="relative rounded-xl overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=728&h=300&fit=crop" alt="Birikim" class="w-full h-48 md:h-64 object-cover">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-center px-8">
+          <span class="text-white text-2xl md:text-3xl font-bold font-headline-lg-mobile">Birikimlerinizi Büyütün</span>
+        </div>
+      </div>
+    </div>
+    <div class="calc-card p-8">
+      <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-6">Sıkça Sorulan Sorular</h2>
+      <div class="space-y-3">
+        <details class="border border-outline-variant rounded-xl overflow-hidden">
+          <summary class="px-5 py-4 font-semibold text-on-surface cursor-pointer bg-white hover:bg-surface-container-lowest transition-colors">Stopaj oranı nedir?</summary>
+          <div class="px-5 py-4 border-t border-outline-variant text-on-surface-variant text-sm leading-relaxed">Stopaj, mevduat faiz gelirinizden kesilen vergidir. 6 aya kadar (182 gün) vadelerde %10, 1 yıla kadar (365 gün) vadelerde %5, 1 yıldan uzun vadelerde ise %0 oranında uygulanır. Bu hesaplama aracında standart %10 oranı kullanılmıştır.</div>
+        </details>
+        <details class="border border-outline-variant rounded-xl overflow-hidden">
+          <summary class="px-5 py-4 font-semibold text-on-surface cursor-pointer bg-white hover:bg-surface-container-lowest transition-colors">En yüksek faiz veren bankalar hangileri?</summary>
+          <div class="px-5 py-4 border-t border-outline-variant text-on-surface-variant text-sm leading-relaxed">En yüksek mevduat faizi oranları bankadan bankaya ve dönemsel kampanyalara göre değişiklik gösterir. Güncel faiz oranlarını karşılaştırmak için bankaların resmi web sitelerini veya finansal karşılaştırma platformlarını ziyaret edebilirsiniz. Genellikle dijital bankalar ve hoş geldin kampanyaları daha avantajlı oranlar sunar.</div>
+        </details>
+        <details class="border border-outline-variant rounded-xl overflow-hidden">
+          <summary class="px-5 py-4 font-semibold text-on-surface cursor-pointer bg-white hover:bg-surface-container-lowest transition-colors">Vadeli hesap açarken nelere dikkat etmeli?</summary>
+          <div class="px-5 py-4 border-t border-outline-variant text-on-surface-variant text-sm leading-relaxed">Vadeli hesap açarken faiz oranı, vade süresi, stopaj oranı, vadeden önce çekim koşulları ve hesap işletim ücreti gibi faktörleri değerlendirmelisiniz. Ayrıca bankanın güvenilirliği, müşteri hizmetleri kalitesi ve dijital bankacılık olanakları da kararınızı etkilemelidir.</div>
+        </details>
+      </div>
+    </div>
+  </section>
 </main>
+<div class="ad-placeholder mx-auto max-w-[728px] h-[90px]" id="adSlot4">Reklam Alanı 728x90</div>
 <footer class="bg-surface-container-lowest border-t border-outline-variant mt-12">
   <div class="flex flex-col md:flex-row justify-between items-center py-8 px-4 md:px-10 w-full max-w-[1200px] mx-auto gap-4">
     <div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-2xl">account_balance</span><span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span><span class="text-body-sm text-on-surface-variant ml-4">© 2024 FinansMatik</span></div>
@@ -89,14 +128,25 @@ input:focus, select:focus { outline: none; border-color: #1B6B6B !important; }
 </footer>
 <script>
 document.getElementById('menuBtn_mevduat')?.addEventListener('click', () => document.getElementById('mobileMenu_mevduat')?.classList.toggle('hidden'));
+const fmt = n => '₺' + new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2 }).format(n);
+function animateValue(el, start, end, duration) {
+  const startTime = performance.now();
+  function step(now) {
+    const p = Math.min((now - startTime) / duration, 1);
+    el.textContent = fmt(start + (end - start) * p);
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
 document.getElementById('depositForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const a = parseFloat(document.getElementById('principal').value), f = parseFloat(document.getElementById('depositRate').value), v = parseInt(document.getElementById('depositTerm').value);
   if (isNaN(a) || isNaN(f)) return;
   const brut = a * f / 100 * v / 365, net = brut * 0.9, bitis = a + net;
-  const fmt = n => '₺' + new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2 }).format(n);
   document.getElementById('results').classList.remove('hidden'); document.getElementById('placeholder').classList.add('hidden');
-  document.getElementById('netReturn').textContent = fmt(net); document.getElementById('grossInterest').textContent = fmt(brut); document.getElementById('maturityBalance').textContent = fmt(bitis);
+  animateValue(document.getElementById('netReturn'), 0, net, 800);
+  animateValue(document.getElementById('grossInterest'), 0, brut, 800);
+  animateValue(document.getElementById('maturityBalance'), a, bitis, 800);
 });
 </script>
 </body>

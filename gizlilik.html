@@ -8,8 +8,10 @@
 <script src="/js/tailwind-config.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 <style>
+html { scroll-behavior: smooth; }
 .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
 body { font-family: 'Inter', sans-serif; background: #FAFAF7; }
+.ad-placeholder { background: #F3F4F1; border: 1px solid #bfc8c8; display: flex; align-items: center; justify-content: center; border-radius: 0.75rem; overflow: hidden; }
 </style>
 </head>
 <body class="text-on-surface font-body-md">
@@ -41,15 +43,47 @@ body { font-family: 'Inter', sans-serif; background: #FAFAF7; }
   </div>
 </nav>
 <main class="max-w-[800px] mx-auto px-4 md:px-0 py-16">
-  <h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">Gizlilik Politikası</h1>
-  <p class="font-body-lg text-body-lg text-on-surface-variant mb-8">Son güncelleme: 24 Mayıs 2024</p>
-  <article class="space-y-8 bg-surface-container-lowest p-8 md:p-12 rounded-xl">
-    <section><h2 class="font-headline-md text-[20px] text-primary mb-4">1. Giriş</h2><p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">FinansMatik olarak, kullanıcılarımızın gizliliğine büyük önem veriyoruz. Bu Gizlilik Politikası, web sitemizi kullandığınızda hangi verilerin toplandığını, nasıl kullanıldığını ve verilerinizin güvenliğini nasıl sağladığımızı açıklamaktadır.</p></section>
-    <section><h2 class="font-headline-md text-[20px] text-primary mb-4">2. Toplanan Veriler</h2><p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Hesaplama araçlarımıza girdiğiniz finansal veriler sunucularımızda kalıcı olarak saklanmaz, sadece anlık hesaplama için kullanılır. Site performansını artırmak amacıyla IP adresi, tarayıcı tipi ve site içi gezinme süreleri gibi teknik veriler toplanabilir.</p></section>
-    <section><h2 class="font-headline-md text-[20px] text-primary mb-4">3. KVKK Uyumluluğu</h2><p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Kişisel verileriniz, 6698 sayılı Kişisel Verilerin Korunması Kanunu uyarınca işlenmektedir.</p></section>
-    <section class="bg-primary-container text-on-primary-container p-6 rounded-xl"><h3 class="font-label-md text-label-md font-bold mb-2">Sorunuz mu var?</h3><p class="font-body-sm text-body-sm opacity-90 mb-4">Gizlilik politikamız hakkında daha fazla bilgi için bizimle iletişime geçin.</p><a href="/iletisim" class="inline-flex items-center gap-2 bg-white text-primary px-6 py-2 rounded-full font-label-md hover:shadow-lg transition-all">İletişime Geç</a></section>
+  <div class="mb-12 border-b border-outline-variant pb-8">
+    <h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">Gizlilik Politikası</h1>
+    <p class="font-body-lg text-body-lg text-on-surface-variant">Son güncelleme: 24 Mayıs 2024</p>
+  </div>
+  <article class="space-y-10 bg-surface-container-lowest p-8 md:p-12 rounded-xl shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+    <section>
+      <h2 class="font-headline-md text-[20px] text-primary mb-4 flex items-center gap-3"><span class="material-symbols-outlined text-secondary">database</span>Toplanan Veriler</h2>
+      <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Hesaplama araçlarımıza girdiğiniz finansal veriler (kredi tutarı, faiz oranları, vade vb.) sunucularımızda kalıcı olarak saklanmaz; sadece anlık hesaplama işlemi için kullanılır. Site performansını artırmak amacıyla IP adresi, tarayıcı tipi, işletim sistemi ve site içi gezinme süreleri gibi teknik veriler toplanabilir. İletişim formunu doldurmanız halinde adınız ve e-posta adresiniz yalnızca talebinize yanıt verebilmek için saklanır.</p>
+    </section>
+    <section>
+      <h2 class="font-headline-md text-[20px] text-primary mb-4 flex items-center gap-3"><span class="material-symbols-outlined text-secondary">insights</span>Veri Kullanımı</h2>
+      <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-4">Toplanan veriler yalnızca aşağıdaki amaçlarla kullanılır:</p>
+      <ul class="list-disc pl-6 space-y-3 font-body-md text-body-md text-on-surface-variant">
+        <li>Hizmetlerimizin iyileştirilmesi ve kişiselleştirilmesi</li>
+        <li>Kullanıcı deneyiminin analiz edilerek optimize edilmesi</li>
+        <li>Yasal yükümlülüklerin yerine getirilmesi</li>
+        <li>Kullanıcı güvenliğinin sağlanması ve suiistimallerin önlenmesi</li>
+      </ul>
+    </section>
+    <section>
+      <h2 class="font-headline-md text-[20px] text-primary mb-4 flex items-center gap-3"><span class="material-symbols-outlined text-secondary">cookie</span>Çerezler</h2>
+      <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">FinansMatik, kullanıcı deneyimini özelleştirmek ve trafiği analiz etmek için çerezler (cookies) kullanmaktadır. Zorunlu çerezler sitenin temel fonksiyonları için gereklidir. Analitik çerezler ise sitemizi nasıl kullandığınızı anlamamıza yardımcı olur. Tarayıcı ayarlarınızdan çerez tercihlerinizi dilediğiniz zaman değiştirebilirsiniz. Çerezler aracılığıyla toplanan veriler anonimleştirilerek analiz edilmektedir.</p>
+    </section>
+    <section>
+      <h2 class="font-headline-md text-[20px] text-primary mb-4 flex items-center gap-3"><span class="material-symbols-outlined text-secondary">share</span>Üçüncü Taraflar</h2>
+      <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Kişisel verileriniz, açık rızanız olmaksızın üçüncü taraflarla paylaşılmaz. Yasal zorunluluk hallerinde veya resmi makamların talebi doğrultusunda, kanunlara uygun şekilde bilgi paylaşımı yapılabilir. Reklam ve analitik hizmetleri için kullandığımız üçüncü taraf hizmet sağlayıcıları, yalnızca anonimleştirilmiş verilere erişebilir.</p>
+    </section>
+    <section>
+      <h2 class="font-headline-md text-[20px] text-primary mb-4 flex items-center gap-3"><span class="material-symbols-outlined text-secondary">mail</span>İletişim</h2>
+      <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Gizlilik politikamız veya kişisel verilerinizin işlenmesi hakkında sorularınız için bizimle iletişime geçebilirsiniz. KVKK kapsamındaki haklarınızı kullanmak için destek@finansmatik.com.tr adresine e-posta gönderebilirsiniz.</p>
+    </section>
+    <div class="bg-primary-container text-on-primary-container p-6 rounded-xl mt-8">
+      <h3 class="font-label-md text-label-md font-bold mb-2">Sorunuz mu var?</h3>
+      <p class="font-body-sm text-body-sm opacity-90 mb-4">Gizlilik politikamız veya verileriniz hakkında daha fazla bilgi almak için bizimle iletişime geçin.</p>
+      <a href="/iletisim" class="inline-flex items-center gap-2 bg-white text-primary px-6 py-2 rounded-full font-label-md text-label-md hover:shadow-lg transition-all active:scale-95">İletişime Geç</a>
+    </div>
   </article>
 </main>
+<div class="max-w-[1200px] mx-auto px-4 md:px-10 pb-12">
+  <div class="ad-placeholder w-full h-24"><span class="text-label-sm text-outline">728x90 Reklam Alanı</span></div>
+</div>
 <footer class="bg-surface-container-lowest border-t border-outline-variant">
   <div class="flex flex-col md:flex-row justify-between items-center py-8 px-4 md:px-10 w-full max-w-[1200px] mx-auto gap-4">
     <div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-2xl">account_balance</span><span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span><span class="text-body-sm text-on-surface-variant ml-4">© 2024 FinansMatik</span></div>
