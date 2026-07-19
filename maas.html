@@ -144,23 +144,23 @@ input:focus { outline: none; border-color: #1B6B6B !important; }
 
     <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
       <div class="bg-primary-container/30 rounded-xl p-4 text-center border border-primary/20">
-        <p class="font-headline-md text-primary text-lg">0 - ₺110.000</p>
+        <p class="font-headline-md text-primary text-lg">0 - ₺190.000</p>
         <p class="font-label-sm text-on-surface-variant">%15</p>
       </div>
       <div class="bg-primary-container/30 rounded-xl p-4 text-center border border-primary/20">
-        <p class="font-headline-md text-primary text-lg">₺110K - ₺230K</p>
+        <p class="font-headline-md text-primary text-lg">₺190K - ₺400K</p>
         <p class="font-label-sm text-on-surface-variant">%20</p>
       </div>
       <div class="bg-primary-container/30 rounded-xl p-4 text-center border border-primary/20">
-        <p class="font-headline-md text-primary text-lg">₺230K - ₺580K</p>
+        <p class="font-headline-md text-primary text-lg">₺400K - ₺1,5M</p>
         <p class="font-label-sm text-on-surface-variant">%27</p>
       </div>
       <div class="bg-primary-container/30 rounded-xl p-4 text-center border border-primary/20">
-        <p class="font-headline-md text-primary text-lg">₺580K - ₺3M</p>
+        <p class="font-headline-md text-primary text-lg">₺1,5M - ₺5,3M</p>
         <p class="font-label-sm text-on-surface-variant">%35</p>
       </div>
       <div class="bg-primary-container/30 rounded-xl p-4 text-center border border-primary/20">
-        <p class="font-headline-md text-primary text-lg">₺3M+</p>
+        <p class="font-headline-md text-primary text-lg">₺5,3M+</p>
         <p class="font-label-sm text-on-surface-variant">%40</p>
       </div>
     </div>
@@ -170,7 +170,7 @@ input:focus { outline: none; border-color: #1B6B6B !important; }
         <span class="material-symbols-outlined text-[#F4972B] text-3xl shrink-0">info</span>
         <div>
           <p class="font-headline-md text-[#F4972B] mb-1">Bilgi</p>
-          <p class="text-body-md text-on-surface-variant">2024 yılı gelir vergisi dilimleri ücret gelirleri için yukarıdaki gibidir. Damga vergisi oranı ise 2024'te %0,759 olarak uygulanmaktadır. Bu oranlar Hazine ve Maliye Bakanlığı tarafından her yıl güncellenmektedir.</p>
+          <p class="text-body-md text-on-surface-variant">2026 yılı gelir vergisi dilimleri ücret gelirleri için yukarıdaki gibidir. Damga vergisi oranı ise %0,759 olarak uygulanmaktadır. Bu oranlar Hazine ve Maliye Bakanlığı tarafından her yıl güncellenmektedir.</p>
         </div>
       </div>
     </div>
@@ -252,11 +252,11 @@ document.getElementById('salaryForm').addEventListener('submit', function(e) {
   if (isNaN(b)) return;
   const sgk = b * 0.14, iss = b * 0.01, mat = b - sgk - iss;
   let v = 0;
-  if (mat <= 110000) v = mat * 0.15;
-  else if (mat <= 230000) v = 16500 + (mat - 110000) * 0.20;
-  else if (mat <= 580000) v = 40500 + (mat - 230000) * 0.27;
-  else if (mat <= 3000000) v = 135000 + (mat - 580000) * 0.35;
-  else v = 982000 + (mat - 3000000) * 0.40;
+  if (mat <= 190000) v = mat * 0.15;
+  else if (mat <= 400000) v = 28500 + (mat - 190000) * 0.20;
+  else if (mat <= 1500000) v = 70500 + (mat - 400000) * 0.27;
+  else if (mat <= 5300000) v = 367500 + (mat - 1500000) * 0.35;
+  else v = 1697500 + (mat - 5300000) * 0.40;
   const dv = b * 0.00759, net = b - sgk - iss - v - dv;
   document.getElementById('results').classList.remove('hidden');
   document.getElementById('placeholder').classList.add('hidden');

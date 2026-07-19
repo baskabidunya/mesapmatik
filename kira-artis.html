@@ -82,7 +82,7 @@ input:focus, select:focus { outline: none; border-color: #1B6B6B !important; }
 <div>
 <label class="block font-label-md text-label-md mb-2 text-on-surface" for="increaseRate">Artış Oranı (%)</label>
 <div class="relative">
-<input class="w-full h-12 px-4 pr-12 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary bg-surface transition-all" id="increaseRate" placeholder="65.07" type="number" value="65.07">
+<input class="w-full h-12 px-4 pr-12 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary bg-surface transition-all" id="increaseRate" placeholder="45.50" type="number" value="45.50">
 <span class="absolute right-4 top-1/2 -translate-y-1/2 text-outline font-bold">%</span>
 </div>
 </div>
@@ -90,9 +90,9 @@ input:focus, select:focus { outline: none; border-color: #1B6B6B !important; }
 <div>
 <label class="block font-label-md text-label-md mb-2 text-on-surface">Popüler Oranlar (TÜFE 12 Aylık Ort.)</label>
 <div class="flex flex-wrap gap-2">
-<button class="px-4 py-2 rounded-full bg-secondary-container/30 text-secondary font-label-md hover:bg-secondary-container transition-all" onclick="setRate(65.07)" type="button">Haziran 2024 (%65.07)</button>
+            <button class="px-4 py-2 rounded-full bg-secondary-container/30 text-secondary font-label-md hover:bg-secondary-container transition-all" onclick="setRate(45.50)" type="button">Haziran 2026 (%45.50)</button>
 <button class="px-4 py-2 rounded-full bg-secondary-container/30 text-secondary font-label-md hover:bg-secondary-container transition-all" onclick="setRate(25.00)" type="button">Yasal Sınır Konut (%25)</button>
-<button class="px-4 py-2 rounded-full bg-secondary-container/30 text-secondary font-label-md hover:bg-secondary-container transition-all" onclick="setRate(59.64)" type="button">Mayıs 2024 (%59.64)</button>
+<button class="px-4 py-2 rounded-full bg-secondary-container/30 text-secondary font-label-md hover:bg-secondary-container transition-all" onclick="setRate(48.20)" type="button">Mayıs 2026 (%48.20)</button>
 </div>
 </div>
 <div class="flex items-center gap-2 text-body-sm text-on-surface-variant bg-surface-container-low p-3 rounded-lg">
@@ -261,7 +261,7 @@ Mal sahibi %25'ten fazla artış isteyebilir mi?
 const formatCurrency = (num) => new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(num) + ' ₺';
 const formatCurrencyInt = (num) => new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(num) + ' ₺';
 function setRate(val) { document.getElementById('increaseRate').value = val; }
-let tufeRate = 65.07;
+let tufeRate = 45.50;
 fetch('https://gbgsykjrozmpkpsqukcp.supabase.co/rest/v1/inflation_data?select=*&order=month.desc&limit=1', {
 headers: { 'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdiZ3N5a2pyb3ptcGtwc3F1a2NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM3MDg4NjMsImV4cCI6MjA5OTI4NDg2M30.r9wAql8KLX-TfRdu1PFRjgnuLSV2JjhYlAMV8rcN_1c' }
 }).then(r => r.json()).then(data => {

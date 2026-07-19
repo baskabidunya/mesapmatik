@@ -124,7 +124,7 @@ HESAPLA
 <div class="relative z-10">
 <h3 class="font-headline-md text-[20px] mb-2">2024 Kıdem Tavanı</h3>
 <p class="font-display-num text-[36px] mb-1 tab-num" id="ceilingDisplay">35.058,58 ₺</p>
-<p class="font-label-sm text-[12px] opacity-80">01.01.2024 - 30.06.2024 dönemi için geçerlidir.</p>
+<p class="font-label-sm text-[12px] opacity-80">01.07.2026 - 31.12.2026 dönemi için geçerlidir.</p>
 </div>
 <span class="material-symbols-outlined absolute -right-4 -bottom-4 text-white/10 text-9xl pointer-events-none">trending_up</span>
 </div>
@@ -269,7 +269,7 @@ PDF Olarak İndir
 </div>
 </footer>
 <script>
-let ceilingAmount = 35058.58;
+let ceilingAmount = 73729.87;
 fetch('https://gbgsykjrozmpkpsqukcp.supabase.co/rest/v1/severance_ceilings?select=*&order=valid_from.desc&limit=1', {
 headers: { 'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdiZ3N5a2pyb3ptcGtwc3F1a2NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM3MDg4NjMsImV4cCI6MjA5OTI4NDg2M30.r9wAql8KLX-TfRdu1PFRjgnuLSV2JjhYlAMV8rcN_1c' }
 }).then(r => r.json()).then(d => {
