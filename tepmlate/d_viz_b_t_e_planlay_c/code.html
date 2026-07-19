@@ -1,0 +1,402 @@
+<!DOCTYPE html><html class="light" lang="tr"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Döviz Bütçe Planlayıcı | FinansMatik</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Sora:wght@100..900&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-container": "#0f4c4c",
+                    "surface-dim": "#d0dbed",
+                    "on-secondary-fixed": "#002020",
+                    "surface": "#f8f9ff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-container": "#f99b2f",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#85bbbb",
+                    "surface-tint": "#306767",
+                    "tertiary": "#472600",
+                    "on-secondary-container": "#1e6d6d",
+                    "on-primary-fixed": "#002020",
+                    "surface-container": "#e6eeff",
+                    "outline": "#707978",
+                    "inverse-primary": "#9ad0d0",
+                    "on-background": "#121c2a",
+                    "inverse-surface": "#27313f",
+                    "on-primary-fixed-variant": "#134f4f",
+                    "on-tertiary-fixed": "#2d1600",
+                    "primary": "#003434",
+                    "on-secondary-fixed-variant": "#004f50",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed": "#a7efef",
+                    "outline-variant": "#bfc8c8",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#ffdcbf",
+                    "surface-variant": "#d9e3f6",
+                    "primary-fixed": "#b5edec",
+                    "tertiary-container": "#663900",
+                    "on-surface-variant": "#404848",
+                    "on-surface": "#121c2a",
+                    "background": "#f8f9ff",
+                    "on-primary": "#ffffff",
+                    "primary-fixed-dim": "#9ad0d0",
+                    "secondary": "#176969",
+                    "surface-container-high": "#dee9fc",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#d9e3f6",
+                    "inverse-on-surface": "#eaf1ff",
+                    "surface-container-lowest": "#ffffff",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#a4ecec",
+                    "surface-bright": "#f8f9ff",
+                    "secondary-fixed-dim": "#8bd3d2",
+                    "on-tertiary-fixed-variant": "#6a3b00",
+                    "tertiary-fixed-dim": "#ffb872",
+                    "surface-container-low": "#eff4ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "container-max": "1200px",
+                    "base": "8px",
+                    "ad-slot-margin": "48px",
+                    "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "headline-md": ["Sora"],
+                    "label-sm": ["Inter"],
+                    "headline-lg": ["Sora"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-num": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Sora"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-num": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .currency-input-focus:focus-within {
+            border-color: #1B6B6B;
+            box-shadow: 0 0 0 1px #1B6B6B;
+        }
+        .card-shadow {
+            box-shadow: 0px 4px 20px rgba(31, 41, 55, 0.04);
+        }
+        .result-shadow {
+            box-shadow: 0px 10px 30px rgba(15, 76, 76, 0.08);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface-dim shadow-[0px_4px_20px_rgba(31,41,55,0.04)] sticky top-0 z-50">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim font-headline-md text-headline-md">account_balance</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">FinansMatik</h1>
+</div>
+<nav class="hidden md:flex gap-6">
+<a class="font-label-md text-label-md text-on-surface hover:bg-surface-variant/50 transition-colors px-3 py-2 rounded-lg" href="#">Ana Sayfa</a>
+<a class="font-label-md text-label-md text-on-surface hover:bg-surface-variant/50 transition-colors px-3 py-2 rounded-lg" href="#">Hesaplamalar</a>
+<a class="font-label-md text-label-md text-on-surface hover:bg-surface-variant/50 transition-colors px-3 py-2 rounded-lg" href="#">Döviz</a>
+</nav>
+<button class="material-symbols-outlined text-primary p-2 hover:bg-surface-variant/50 rounded-full transition-all">menu</button>
+</div>
+</header><div class="w-full flex justify-center py-4 bg-surface-container-low border-b border-outline-variant/20">
+  <div class="w-[320px] h-[50px] bg-surface-container-highest border border-outline-variant flex items-center justify-center rounded">
+    <span class="text-label-sm text-on-surface-variant/50">AdSense Reklam Alanı (320x50)</span>
+  </div>
+</div>
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 md:py-12">
+<!-- Hero Section -->
+<div class="mb-12 text-center md:text-left max-w-2xl">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">Döviz Bütçe Planlayıcı</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Gelecek hedefleriniz için birikiminizi planlayın. Hedeflediğiniz döviz tutarına ulaşmak için aylık ne kadar tasarruf yapmanız gerektiğini anında hesaplayın.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Calculation Form -->
+<div class="lg:col-span-7 bg-surface-container-lowest p-6 md:p-8 rounded-xl card-shadow border border-outline-variant/30">
+<div class="space-y-6">
+<!-- Total Budget -->
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant block">Toplam Bütçe (TL)</label>
+<div class="relative currency-input-focus flex items-center border border-outline-variant rounded-lg transition-all h-14 bg-white overflow-hidden">
+<span class="pl-4 pr-2 text-on-surface-variant font-body-md">₺</span>
+<input class="flex-grow border-none focus:ring-0 font-body-md text-on-surface px-0" id="totalBudget" placeholder="Örn: 50.000" type="number">
+</div>
+</div>
+<!-- Currency Selection -->
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant block">Hedef Döviz Cinsi</label>
+<div class="grid grid-cols-3 gap-3">
+<button class="currency-chip border-2 border-primary-container bg-primary-container/10 text-primary-container py-3 rounded-lg font-label-md flex flex-col items-center gap-1 transition-all" data-currency="USD">
+<span class="font-bold">USD</span>
+<span class="text-[10px] opacity-70">Amerikan Doları</span>
+</button>
+<button class="currency-chip border-2 border-outline-variant text-on-surface-variant py-3 rounded-lg font-label-md flex flex-col items-center gap-1 hover:border-primary-container/50 transition-all" data-currency="EUR">
+<span class="font-bold">EUR</span>
+<span class="text-[10px] opacity-70">Euro</span>
+</button>
+<button class="currency-chip border-2 border-outline-variant text-on-surface-variant py-3 rounded-lg font-label-md flex flex-col items-center gap-1 hover:border-primary-container/50 transition-all" data-currency="GBP">
+<span class="font-bold">GBP</span>
+<span class="text-[10px] opacity-70">İngiliz Sterlini</span>
+</button>
+</div>
+</div>
+<!-- Duration -->
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant block">Planlanan Süre (Ay)</label>
+<div class="grid grid-cols-4 md:grid-cols-6 gap-2">
+<!-- Duration Chips -->
+<button class="duration-chip border border-outline-variant text-on-surface-variant py-2 rounded-full font-label-sm hover:bg-surface-container transition-all" data-months="3">3 Ay</button>
+<button class="duration-chip border border-outline-variant text-on-surface-variant py-2 rounded-full font-label-sm hover:bg-surface-container transition-all" data-months="6">6 Ay</button>
+<button class="duration-chip border border-primary text-on-primary bg-primary py-2 rounded-full font-label-sm transition-all" data-months="12">12 Ay</button>
+<button class="duration-chip border border-outline-variant text-on-surface-variant py-2 rounded-full font-label-sm hover:bg-surface-container transition-all" data-months="18">18 Ay</button>
+<button class="duration-chip border border-outline-variant text-on-surface-variant py-2 rounded-full font-label-sm hover:bg-surface-container transition-all" data-months="24">24 Ay</button>
+<button class="duration-chip border border-outline-variant text-on-surface-variant py-2 rounded-full font-label-sm hover:bg-surface-container transition-all" data-months="36">36 Ay</button>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full bg-[#F4972B] hover:bg-[#e08920] text-white font-headline-md text-headline-md py-4 rounded-xl shadow-lg transition-all active:scale-[0.98] mt-4" id="calculateBtn">
+                        Hesapla
+                    </button>
+</div>
+</div>
+<!-- Results Section -->
+<div class="lg:col-span-5 space-y-6">
+<div class="bg-surface-container-lowest rounded-xl result-shadow border-t-4 border-primary overflow-hidden transition-all opacity-100" id="resultCard">
+<div class="p-6 md:p-8 space-y-8">
+<div class="text-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Tahmini Döviz Karşılığı</span>
+<div class="mt-2 flex items-baseline justify-center gap-2">
+<span class="font-display-num text-display-num text-primary">$</span>
+<span class="font-display-num text-display-num text-primary" id="fxTotal">1.462</span>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<div class="bg-surface-container-low p-4 rounded-lg flex items-center justify-between">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Aylık Tasarruf Hedefi</p>
+<p class="font-headline-md text-headline-md text-secondary">4.166 TL</p>
+</div>
+<span class="material-symbols-outlined text-secondary text-3xl">savings</span>
+</div>
+<div class="bg-tertiary-container/10 p-4 rounded-lg border border-tertiary-container/20">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant mt-0.5">info</span>
+<div>
+<p class="font-label-md text-label-md text-on-tertiary-fixed-variant font-bold">Kur Tahmin Notu</p>
+<p class="font-body-sm text-body-sm text-on-tertiary-fixed-variant mt-1 leading-relaxed">Piyasa beklentileri ve enflasyon verileri doğrultusunda, seçilen dönem sonunda kurun %12-15 bandında yukarı yönlü seyretmesi muhtemeldir. Planınızı %5 esneklik payı ile yapmanız önerilir.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="w-full flex justify-center py-6">
+  <div class="w-[300px] h-[250px] bg-surface-container-highest border border-outline-variant flex flex-col items-center justify-center rounded-xl shadow-sm">
+    <span class="text-label-sm text-on-surface-variant/50 uppercase tracking-tighter mb-2">Sponsor</span>
+    <span class="text-label-md text-on-surface-variant/70">AdSense Reklam Alanı</span>
+  </div>
+</div>
+<!-- Ad Slot -->
+<div class="bg-[#F3F4F1] rounded-xl p-8 flex flex-col items-center justify-center text-center border border-outline-variant/20 min-h-[250px]">
+<span class="font-label-sm text-label-sm text-on-surface-variant/50 uppercase mb-4">Sponsorlu İçerik</span>
+<div class="w-full h-32 bg-surface-container border border-dashed border-outline-variant rounded-lg flex items-center justify-center">
+<p class="text-on-surface-variant font-body-sm px-4">Yüksek Faizli Birikim Hesabı ile hedeflerinize daha hızlı ulaşın. Şimdi başvurun.</p>
+</div>
+<button class="mt-4 text-primary font-label-md border-b border-primary">Hemen İncele</button>
+</div>
+</div>
+</div>
+<!-- SEO Content -->
+<section class="mt-ad-slot-margin grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<div class="lg:col-span-2 prose prose-slate">
+<h3 class="font-headline-md text-headline-md text-primary mb-6">Döviz Bütçesi Neden Önemli?</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Finansal özgürlük yolculuğunda birikim yapmak kadar, bu birikimin değerini korumak da kritik bir öneme sahiptir. Türkiye gibi gelişmekte olan piyasalarda döviz bütçe planlayıcısı kullanmak, özellikle yurtdışı seyahati, teknolojik ürün alımı veya eğitim masrafları gibi dövize endeksli hedeflerinizde sizi sürprizlerden korur.</p>
+<p class="font-body-md text-body-md text-on-surface-variant">FinansMatik olarak sunduğumuz bu araç, mevcut kur verileri ve makroekonomik projeksiyonları harmanlayarak size en gerçekçi tasarruf yol haritasını çizer. Unutmayın, disiplinli bir birikim planı her türlü ekonomik dalgalanmaya karşı en güçlü kalkanınızdır.</p>
+<div class="mt-8 p-4 bg-surface-container-low border border-dashed border-outline-variant rounded-lg flex gap-4 items-center">
+  <div class="w-20 h-20 bg-surface-container-highest rounded flex-shrink-0 flex items-center justify-center">
+    <span class="material-symbols-outlined text-on-surface-variant/30">featured_video</span>
+  </div>
+  <div class="flex-grow">
+    <div class="h-4 bg-surface-container-highest rounded w-3/4 mb-2"></div>
+    <div class="h-3 bg-surface-container-highest rounded w-full mb-1"></div>
+    <div class="h-3 bg-surface-container-highest rounded w-2/3"></div>
+    <span class="text-[10px] text-on-surface-variant/40 block mt-2">AdSense Reklam Alanı (Native)</span>
+  </div>
+</div></div>
+<div class="hidden lg:block">
+<div class="w-full h-full min-h-[300px] rounded-2xl bg-cover bg-center" data-alt="A professional flat-lay photograph of a high-end office desk. On the desk is a sleek silver laptop displaying financial charts, a luxury fountain pen, a premium leather notebook, and a stack of various international currency notes like Euro and Dollar. The lighting is bright, soft, and airy, following a modern corporate light-mode aesthetic with teal and orange color accents." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBxpRMQt79EFWe1ZDpuFLXGsI5Ilqxi6X5lgqsntatP05MrRl28PbGj9HZGEI7k2Awx8cL-ugSDcXIc_S1jvtaComYnxPSn1Z3INeCnOBSJIR3qSDAXMEV7ENmfyUDp2kXCI9onzenGM1dPFWo0zefC7BIBPn2Ue4ruYdKuWXw83d4ETzFP467Mv2tqfB76g3rf8Jj8cVUy4pzaa2oMS9B9beDJ464gq0-_lrUjTWJftqB2onzYJoUc')"></div>
+</div>
+</section>
+<!-- FAQ Accordion -->
+<section class="mt-ad-slot-margin max-w-3xl mx-auto w-full">
+<h3 class="font-headline-md text-headline-md text-primary mb-8 text-center">Sıkça Sorulan Sorular</h3>
+<div class="space-y-4">
+<!-- FAQ Item 1 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden">
+<button class="faq-toggle w-full px-6 py-5 flex items-center justify-between text-left hover:bg-surface-container transition-all">
+<span class="font-label-md text-label-md font-bold text-on-surface">Döviz kurları ne sıklıkla güncelleniyor?</span>
+<span class="material-symbols-outlined transition-transform duration-300">expand_more</span>
+</button>
+<div class="faq-content max-h-0 overflow-hidden transition-all duration-300 bg-surface">
+<div class="px-6 py-4 text-body-sm text-on-surface-variant">
+                            Sistemimizdeki döviz kurları Türkiye Cumhuriyeti Merkez Bankası (TCMB) verileriyle eş zamanlı olarak, piyasa açılış saatlerinde her 15 dakikada bir güncellenmektedir.
+                        </div>
+</div>
+</div>
+<!-- FAQ Item 2 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden">
+<button class="faq-toggle w-full px-6 py-5 flex items-center justify-between text-left hover:bg-surface-container transition-all">
+<span class="font-label-md text-label-md font-bold text-on-surface">Kur tahmini neye göre yapılıyor?</span>
+<span class="material-symbols-outlined transition-transform duration-300">expand_more</span>
+</button>
+<div class="faq-content max-h-0 overflow-hidden transition-all duration-300 bg-surface">
+<div class="px-6 py-4 text-body-sm text-on-surface-variant">
+                            Kur tahminleri; vadeli işlem piyasaları (VIOP) verileri, Merkez Bankası Piyasa Katılımcıları Anketi sonuçları ve tarihsel volatilite endeksleri kullanılarak oluşturulan bir algoritma üzerinden hesaplanmaktadır. Bu bilgiler yatırım tavsiyesi niteliği taşımaz.
+                        </div>
+</div>
+</div>
+<!-- FAQ Item 3 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden">
+<button class="faq-toggle w-full px-6 py-5 flex items-center justify-between text-left hover:bg-surface-container transition-all">
+<span class="font-label-md text-label-md font-bold text-on-surface">Planlanan süreyi değiştirmek hesaplamayı nasıl etkiler?</span>
+<span class="material-symbols-outlined transition-transform duration-300">expand_more</span>
+</button>
+<div class="faq-content max-h-0 overflow-hidden transition-all duration-300 bg-surface">
+<div class="px-6 py-4 text-body-sm text-on-surface-variant">
+                            Süre uzadıkça bileşik faiz ve enflasyon beklentileri daha fazla devreye girer. Kısa vadeli planlarda mevcut kur ağırlıklı hesaplama yapılırken, 12 ay ve üzeri planlarda makroekonomik hedefler daha belirleyici olur.
+                        </div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<div class="w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-12">
+  <div class="w-full h-[90px] bg-surface-container-highest border border-outline-variant flex items-center justify-center rounded-xl">
+    <span class="text-label-md text-on-surface-variant/50">AdSense Reklam Alanı (728x90)</span>
+  </div>
+</div><footer class="bg-surface-container-lowest dark:bg-inverse-surface border-t border-outline-variant dark:border-outline mt-12">
+<div class="flex flex-col md:flex-row justify-between items-center py-8 px-margin-mobile md:px-margin-desktop w-full max-w-container-max mx-auto gap-4">
+<div class="flex flex-col items-center md:items-start gap-2">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">FinansMatik</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant text-center md:text-left">© 2024 FinansMatik. Tüm hakları saklıdır.</p>
+</div>
+<div class="flex gap-6">
+<a class="font-label-sm text-label-sm text-secondary dark:text-secondary-fixed hover:text-secondary-container dark:hover:text-secondary-fixed-dim underline transition-all" href="#">Hakkımızda</a>
+<a class="font-label-sm text-label-sm text-secondary dark:text-secondary-fixed hover:text-secondary-container dark:hover:text-secondary-fixed-dim underline transition-all" href="#">Gizlilik Politikası</a>
+<a class="font-label-sm text-label-sm text-secondary dark:text-secondary-fixed hover:text-secondary-container dark:hover:text-secondary-fixed-dim underline transition-all" href="#">İletişim</a>
+</div>
+</div>
+</footer>
+<script>
+        // Currency Chip Toggle
+        const currencyChips = document.querySelectorAll('.currency-chip');
+        currencyChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                currencyChips.forEach(c => {
+                    c.classList.remove('border-primary-container', 'bg-primary-container/10', 'text-primary-container');
+                    c.classList.add('border-outline-variant', 'text-on-surface-variant');
+                });
+                chip.classList.remove('border-outline-variant', 'text-on-surface-variant');
+                chip.classList.add('border-primary-container', 'bg-primary-container/10', 'text-primary-container');
+            });
+        });
+
+        // Duration Chip Toggle
+        const durationChips = document.querySelectorAll('.duration-chip');
+        durationChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                durationChips.forEach(c => {
+                    c.classList.remove('border-primary', 'text-on-primary', 'bg-primary');
+                    c.classList.add('border-outline-variant', 'text-on-surface-variant');
+                });
+                chip.classList.remove('border-outline-variant', 'text-on-surface-variant');
+                chip.classList.add('border-primary', 'text-on-primary', 'bg-primary');
+            });
+        });
+
+        // FAQ Accordion
+        const faqToggles = document.querySelectorAll('.faq-toggle');
+        faqToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const content = toggle.nextElementSibling;
+                const icon = toggle.querySelector('.material-symbols-outlined');
+                
+                // Close others
+                faqToggles.forEach(otherToggle => {
+                    if (otherToggle !== toggle) {
+                        otherToggle.nextElementSibling.style.maxHeight = '0';
+                        otherToggle.querySelector('.material-symbols-outlined').style.transform = 'rotate(0deg)';
+                    }
+                });
+
+                if (content.style.maxHeight === '0px' || content.style.maxHeight === '') {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    icon.style.transform = 'rotate(180deg)';
+                } else {
+                    content.style.maxHeight = '0';
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            });
+        });
+
+        // Simple Calculation Animation Mockup
+        const calculateBtn = document.getElementById('calculateBtn');
+        const resultCard = document.getElementById('resultCard');
+        
+        calculateBtn.addEventListener('click', () => {
+            // Visual feedback
+            calculateBtn.innerHTML = 'Hesaplanıyor...';
+            calculateBtn.style.opacity = '0.8';
+            resultCard.style.opacity = '0.5';
+            resultCard.style.transform = 'translateY(10px)';
+
+            setTimeout(() => {
+                calculateBtn.innerHTML = 'Hesapla';
+                calculateBtn.style.opacity = '1';
+                resultCard.style.opacity = '1';
+                resultCard.style.transform = 'translateY(0)';
+                // In a real app, actual math would happen here
+            }, 600);
+        });
+    </script>
+
+
+</body></html>

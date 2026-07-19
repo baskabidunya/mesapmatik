@@ -1,0 +1,302 @@
+<!DOCTYPE html><html class="light" lang="tr"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>İletişim - FinansMatik</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Sora:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-container": "#0f4c4c",
+                    "surface-dim": "#d0dbed",
+                    "on-secondary-fixed": "#002020",
+                    "surface": "#f8f9ff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-container": "#f99b2f",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#85bbbb",
+                    "surface-tint": "#306767",
+                    "tertiary": "#472600",
+                    "on-secondary-container": "#1e6d6d",
+                    "on-primary-fixed": "#002020",
+                    "surface-container": "#e6eeff",
+                    "outline": "#707978",
+                    "inverse-primary": "#9ad0d0",
+                    "on-background": "#121c2a",
+                    "inverse-surface": "#27313f",
+                    "on-primary-fixed-variant": "#134f4f",
+                    "on-tertiary-fixed": "#2d1600",
+                    "primary": "#003434",
+                    "on-secondary-fixed-variant": "#004f50",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed": "#a7efef",
+                    "outline-variant": "#bfc8c8",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#ffdcbf",
+                    "surface-variant": "#d9e3f6",
+                    "primary-fixed": "#b5edec",
+                    "tertiary-container": "#663900",
+                    "on-surface-variant": "#404848",
+                    "on-surface": "#121c2a",
+                    "background": "#f8f9ff",
+                    "on-primary": "#ffffff",
+                    "primary-fixed-dim": "#9ad0d0",
+                    "secondary": "#176969",
+                    "surface-container-high": "#dee9fc",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#d9e3f6",
+                    "inverse-on-surface": "#eaf1ff",
+                    "surface-container-lowest": "#ffffff",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#a4ecec",
+                    "surface-bright": "#f8f9ff",
+                    "secondary-fixed-dim": "#8bd3d2",
+                    "on-tertiary-fixed-variant": "#6a3b00",
+                    "tertiary-fixed-dim": "#ffb872",
+                    "surface-container-low": "#eff4ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "container-max": "1200px",
+                    "base": "8px",
+                    "ad-slot-margin": "48px",
+                    "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "headline-md": ["Sora"],
+                    "label-sm": ["Inter"],
+                    "headline-lg": ["Sora"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-num": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Sora"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-num": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .form-card {
+            box-shadow: 0px 4px 20px rgba(31, 41, 55, 0.04);
+        }
+        .map-card {
+            box-shadow: 0px 10px 30px rgba(15, 76, 76, 0.08);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md">
+<!-- TopAppBar -->
+<nav class="bg-surface dark:bg-surface-dim shadow-[0px_4px_20px_rgba(31,41,55,0.04)] sticky top-0 z-50">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" data-icon="account_balance">account_balance</span>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">FinansMatik</span>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline hover:bg-surface-variant/50 transition-colors px-3 py-2 rounded-lg" href="#">Anasayfa</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline hover:bg-surface-variant/50 transition-colors px-3 py-2 rounded-lg" href="#">Hesaplamalar</a>
+<a class="font-label-md text-label-md text-on-surface dark:text-inverse-on-surface bg-surface-variant/30 px-3 py-2 rounded-lg" href="#">İletişim</a>
+</div>
+<button class="md:hidden p-2 rounded-lg hover:bg-surface-variant/50 transition-colors">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+</nav><div class="w-full bg-surface-container-low py-4 border-b border-outline-variant/30">
+  <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+    <div class="w-full max-w-[320px] h-[50px] mx-auto bg-[#F3F4F1] border border-outline-variant/30 rounded flex items-center justify-center">
+      <span class="text-label-sm text-outline uppercase tracking-widest">AdSense Reklam Alanı</span>
+    </div>
+  </div>
+</div>
+<main class="min-h-screen">
+<!-- Hero Section -->
+<section class="py-12 md:py-20 bg-surface-container-low overflow-hidden relative">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop relative z-10">
+<div class="max-w-2xl">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">Bizimle İletişime Geçin</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Sorularınız, önerileriniz veya profesyonel finansal danışmanlık talepleriniz için bize ulaşın. Ekibimiz en kısa sürede size geri dönüş yapacaktır.</p>
+</div>
+</div>
+<!-- Decorative Elements -->
+<div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+</section>
+<!-- Content Grid -->
+<section class="py-12 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Contact Form -->
+<div class="lg:col-span-7 bg-surface-container-lowest p-8 rounded-xl form-card border-t-4 border-primary">
+<form class="space-y-6" id="contactForm">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant" for="fullname">Ad Soyad</label>
+<input class="w-full h-12 px-4 rounded-lg border-outline-variant focus:border-secondary focus:ring-1 focus:ring-secondary bg-surface transition-all" id="fullname" placeholder="Örn: Ahmet Yılmaz" type="text">
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant" for="email">E-posta Adresi</label>
+<input class="w-full h-12 px-4 rounded-lg border-outline-variant focus:border-secondary focus:ring-1 focus:ring-secondary bg-surface transition-all" id="email" placeholder="ahmet@ornekkurum.com" type="email">
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant" for="subject">Konu</label>
+<input class="w-full h-12 px-4 rounded-lg border-outline-variant focus:border-secondary focus:ring-1 focus:ring-secondary bg-surface transition-all" id="subject" placeholder="Mesajınızın konusu" type="text">
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant" for="message">Mesaj</label>
+<textarea class="w-full p-4 rounded-lg border-outline-variant focus:border-secondary focus:ring-1 focus:ring-secondary bg-surface transition-all resize-none" id="message" placeholder="Size nasıl yardımcı olabiliriz?" rows="5"></textarea>
+</div>
+<button class="w-full md:w-auto px-12 h-14 bg-[#F4972B] text-white font-bold rounded-lg shadow-lg hover:shadow-xl active:scale-95 transition-all flex items-center justify-center gap-2" type="submit">
+<span class="">Gönder</span>
+<span class="material-symbols-outlined" data-icon="send">send</span>
+</button>
+</form>
+<!-- Social Icons -->
+<div class="mt-12 pt-8 border-t border-outline-variant flex flex-col md:flex-row items-center justify-between gap-6">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Sosyal Medyada Bizi Takip Edin</span>
+<div class="flex gap-4">
+<a class="w-12 h-12 flex items-center justify-center rounded-full bg-surface-container hover:bg-primary-fixed-dim transition-colors group" href="#">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform" data-icon="share">share</span>
+</a>
+<a class="w-12 h-12 flex items-center justify-center rounded-full bg-surface-container hover:bg-primary-fixed-dim transition-colors group" href="#">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform" data-icon="groups">groups</span>
+</a>
+<a class="w-12 h-12 flex items-center justify-center rounded-full bg-surface-container hover:bg-primary-fixed-dim transition-colors group" href="#">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform" data-icon="hub">hub</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Info and Map -->
+<div class="lg:col-span-5 space-y-gutter">
+<!-- Contact Cards (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4">
+<div class="bg-surface-container-high p-6 rounded-xl flex items-start gap-4">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white" data-icon="call">call</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-primary font-bold">Telefon</h3>
+<p class="font-body-md text-body-md text-on-surface">+90 (212) 555 00 00</p>
+</div>
+</div>
+<div class="bg-surface-container-high p-6 rounded-xl flex items-start gap-4">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white" data-icon="location_on">location_on</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-primary font-bold">Adres</h3>
+<p class="font-body-md text-body-md text-on-surface">Levent Plaza, Büyükdere Cd. No:123, 34394 Şişli/İstanbul</p>
+</div>
+</div>
+</div>
+<!-- Map Placeholder -->
+<div class="map-card rounded-xl overflow-hidden h-[340px] relative border-4 border-white group">
+<div class="absolute inset-0 bg-surface-dim/20 pointer-events-none group-hover:bg-transparent transition-colors z-10"></div>
+<div class="w-full h-full bg-surface-container" data-alt="A detailed map visualization of a modern financial district in Istanbul, featuring stylized isometric buildings, green spaces, and clean navigation routes. The design uses a sophisticated teal and soft grey color palette, reflecting a professional and reliable fintech aesthetic with high-key daylight illumination." data-location="Istanbul, Levent" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDCtTcgKvKSQXYBN_QEqE5lEBqJFQDyQrRNuJwbf5IExu52kxas3UHu1K9hgC9WFWAzf00-XIg6OMUAPX1Tvzdf7M7Gkfz9vpcoip63kRgi2D1pzGI-X9RdtzwGB1fMh2s7C31JYBLHNe8EEyA_rmCbZt0mYhKPtRIbHBIdbivmEICvcCL-GhzLoaRV_RyVXlkWBWnXD6PZa-aBG4tD4PuBbQjD0-61t0PHV5pklsWqctlaFnl6TCSG')">
+</div>
+<div class="absolute bottom-4 left-4 z-20 bg-white/90 backdrop-blur-md px-4 py-2 rounded-lg shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="pin_drop" style="font-variation-settings: 'FILL' 1;">pin_drop</span>
+<span class="font-label-sm text-label-sm font-bold">Genel Merkezimiz</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Ad Slot -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop my-ad-slot-margin">
+<div class="w-full h-32 bg-[#F3F4F1] rounded-xl flex items-center justify-center border border-outline-variant/30 group cursor-pointer transition-all hover:bg-[#ebede9]">
+<div class="text-center">
+<p class="font-label-sm text-label-sm text-outline uppercase tracking-widest mb-1">Reklam</p>
+<p class="font-body-md text-body-md text-on-surface-variant italic">Size özel finansal çözümlerimizi keşfettiniz mi?</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-8">
+  <div class="w-full h-24 bg-[#F3F4F1] border border-outline-variant/30 rounded-xl flex items-center justify-center">
+    <span class="text-label-sm text-outline uppercase tracking-widest">AdSense Reklam Alanı</span>
+  </div>
+</section><footer class="bg-surface-container-lowest dark:bg-inverse-surface border-t border-outline-variant dark:border-outline">
+<div class="flex flex-col md:flex-row justify-between items-center py-8 px-margin-mobile md:px-margin-desktop w-full max-w-container-max mx-auto gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" data-icon="account_balance">account_balance</span>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">FinansMatik</span>
+</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant hover:text-secondary-container dark:hover:text-secondary-fixed-dim underline transition-all" href="#">Hakkımızda</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant hover:text-secondary-container dark:hover:text-secondary-fixed-dim underline transition-all" href="#">Gizlilik Politikası</a>
+<a class="font-label-sm text-label-sm text-primary dark:text-primary-fixed font-bold hover:text-secondary-container dark:hover:text-secondary-fixed-dim underline transition-all" href="#">İletişim</a>
+</div>
+<p class="font-body-sm text-body-sm text-secondary dark:text-secondary-fixed">© 2024 FinansMatik. Tüm hakları saklıdır.</p>
+</div>
+</footer>
+<script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalContent = btn.innerHTML;
+            
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin" data-icon="progress_activity">progress_activity</span> Gönderiliyor...';
+            
+            setTimeout(() => {
+                btn.innerHTML = '<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span> Başarılı!';
+                btn.classList.replace('bg-[#F4972B]', 'bg-green-600');
+                e.target.reset();
+                
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
+                    btn.innerHTML = originalContent;
+                    btn.classList.replace('bg-green-600', 'bg-[#F4972B]');
+                }, 3000);
+            }, 1500);
+        });
+
+        // Simple parallax effect for decorative circles
+        window.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            const bg = document.querySelector('.bg-primary\\/5');
+            if(bg) {
+                bg.style.transform = `translate(${x * 20}px, ${y * 20}px)`;
+            }
+        });
+    </script>
+
+
+</body></html>

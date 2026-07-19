@@ -1,0 +1,256 @@
+<!DOCTYPE html><html lang="tr" class="scroll-smooth"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Sora:wght@600;700;800&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-container": "#0f4c4c",
+                    "surface-dim": "#d0dbed",
+                    "on-secondary-fixed": "#002020",
+                    "surface": "#f8f9ff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-container": "#f99b2f",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#85bbbb",
+                    "surface-tint": "#306767",
+                    "tertiary": "#472600",
+                    "on-secondary-container": "#1e6d6d",
+                    "on-primary-fixed": "#002020",
+                    "surface-container": "#e6eeff",
+                    "outline": "#707978",
+                    "inverse-primary": "#9ad0d0",
+                    "on-background": "#121c2a",
+                    "inverse-surface": "#27313f",
+                    "on-primary-fixed-variant": "#134f4f",
+                    "on-tertiary-fixed": "#2d1600",
+                    "primary": "#003434",
+                    "on-secondary-fixed-variant": "#004f50",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed": "#a7efef",
+                    "outline-variant": "#bfc8c8",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#ffdcbf",
+                    "surface-variant": "#d9e3f6",
+                    "primary-fixed": "#b5edec",
+                    "tertiary-container": "#663900",
+                    "on-surface-variant": "#404848",
+                    "on-surface": "#121c2a",
+                    "background": "#f8f9ff",
+                    "on-primary": "#ffffff",
+                    "primary-fixed-dim": "#9ad0d0",
+                    "secondary": "#176969",
+                    "surface-container-high": "#dee9fc",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#d9e3f6",
+                    "inverse-on-surface": "#eaf1ff",
+                    "surface-container-lowest": "#ffffff",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#a4ecec",
+                    "surface-bright": "#f8f9ff",
+                    "secondary-fixed-dim": "#8bd3d2",
+                    "on-tertiary-fixed-variant": "#6a3b00",
+                    "tertiary-fixed-dim": "#ffb872",
+                    "surface-container-low": "#eff4ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "container-max": "1200px",
+                    "base": "8px",
+                    "ad-slot-margin": "48px",
+                    "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "headline-md": ["Sora"],
+                    "label-sm": ["Inter"],
+                    "headline-lg": ["Sora"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-num": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Sora"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-num": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    }catch(_e){}</script><meta charset="utf-8"></head><body class="font-body-md text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-surface sticky top-0 z-50 shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="account_balance">account_balance</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">FinansMatik</span>
+</div>
+<nav class="hidden md:flex gap-8">
+<a href="#" class="font-label-md text-label-md text-primary font-bold">Hakkımızda</a>
+<a href="#" class="font-label-md text-label-md text-on-surface-variant hover:bg-surface-variant/50 transition-colors px-2 py-1 rounded">Gizlilik Politikası</a>
+<a href="#" class="font-label-md text-label-md text-on-surface-variant hover:bg-surface-variant/50 transition-colors px-2 py-1 rounded">İletişim</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="md:hidden p-2 rounded-full hover:bg-surface-variant/50 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="menu">menu</span>
+</button>
+</div>
+</div>
+</header><div class="w-full bg-surface-container-low py-4 border-b border-outline-variant">
+  <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop flex justify-center">
+    <div class="w-full max-w-[320px] h-[50px] bg-surface-container-highest border border-outline-variant flex items-center justify-center rounded">
+      <span class="text-label-sm text-on-surface-variant">AdSense Reklam Alanı (320x50)</span>
+    </div>
+  </div>
+</div>
+<main class="w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 md:py-20">
+<!-- Hero Section -->
+<section class="mb-16 md:mb-24 text-center md:text-left">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-6">Hakkımızda</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl leading-relaxed">
+                FinansMatik, Türkiye'nin karmaşık finansal verilerini her seviyeden kullanıcı için erişilebilir, anlaşılır ve güvenilir kılmak amacıyla yola çıkmış bir teknoloji girişimidir. Geleneksel bankacılık araçlarının karmaşasını modern bir arayüzle ortadan kaldırıyoruz.
+            </p>
+</section>
+<!-- Mission & Values Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+<div class="card-surface p-8 border-t-4 border-primary">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center mb-6 text-secondary">
+<span class="material-symbols-outlined text-3xl" data-icon="update">update</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-4">Güncel Veri</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    Piyasalardaki değişimleri saniye saniye takip ediyoruz. Hesaplamalarımızda en güncel TCMB verilerini ve banka oranlarını kullanarak hata payını sıfıra indiriyoruz.
+                </p>
+</div>
+<div class="card-surface p-8 border-t-4 border-primary">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center mb-6 text-secondary">
+<span class="material-symbols-outlined text-3xl" data-icon="bolt">bolt</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-4">Hız ve Verimlilik</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    Karmaşık kredi, mevduat ve yatırım hesaplamalarını milisaniyeler içinde sonuçlandırıyoruz. Vaktinizin değerli olduğunun farkındayız.
+                </p>
+</div>
+<div class="card-surface p-8 border-t-4 border-primary">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center mb-6 text-secondary">
+<span class="material-symbols-outlined text-3xl" data-icon="security">security</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-4">Mutlak Gizlilik</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    Finansal verileriniz size özeldir. FinansMatik üzerinde yaptığınız hesaplamaların hiçbiri sunucularımızda saklanmaz veya üçüncü taraflarla paylaşılmaz.
+                </p>
+</div>
+</div>
+<!-- Team Section -->
+<section class="mb-24">
+<div class="flex flex-col md:flex-row items-center gap-12 bg-surface-container-low rounded-[2rem] p-8 md:p-16">
+<div class="w-full md:w-1/2 rounded-2xl overflow-hidden shadow-lg">
+<img class="w-full h-full object-cover min-h-[300px] md:min-h-[400px]" data-alt="A professional group of diverse fintech experts collaborating in a bright, modern office with floor-to-ceiling windows. The scene is bathed in natural morning light, emphasizing a clean and reliable atmosphere. The team members are engaged in conversation around a minimalist table with high-end laptops. The overall aesthetic is professional, modern, and trustworthy, using a palette of soft whites and deep teals." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5wk3WXFzh3TME4XzgKGp9xfv1AmLtX8ZVFwP6vzM1ouctRneIc8ojeqqHmrp-1hqsF2IWEbj0GYWMYckxJRpc1_7R8W2D3gUa5NCrbGEbsnyP-Hs1tuQrhzcoo6hF91SRk-ASDzz1nG3IBuQG9uFgGcvaTZmHIANhc7OD-hJNOzo9OmvJD-Z6sfRHLINWtQA3H3NgIakD7NHo6I_J5kx6WjUHioK0BuB9yBNy4tvwV0Cl7RgzpdXy">
+</div>
+<div class="w-full md:w-1/2 space-y-6">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">Uzman Kadro, Güçlü Altyapı</h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                        Ekibimiz, bankacılık sektöründen gelen deneyimli uzmanlar ve yazılım mimarlarından oluşmaktadır. Finansal okuryazarlığı artırmak ve herkes için adil bir veri erişimi sağlamak temel vizyonumuzdur.
+                    </p>
+<div class="flex gap-4">
+<div class="flex -space-x-4">
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-primary text-white flex items-center justify-center font-bold text-xs">FM</div>
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-secondary text-white flex items-center justify-center font-bold text-xs">BT</div>
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-on-primary-container text-white flex items-center justify-center font-bold text-xs">GY</div>
+</div>
+<p class="font-label-md text-label-md self-center text-on-surface-variant">15+ Uzman Danışman</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Trust Indicators -->
+<section class="py-16 border-y border-outline-variant">
+<div class="text-center mb-12">
+<h2 class="font-headline-md text-headline-md text-primary">Güven Unsurlarımız</h2>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="p-4 rounded-full bg-surface-container-high">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="verified_user">verified_user</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-bold text-on-surface">SSL Sertifikalı</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">256-bit Güvenli Bağlantı</p>
+</div>
+</div>
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="p-4 rounded-full bg-surface-container-high">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="storage">storage</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-bold text-on-surface">Bulut Altyapı</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Yüksek Erişilebilirlik</p>
+</div>
+</div>
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="p-4 rounded-full bg-surface-container-high">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="gavel">gavel</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-bold text-on-surface">KVKK Uyumlu</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Veri Koruma Standartları</p>
+</div>
+</div>
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="p-4 rounded-full bg-surface-container-high">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="support_agent">support_agent</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-bold text-on-surface">Kesintisiz Destek</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Hızlı Çözüm Merkezi</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<div class="w-full bg-surface-container-low py-8 border-t border-outline-variant">
+  <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop flex justify-center">
+    <div class="w-full h-[90px] md:h-[120px] bg-surface-container-highest border border-outline-variant flex items-center justify-center rounded">
+      <span class="text-label-md text-on-surface-variant">AdSense Reklam Alanı</span>
+    </div>
+  </div>
+</div><footer class="bg-surface-container-lowest dark:bg-inverse-surface border-t border-outline-variant">
+<div class="flex flex-col md:flex-row justify-between items-center py-8 px-margin-mobile md:px-margin-desktop w-full max-w-container-max mx-auto gap-4">
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md font-bold text-primary">FinansMatik</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant md:ml-4">© 2024 FinansMatik. Tüm hakları saklıdır.</p>
+</div>
+<div class="flex gap-6">
+<a class="font-label-sm text-label-sm text-primary font-bold hover:text-secondary-container underline transition-all" href="#">Hakkımızda</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary-container underline transition-all" href="#">Gizlilik Politikası</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary-container underline transition-all" href="#">İletişim</a>
+</div>
+</div>
+</footer>
+<script>
+        // Simple Interaction: Lift effect for trust icons
+        document.querySelectorAll('.trust-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'scale(1.05)';
+            });
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

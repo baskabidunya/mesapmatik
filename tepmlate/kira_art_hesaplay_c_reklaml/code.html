@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kira Artış Hesaplayıcı | FinansMatik</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;family=Sora:wght@100..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#134f4f",
+                    "tertiary-fixed": "#ffdcbf",
+                    "on-primary-fixed": "#002020",
+                    "secondary-fixed": "#a7efef",
+                    "inverse-on-surface": "#eaf1ff",
+                    "surface-variant": "#d9e3f6",
+                    "surface-container-low": "#eff4ff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#306767",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#9ad0d0",
+                    "inverse-primary": "#9ad0d0",
+                    "on-secondary-container": "#1e6d6d",
+                    "surface-container-high": "#dee9fc",
+                    "on-primary-container": "#85bbbb",
+                    "surface-container": "#e6eeff",
+                    "on-surface-variant": "#404848",
+                    "tertiary": "#472600",
+                    "tertiary-container": "#663900",
+                    "secondary-fixed-dim": "#8bd3d2",
+                    "on-secondary-fixed-variant": "#004f50",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#0f4c4c",
+                    "surface-container-highest": "#d9e3f6",
+                    "secondary": "#176969",
+                    "surface-bright": "#f8f9ff",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "inverse-surface": "#27313f",
+                    "outline": "#707978",
+                    "tertiary-fixed-dim": "#ffb872",
+                    "secondary-container": "#a4ecec",
+                    "on-tertiary-container": "#f99b2f",
+                    "background": "#f8f9ff",
+                    "outline-variant": "#bfc8c8",
+                    "on-surface": "#121c2a",
+                    "on-tertiary-fixed-variant": "#6a3b00",
+                    "surface": "#f8f9ff",
+                    "primary": "#003434",
+                    "on-tertiary-fixed": "#2d1600",
+                    "surface-dim": "#d0dbed",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#b5edec",
+                    "on-secondary-fixed": "#002020",
+                    "on-primary": "#ffffff",
+                    "on-background": "#121c2a",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "ad-slot-margin": "48px",
+                    "container-max": "1200px",
+                    "gutter": "24px",
+                    "margin-desktop": "40px",
+                    "base": "8px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "display-num": ["Inter"],
+                    "headline-lg": ["Sora"],
+                    "label-sm": ["Inter"],
+                    "headline-lg-mobile": ["Sora"],
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-md": ["Sora"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-num": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FAFAF7;
+        }
+        .calculator-card {
+            background-color: #ffffff;
+            box-shadow: 0px 4px 20px rgba(31, 41, 55, 0.04);
+            border-radius: 1rem;
+        }
+        .result-card {
+            background-color: #ffffff;
+            box-shadow: 0px 10px 30px rgba(15, 76, 76, 0.08);
+            border-top: 4px solid #1B6B6B;
+            border-radius: 1rem;
+        }
+        .tab-num {
+            font-variant-numeric: tabular-nums;
+        }
+        .faq-item[open] .faq-icon {
+            transform: rotate(180deg);
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #1B6B6B !important;
+            ring: 0 !important;
+        }
+        .ad-placeholder {
+            background-color: #F3F4F1;
+            border: 1px dashed #bfc8c8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: #707978;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-surface shadow-[0px_4px_20px_rgba(31,41,55,0.04)] sticky top-0 z-50">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="account_balance">account_balance</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">FinansMatik</span>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant/50 p-2 rounded-full transition-colors" data-icon="menu">menu</button>
+</div>
+</header>
+<!-- AdSense Location 1: Horizontal banner below header -->
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-4">
+<div class="ad-placeholder w-full max-w-[320px] h-[50px] mx-auto rounded-lg">
+<span class="material-symbols-outlined text-sm mb-1" data-icon="ads_click">ads_click</span>
+        AdSense Reklam Alanı (320x50)
+    </div>
+</div>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8">
+<!-- Hero Section -->
+<section class="mb-12">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">Kira Artış Hesaplayıcı</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Yasal TÜFE oranlarına göre kira artışınızı profesyonel algoritmalarımızla saniyeler içinde hesaplayın.</p>
+</section>
+<!-- Main Content Area: Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-ad-slot-margin">
+<!-- Calculator Form -->
+<div class="lg:col-span-5 calculator-card p-8 h-fit">
+<form class="space-y-6" id="rentForm">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2" for="current_rent">Mevcut Kira Bedeli (TL)</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-outline">₺</span>
+<input class="w-full pl-10 pr-4 py-3 border border-outline-variant rounded-xl font-body-md text-body-md transition-all" id="current_rent" placeholder="0.00" required="" type="number"/>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-3">Artış Yöntemi</label>
+<div class="grid grid-cols-2 gap-4">
+<label class="relative flex flex-col items-center justify-center p-4 border border-outline-variant rounded-xl cursor-pointer hover:border-secondary transition-all group has-[:checked]:border-secondary has-[:checked]:bg-secondary/5">
+<input checked="" class="sr-only" name="increase_type" type="radio" value="tufe"/>
+<span class="font-label-md text-label-md text-on-surface-variant group-has-[:checked]:text-secondary">TÜFE Oranı</span>
+</label>
+<label class="relative flex flex-col items-center justify-center p-4 border border-outline-variant rounded-xl cursor-pointer hover:border-secondary transition-all group has-[:checked]:border-secondary has-[:checked]:bg-secondary/5">
+<input class="sr-only" name="increase_type" type="radio" value="manual"/>
+<span class="font-label-md text-label-md text-on-surface-variant group-has-[:checked]:text-secondary">Manuel Oran</span>
+</label>
+</div>
+</div>
+<div class="hidden animate-fade-in" id="manual_rate_container">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2" for="manual_rate">Yüzde Kaç Artış? (%)</label>
+<input class="w-full px-4 py-3 border border-outline-variant rounded-xl font-body-md text-body-md" id="manual_rate" placeholder="Örn: 25" type="number"/>
+</div>
+<button class="w-full bg-[#F4972B] hover:bg-[#e08924] text-white font-headline-md text-headline-md py-4 rounded-xl shadow-lg transition-transform active:scale-[0.98]" type="submit">
+                        Hesapla
+                    </button>
+</form>
+</div>
+<!-- AdSense Area (Desktop Sidebar) -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<!-- Dynamic Results (Initially hidden or skeleton) -->
+<div class="hidden space-y-6" id="results">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="result-card p-6 flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-2">Yeni Kira Bedeli</span>
+<span class="font-display-num text-display-num text-primary tab-num" id="new_rent_val">₺0</span>
+</div>
+<div class="result-card p-6 flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-2">Artış Tutarı</span>
+<span class="font-display-num text-display-num text-secondary tab-num" id="increase_val">₺0</span>
+</div>
+<div class="result-card p-6 flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-2">Artış Oranı (%)</span>
+<span class="font-display-num text-display-num text-tertiary tab-num" id="rate_val">%0</span>
+</div>
+</div>
+<!-- AdSense Location 2: Below Result Box -->
+<div class="ad-placeholder w-full max-w-[300px] h-[250px] mx-auto rounded-xl">
+<span class="material-symbols-outlined text-2xl mb-2" data-icon="ads_click">ads_click</span>
+    AdSense Reklam Alanı (300x250)
+</div>
+<div class="p-6 bg-surface-container-low rounded-xl border border-secondary/20">
+<h4 class="font-headline-md text-headline-md text-primary mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="info">info</span>
+                            Bilgilendirme
+                        </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Yukarıdaki hesaplama, Türkiye İstatistik Kurumu (TÜİK) tarafından açıklanan en güncel TÜFE 12 aylık ortalama verilerine veya belirlediğiniz manuel orana dayanmaktadır.</p>
+</div>
+</div>
+<!-- AdSense Placeholder -->
+<div class="bg-[#F3F4F1] border-2 border-dashed border-outline-variant rounded-2xl h-[300px] flex items-center justify-center relative overflow-hidden group">
+<div class="absolute inset-0 opacity-10 bg-repeat bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+<div class="z-10 text-center">
+<span class="material-symbols-outlined text-4xl text-outline mb-2" data-icon="ads_click">ads_click</span>
+<p class="font-label-md text-label-md text-outline">AdSense Reklam Alanı</p>
+</div>
+</div>
+</div>
+</div>
+<!-- SEO Content Section -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-ad-slot-margin">
+<div class="relative rounded-2xl overflow-hidden shadow-xl min-h-[400px]">
+<div class="bg-cover bg-center absolute inset-0" data-alt="A professional photograph of a bright, modern minimalist apartment in Istanbul, with sunlight streaming through large windows. The interior features soft neutral tones, high-quality wooden flooring, and contemporary furniture, evoking a sense of premium real estate and reliability. The lighting is natural and airy, reflecting a sophisticated light-mode UI aesthetic for a financial platform." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuApE5Gni295qlxcsC4fgvuCKAF1MyBV4GFWb6VcF5Jvh6sSQLefwgQNjTlDZor5fcLKJuGzIExTpUSXsYt2MLyoR4D_PdSn9FSpamr6IIh2WLeJ5kyYTzMYPwYOWkNNhcbdLb8JeIKCS2SIlIjMFC_WN7Qvfi84-0nzKescGBAFdKZE6Dzzbl21KBl3vSlNHP5n5hojrJSyDP01NOFKvvevF8Cu9le-PHLqfVgR7-AcTIcMdAf-ffIk')"></div>
+</div>
+<div class="flex flex-col justify-center">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-6">Nasıl hesaplanır?</h2>
+<div class="space-y-4 font-body-md text-body-md text-on-surface-variant">
+<p>Kira artış oranları, Borçlar Kanunu uyarınca her yıl Türkiye İstatistik Kurumu (TÜİK) tarafından yayımlanan Tüketici Fiyat Endeksi (TÜFE) üzerinden belirlenir. Özellikle 12 aylık ortalamalar dikkate alınarak yasal üst sınır tayin edilir.</p>
+<p>Konut kiralamalarında son dönemde uygulanan %25'lik sabit sınır uygulamasının sona ermesiyle birlikte, tekrar TÜFE endeksli hesaplama modeline geçilmiştir. FinansMatik Kira Artış Hesaplayıcı, bu güncel verileri otomatik olarak çekerek hatasız bir döküm sunar.</p>
+<!-- AdSense Location 3: Inside text block, after 2nd paragraph -->
+<div class="ad-placeholder w-full h-[120px] rounded-xl my-6">
+<span class="material-symbols-outlined text-2xl mb-2" data-icon="ads_click">ads_click</span>
+    AdSense Yerel Reklam Alanı
+</div>
+<div class="flex gap-4 pt-4">
+<div class="bg-primary/5 p-4 rounded-lg flex-1">
+<h5 class="font-bold text-primary mb-1">Hızlı</h5>
+<p class="text-xs">Tek tıkla anında sonuç.</p>
+</div>
+<div class="bg-secondary/5 p-4 rounded-lg flex-1">
+<h5 class="font-bold text-secondary mb-1">Güncel</h5>
+<p class="text-xs">TÜİK verileriyle entegre.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Accordion -->
+<section class="mb-ad-slot-margin">
+<h3 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary text-center mb-10">Sıkça Sorulan Sorular</h3>
+<div class="max-w-3xl mx-auto space-y-4">
+<details class="faq-item group calculator-card cursor-pointer">
+<summary class="flex justify-between items-center p-6 list-none">
+<span class="font-headline-md text-headline-md text-on-surface">TÜFE kira artış oranı nedir?</span>
+<span class="material-symbols-outlined faq-icon transition-transform duration-300" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="px-6 pb-6 font-body-md text-body-md text-on-surface-variant">
+                        TÜFE kira artış oranı, Tüketici Fiyat Endeksi'nin 12 aylık ortalamasına göre belirlenen yasal tavan fiyat artış sınırıdır. Ev sahipleri bu oranın üzerinde bir artış talep edemezler.
+                    </div>
+</details>
+<details class="faq-item group calculator-card cursor-pointer">
+<summary class="flex justify-between items-center p-6 list-none">
+<span class="font-headline-md text-headline-md text-on-surface">Yasal sınır nedir?</span>
+<span class="material-symbols-outlined faq-icon transition-transform duration-300" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="px-6 pb-6 font-body-md text-body-md text-on-surface-variant">
+                        Temmuz 2024 itibarıyla konutlardaki %25'lik tavan fiyat uygulaması sona ermiştir. Yeni dönemde yasal sınır, TÜFE'nin 12 aylık ortalaması olarak belirlenmiştir.
+                    </div>
+</details>
+<details class="faq-item group calculator-card cursor-pointer">
+<summary class="flex justify-between items-center p-6 list-none">
+<span class="font-headline-md text-headline-md text-on-surface">Ticari mülklerde artış nasıl olur?</span>
+<span class="material-symbols-outlined faq-icon transition-transform duration-300" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="px-6 pb-6 font-body-md text-body-md text-on-surface-variant">
+                        İş yerleri ve ticari mülklerde kira artış oranı her zaman TÜFE 12 aylık ortalaması üzerinden hesaplanır. Ticari mülkler için hiçbir zaman %25 sınırı uygulanmamıştır.
+                    </div>
+</details>
+<details class="faq-item group calculator-card cursor-pointer">
+<summary class="flex justify-between items-center p-6 list-none">
+<span class="font-headline-md text-headline-md text-on-surface">Artış oranı ne zaman uygulanır?</span>
+<span class="material-symbols-outlined faq-icon transition-transform duration-300" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="px-6 pb-6 font-body-md text-body-md text-on-surface-variant">
+                        Kira artışı, mevcut kira sözleşmesinin dolduğu ayda başlayan yeni dönem kirasına uygulanır. Sözleşme ortasında artış yapılması yasal değildir.
+                    </div>
+</details>
+</div>
+</section>
+</main>
+<!-- AdSense Location 4: Wide horizontal banner above footer -->
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-8">
+<div class="ad-placeholder w-full h-[90px] rounded-xl">
+<span class="material-symbols-outlined text-2xl mb-1" data-icon="ads_click">ads_click</span>
+        AdSense Geniş Banner Alanı
+    </div>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant">
+<div class="flex flex-col md:flex-row justify-between items-center py-12 px-margin-mobile md:px-margin-desktop w-full max-w-container-max mx-auto gap-8">
+<div class="flex flex-col items-center md:items-start gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="account_balance">account_balance</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">FinansMatik</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xs text-center md:text-left">Türkiye'nin en güvenilir finansal hesaplama merkezi.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary underline transition-all" href="#">Hakkımızda</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary underline transition-all" href="#">Gizlilik Politikası</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary underline transition-all" href="#">İletişim</a>
+</div>
+<div class="text-on-surface-variant font-label-sm text-label-sm">
+                © 2024 FinansMatik. Tüm hakları saklıdır.
+            </div>
+</div>
+</footer>
+<script>
+        // Toggle Manual Rate Input
+        const increaseTypeRadios = document.querySelectorAll('input[name="increase_type"]');
+        const manualRateContainer = document.getElementById('manual_rate_container');
+        const manualRateInput = document.getElementById('manual_rate');
+
+        increaseTypeRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                if (e.target.value === 'manual') {
+                    manualRateContainer.classList.remove('hidden');
+                    manualRateInput.required = true;
+                } else {
+                    manualRateContainer.classList.add('hidden');
+                    manualRateInput.required = false;
+                }
+            });
+        });
+
+        // Calculation Logic
+        const form = document.getElementById('rentForm');
+        const resultsDiv = document.getElementById('results');
+        const newRentSpan = document.getElementById('new_rent_val');
+        const increaseSpan = document.getElementById('increase_val');
+        const rateSpan = document.getElementById('rate_val');
+
+        const formatCurrency = (num) => {
+            return '₺' + new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(num);
+        };
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const currentRent = parseFloat(document.getElementById('current_rent').value);
+            const increaseType = document.querySelector('input[name="increase_type"]:checked').value;
+            let rate = 65.07; // Fictional current TUFE rate for demo
+
+            if (increaseType === 'manual') {
+                rate = parseFloat(manualRateInput.value);
+            }
+
+            if (isNaN(currentRent) || isNaN(rate)) return;
+
+            const increaseAmount = (currentRent * rate) / 100;
+            const newRent = currentRent + increaseAmount;
+
+            // Visual feedback
+            resultsDiv.classList.remove('hidden');
+            resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            // Animate values
+            let start = 0;
+            const duration = 800;
+            const timestamp = performance.now();
+
+            const animate = (now) => {
+                const progress = Math.min((now - timestamp) / duration, 1);
+                const currentNewRent = progress * newRent;
+                const currentIncrease = progress * increaseAmount;
+                const currentRate = progress * rate;
+
+                newRentSpan.textContent = formatCurrency(currentNewRent);
+                increaseSpan.textContent = formatCurrency(currentIncrease);
+                rateSpan.textContent = '%' + currentRate.toFixed(2);
+
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                }
+            };
+
+            requestAnimationFrame(animate);
+        });
+    </script>
+</body></html>

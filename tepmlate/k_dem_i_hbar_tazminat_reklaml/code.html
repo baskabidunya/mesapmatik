@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kıdem ve İhbar Tazminatı Hesaplayıcı | FinansMatik</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Sora:wght@600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Sora:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#0f4c4c",
+                        "surface-dim": "#d0dbed",
+                        "on-secondary-fixed": "#002020",
+                        "surface": "#f8f9ff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#f99b2f",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#85bbbb",
+                        "surface-tint": "#306767",
+                        "tertiary": "#472600",
+                        "on-secondary-container": "#1e6d6d",
+                        "on-primary-fixed": "#002020",
+                        "surface-container": "#e6eeff",
+                        "outline": "#707978",
+                        "inverse-primary": "#9ad0d0",
+                        "on-background": "#121c2a",
+                        "inverse-surface": "#27313f",
+                        "on-primary-fixed-variant": "#134f4f",
+                        "on-tertiary-fixed": "#2d1600",
+                        "primary": "#003434",
+                        "on-secondary-fixed-variant": "#004f50",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#a7efef",
+                        "outline-variant": "#bfc8c8",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#ffdcbf",
+                        "surface-variant": "#d9e3f6",
+                        "primary-fixed": "#b5edec",
+                        "tertiary-container": "#663900",
+                        "on-surface-variant": "#404848",
+                        "on-surface": "#121c2a",
+                        "background": "#f8f9ff",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#9ad0d0",
+                        "secondary": "#176969",
+                        "surface-container-high": "#dee9fc",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#d9e3f6",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-container-lowest": "#ffffff",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#a4ecec",
+                        "surface-bright": "#f8f9ff",
+                        "secondary-fixed-dim": "#8bd3d2",
+                        "on-tertiary-fixed-variant": "#6a3b00",
+                        "tertiary-fixed-dim": "#ffb872",
+                        "surface-container-low": "#eff4ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "container-max": "1200px",
+                        "base": "8px",
+                        "ad-slot-margin": "48px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "headline-md": ["Sora"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Sora"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-num": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Sora"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .calculation-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .calculation-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 10px 30px rgba(15, 76, 76, 0.08);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .accordion-open .accordion-content {
+            max-height: 500px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-secondary-container">
+<!-- Top Navigation Shell -->
+<header class="bg-surface dark:bg-surface-dim shadow-[0px_4px_20px_rgba(31,41,55,0.04)] sticky top-0 z-50">
+<nav class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim font-headline-md text-headline-md" data-icon="account_balance">account_balance</span>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">FinansMatik</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-label-md text-label-md text-on-surface dark:text-inverse-on-surface hover:bg-surface-variant/50 transition-colors px-3 py-2 rounded-lg" href="#">Kredi Hesapla</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline hover:bg-surface-variant/50 transition-colors px-3 py-2 rounded-lg" href="#">Kira Artış</a>
+<a class="font-label-md text-label-md text-on-surface dark:text-inverse-on-surface border-b-2 border-primary-container" href="#">Tazminat</a>
+</div>
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed-dim hover:bg-surface-variant/50 p-2 rounded-full transition-all active:scale-95" data-icon="menu">menu</button>
+</nav>
+</header>
+<!-- Ad Slot 1: Horizontal banner below Header -->
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-4">
+<div class="w-full max-w-[320px] h-[50px] mx-auto bg-surface-container border border-outline-variant rounded flex items-center justify-center">
+<span class="text-label-sm text-outline font-medium tracking-tight">AdSense Reklam Alanı (320x50)</span>
+</div>
+</div>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 md:py-12">
+<!-- Hero & Title Section -->
+<div class="mb-10 text-center md:text-left">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">Kıdem ve İhbar Tazminatı Hesaplayıcı</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+                Güncel mevzuat ve tavan fiyatlara göre kıdem ve ihbar tazminatınızı saniyeler içinde hesaplayın.
+            </p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Calculation Form (Left Canvas) -->
+<div class="lg:col-span-7">
+<div class="bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(31,41,55,0.04)] p-6 md:p-8">
+<form class="space-y-6" id="calcForm">
+<!-- Brüt Maaş -->
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-on-surface-variant">Brüt Maaş (TL)</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-outline font-body-md">₺</span>
+<input class="w-full pl-8 pr-4 h-12 bg-surface-container-low border-transparent focus:border-secondary border-2 rounded-lg transition-all outline-none font-body-md" placeholder="Örn: 45.000" required="" type="number"/>
+</div>
+</div>
+<!-- Dates Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-on-surface-variant">İşe Başlama Tarihi</label>
+<input class="w-full px-4 h-12 bg-surface-container-low border-transparent focus:border-secondary border-2 rounded-lg transition-all outline-none font-body-md" required="" type="date"/>
+</div>
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-on-surface-variant">İşten Ayrılma Tarihi</label>
+<input class="w-full px-4 h-12 bg-surface-container-low border-transparent focus:border-secondary border-2 rounded-lg transition-all outline-none font-body-md" required="" type="date"/>
+</div>
+</div>
+<!-- İhbar Süresi -->
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-on-surface-variant">İhbar Süresi Durumu</label>
+<select class="w-full px-4 h-12 bg-surface-container-low border-transparent focus:border-secondary border-2 rounded-lg transition-all outline-none font-body-md appearance-none">
+<option value="1">İhbar süresini kullandım</option>
+<option value="2">İhbar süresini kullanmadım (Tazminat alacağım)</option>
+<option value="3">İstifa ettim (İhbar ödeyeceğim)</option>
+</select>
+</div>
+<!-- Ek Bilgi Chips -->
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 bg-secondary-container/20 text-on-secondary-container rounded-full text-label-sm font-label-sm border border-secondary-container hover:bg-secondary-container/40 transition-colors" type="button">Yıllık İzin Dahil Et</button>
+<button class="px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full text-label-sm font-label-sm border border-transparent hover:bg-surface-variant transition-colors" type="button">Ek Ödemeler</button>
+</div>
+<!-- Action Button -->
+<button class="w-full h-14 bg-[#F4972B] text-white rounded-lg font-headline-md text-headline-md shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all active:scale-[0.98]" type="submit">
+                            Hesapla
+                        </button>
+</form>
+</div>
+<!-- SEO Content & FAQ -->
+<div class="mt-12 space-y-8">
+<section>
+<h2 class="font-headline-md text-headline-md text-primary mb-4">Kıdem Tazminatı Nasıl Hesaplanır?</h2>
+<div class="font-body-md text-body-md text-on-surface-variant space-y-4">
+<p>Kıdem tazminatı, bir çalışanın en az 1 yıl boyunca aynı işverene bağlı olarak çalışması durumunda, iş sözleşmesinin kanunda belirtilen sebeplerle sona ermesiyle ödenen toplu paradır. Her tam yıl için 30 günlük brüt ücret tutarında hesaplanır.</p>
+<!-- Ad Slot 3: In-content ad inside SEO text -->
+<div class="my-6 p-4 bg-surface-container border border-outline-variant rounded-lg">
+<div class="flex flex-col items-center justify-center min-h-[100px]">
+<span class="text-label-sm text-outline mb-2 uppercase tracking-widest text-[10px]">İlgili İçerik</span>
+<span class="text-label-md text-on-surface-variant font-medium">AdSense Reklam Alanı (Native)</span>
+</div>
+</div>
+<p><strong>İhbar tazminatı</strong> ise, işten ayrılma bildirim sürelerine uymayan tarafın diğer tarafa ödediği tutardır. Çalışma süresine göre 2 haftadan 8 haftaya kadar değişebilmektedir.</p>
+</div>
+</section>
+<div class="space-y-4">
+<h3 class="font-headline-md text-headline-md text-primary">Sıkça Sorulan Sorular</h3>
+<!-- Accordion Item 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden accordion-item">
+<button class="w-full flex justify-between items-center p-4 text-left font-label-md text-label-md text-on-surface hover:bg-surface-container-low transition-colors" onclick="this.parentElement.classList.toggle('accordion-open')">
+<span>Kıdem tazminatı tavanı nedir?</span>
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+<div class="accordion-content bg-surface-bright px-4">
+<div class="py-4 text-body-sm text-on-surface-variant">
+                                    Kıdem tazminatı tavanı, her yıl Ocak ve Temmuz aylarında Hazine ve Maliye Bakanlığı tarafından belirlenir. Brüt maaşınız bu tavanın üzerindeyse, hesaplama tavan rakam üzerinden yapılır.
+                                </div>
+</div>
+</div>
+<!-- Accordion Item 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden accordion-item">
+<button class="w-full flex justify-between items-center p-4 text-left font-label-md text-label-md text-on-surface hover:bg-surface-container-low transition-colors" onclick="this.parentElement.classList.toggle('accordion-open')">
+<span>İstifa eden kıdem tazminatı alabilir mi?</span>
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+<div class="accordion-content bg-surface-bright px-4">
+<div class="py-4 text-body-sm text-on-surface-variant">
+                                    Genel kural olarak istifa eden işçi kıdem tazminatı alamaz. Ancak askerlik, emeklilik, haklı nedenle fesih gibi özel durumlarda istifa halinde de tazminat hakkı doğabilir.
+                                </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Results & Ad Slot (Right Sidebar) -->
+<div class="lg:col-span-5 space-y-gutter">
+<!-- Result Section -->
+<div class="space-y-4">
+<div class="bg-surface-container-lowest rounded-xl shadow-[0px_10px_30px_rgba(15,76,76,0.08)] overflow-hidden border-t-4 border-primary p-6 md:p-8 calculation-card">
+<h3 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+                            Hesaplama Sonucu
+                        </h3>
+<div class="space-y-4">
+<div class="flex justify-between items-center pb-3 border-b border-outline-variant">
+<span class="text-on-surface-variant font-body-md">Kıdem Tazminatı</span>
+<span class="font-display-num text-display-num text-primary">₺78.450,00</span>
+</div>
+<div class="flex justify-between items-center pb-3 border-b border-outline-variant">
+<span class="text-on-surface-variant font-body-md">İhbar Tazminatı</span>
+<span class="font-display-num text-display-num text-secondary">₺12.300,00</span>
+</div>
+<div class="flex justify-between items-center pt-2">
+<span class="text-primary font-bold font-body-lg">Toplam Ödeme</span>
+<span class="font-display-num text-display-num text-[#F4972B]">₺90.750,00</span>
+</div>
+</div>
+<button class="w-full mt-8 flex items-center justify-center gap-2 text-primary font-label-md border-2 border-primary rounded-lg h-12 hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+                            PDF Olarak İndir
+                        </button>
+</div>
+<!-- Ad Slot 2: Medium rectangle below the Result box -->
+<div class="bg-surface-container border border-outline-variant rounded-xl flex flex-col items-center justify-center p-4 min-h-[250px]">
+<span class="text-[10px] text-outline font-bold uppercase tracking-widest mb-4">REKLAM</span>
+<div class="w-full aspect-[300/250] max-w-[300px] flex items-center justify-center border-2 border-dashed border-outline-variant/30 rounded">
+<span class="text-label-md text-on-surface-variant text-center px-4">AdSense Reklam Alanı<br/>(300x250)</span>
+</div>
+</div>
+</div>
+<!-- Ad Slot -->
+<div class="mt-ad-slot-margin bg-[#F3F4F1] rounded-xl p-8 flex flex-col items-center justify-center min-h-[300px] border border-outline-variant/30 text-center relative overflow-hidden">
+<div class="absolute top-2 left-2 text-[10px] text-outline font-bold tracking-widest uppercase">REKLAM</div>
+<div class="mb-4">
+<span class="material-symbols-outlined text-4xl text-outline-variant">campaign</span>
+</div>
+<p class="font-label-md text-on-surface-variant mb-4">Sizin İçin En Uygun Kredi Seçenekleri</p>
+<div class="w-full h-40 bg-surface-container-lowest rounded shadow-inner flex items-center justify-center">
+<div class="w-full h-full" data-alt="A clean, minimalist banner for a banking product featuring abstract golden shapes and a white sleek mobile phone displaying a finance app. The background is a soft beige color, matching the professional and trustworthy fintech aesthetic. High-quality corporate studio lighting with soft shadows." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCy5gDmgQZb6HqUNaqZpOX2GvJkl7jp8sQO5daMYXODgQCteb2RiGIEvx9DUCJu04mryGzTn3VpKkSEaKCSpoDLDCzJDNIqSOvnm6_0FugYehV2Htire5Dehl-12-8sKoL65RC3Yu8uMgEbhyd_hhp5q45BP3mP8tLVYo_J-Hr7VrpEHRTW9vSpgLaEidWM0ig1RUpxUjpYaz_fsUjq3dvY7Cable3AYfkjsHTijHPBQdXBzBADvgQ_')"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Ad Slot 4: Wide horizontal banner above Footer -->
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-8">
+<div class="w-full h-[90px] bg-surface-container border border-outline-variant rounded-lg flex items-center justify-center">
+<span class="text-label-md text-outline font-medium">AdSense Reklam Alanı (Geniş Yatay Banner)</span>
+</div>
+</div>
+<!-- Footer Shell -->
+<footer class="bg-surface-container-lowest dark:bg-inverse-surface border-t border-outline-variant dark:border-outline">
+<div class="flex flex-col md:flex-row justify-between items-center py-8 px-margin-mobile md:px-margin-desktop w-full max-w-container-max mx-auto gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim font-headline-md text-headline-md" data-icon="account_balance">account_balance</span>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">FinansMatik</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary dark:text-secondary-fixed">© 2024 FinansMatik. Tüm hakları saklıdır.</p>
+<div class="flex gap-6">
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant hover:text-secondary-container dark:hover:text-secondary-fixed-dim underline transition-all" href="#">Hakkımızda</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant hover:text-secondary-container dark:hover:text-secondary-fixed-dim underline transition-all" href="#">Gizlilik Politikası</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant hover:text-secondary-container dark:hover:text-secondary-fixed-dim underline transition-all" href="#">İletişim</a>
+</div>
+</div>
+</footer>
+<script>
+        // Simple micro-interaction for form focus
+        const inputs = document.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.closest('.bg-surface-container-lowest')?.classList.add('shadow-lg');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.closest('.bg-surface-container-lowest')?.classList.remove('shadow-lg');
+            });
+        });
+
+        // Prevent form default to showcase "Calculation" effect
+        document.getElementById('calcForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = 'Hesaplanıyor...';
+            btn.classList.add('opacity-80');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('opacity-80');
+                // Normally results would update here
+            }, 1000);
+        });
+    </script>
+</body></html>

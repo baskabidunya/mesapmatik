@@ -1,0 +1,257 @@
+<!DOCTYPE html><html lang="tr" class="scroll-smooth"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Sora:wght@600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-container": "#0f4c4c",
+                    "surface-dim": "#d0dbed",
+                    "on-secondary-fixed": "#002020",
+                    "surface": "#f8f9ff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-container": "#f99b2f",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#85bbbb",
+                    "surface-tint": "#306767",
+                    "tertiary": "#472600",
+                    "on-secondary-container": "#1e6d6d",
+                    "on-primary-fixed": "#002020",
+                    "surface-container": "#e6eeff",
+                    "outline": "#707978",
+                    "inverse-primary": "#9ad0d0",
+                    "on-background": "#121c2a",
+                    "inverse-surface": "#27313f",
+                    "on-primary-fixed-variant": "#134f4f",
+                    "on-tertiary-fixed": "#2d1600",
+                    "primary": "#003434",
+                    "on-secondary-fixed-variant": "#004f50",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed": "#a7efef",
+                    "outline-variant": "#bfc8c8",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#ffdcbf",
+                    "surface-variant": "#d9e3f6",
+                    "primary-fixed": "#b5edec",
+                    "tertiary-container": "#663900",
+                    "on-surface-variant": "#404848",
+                    "on-surface": "#121c2a",
+                    "background": "#f8f9ff",
+                    "on-primary": "#ffffff",
+                    "primary-fixed-dim": "#9ad0d0",
+                    "secondary": "#176969",
+                    "surface-container-high": "#dee9fc",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#d9e3f6",
+                    "inverse-on-surface": "#eaf1ff",
+                    "surface-container-lowest": "#ffffff",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#a4ecec",
+                    "surface-bright": "#f8f9ff",
+                    "secondary-fixed-dim": "#8bd3d2",
+                    "on-tertiary-fixed-variant": "#6a3b00",
+                    "tertiary-fixed-dim": "#ffb872",
+                    "surface-container-low": "#eff4ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "container-max": "1200px",
+                    "base": "8px",
+                    "ad-slot-margin": "48px",
+                    "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "headline-md": ["Sora"],
+                    "label-sm": ["Inter"],
+                    "headline-lg": ["Sora"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-num": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Sora"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-num": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    }catch(_e){}</script><meta charset="utf-8"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Sora:wght@100..900&amp;display=swap" rel="stylesheet"></head><body class="font-body-md text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface-dim shadow-[0px_4px_20px_rgba(31,41,55,0.04)] docked full-width top-0 sticky z-50 transition-all duration-300">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" data-icon="account_balance" data-original-icon="account_balance">account_balance</span>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">FinansMatik</span>
+</div>
+<nav class="hidden md:flex gap-8 items-center">
+<a href="#" class="font-label-md text-label-md text-on-surface-variant dark:text-outline hover:bg-surface-variant/50 dark:hover:bg-surface-container-highest transition-colors px-3 py-2 rounded-lg">Araçlar</a>
+<a href="#" class="font-label-md text-label-md text-on-surface-variant dark:text-outline hover:bg-surface-variant/50 dark:hover:bg-surface-container-highest transition-colors px-3 py-2 rounded-lg">Piyasalar</a>
+<a href="#" class="font-label-md text-label-md text-on-surface dark:text-inverse-on-surface font-bold px-3 py-2 rounded-lg">Gizlilik</a>
+</nav>
+<button class="p-2 rounded-full hover:bg-surface-variant/50 transition-all active:opacity-80 active:scale-95">
+<span class="material-symbols-outlined text-on-surface" data-icon="menu">menu</span>
+</button>
+</div>
+</header>
+<main class="max-w-[800px] mx-auto px-margin-mobile md:px-0 py-16"><div class="mb-8 bg-surface-container border border-outline-variant rounded-lg p-4 flex flex-col items-center justify-center opacity-60">
+    <span class="font-label-sm text-label-sm text-outline mb-1">AdSense Reklam Alanı</span>
+    <div class="w-full max-w-[320px] h-[50px] bg-white flex items-center justify-center text-outline-variant font-body-sm italic border border-dashed border-outline-variant">
+        320x50 Banner
+    </div>
+</div>
+<!-- Typography Focused Header -->
+<div class="mb-12 border-b border-outline-variant pb-8">
+<h1 class="font-headline-lg text-headline-lg md:text-display-num text-primary mb-4">Gizlilik Politikası</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Son güncelleme: 24 Mayıs 2024</p>
+</div>
+<!-- Content Canvas -->
+<article class="space-y-12 bg-surface-container-lowest p-8 md:p-12 rounded-xl content-shadow">
+<section class="prose prose-slate max-w-none">
+<h2 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+                    1. Giriş
+                </h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                    FinansMatik olarak, kullanıcılarımızın gizliliğine ve kişisel verilerinin korunmasına büyük önem veriyoruz. Bu Gizlilik Politikası, web sitemizi ve finansal hesaplama araçlarımızı kullandığınızda hangi verileri topladığımızı, bu verileri nasıl kullandığımızı ve verilerinizin güvenliğini nasıl sağladığımızı açıklamaktadır. Sitemizi kullanarak bu politikayı kabul etmiş sayılırsınız.
+                </p>
+</section>
+<section class="prose prose-slate max-w-none">
+<h2 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span>
+                    2. KVKK Uyumluluğu
+                </h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-4">
+                    Kişisel verileriniz, 6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") uyarınca, veri sorumlusu sıfatıyla FinansMatik tarafından aşağıda açıklanan kapsamda işlenebilecektir. Kanun kapsamındaki haklarınız:
+                </p>
+<ul class="list-disc pl-6 space-y-3 font-body-md text-body-md text-on-surface-variant">
+<li class="">Kişisel verilerinizin işlenip işlenmediğini öğrenme,</li>
+<li class="">İşlenmişse buna ilişkin bilgi talep etme,</li>
+<li class="">İşlenme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme,</li>
+<li class="">Yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme,</li>
+<li class="">Eksik veya yanlış işlenmişse düzeltilmesini isteme.</li>
+</ul>
+</section><div class="my-8 bg-surface-container border border-outline-variant rounded-lg p-6 flex flex-col items-center justify-center opacity-60">
+    <span class="font-label-sm text-label-sm text-outline mb-2">AdSense Reklam Alanı</span>
+    <div class="w-full h-32 bg-white flex items-center justify-center text-outline-variant font-body-sm italic border border-dashed border-outline-variant">
+        Native Ad Placement
+    </div>
+</div>
+<section class="prose prose-slate max-w-none">
+<h2 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+                    3. Toplanan Veriler ve Kullanım Amacı
+                </h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-6">
+                    Hesaplama araçlarımıza girdiğiniz finansal veriler (kredi tutarı, faiz oranları, vade vb.) sunucularımızda kalıcı olarak saklanmaz; sadece anlık hesaplama işlemi için kullanılır. Ancak, sitemizin performansını artırmak amacıyla şu teknik veriler toplanabilir:
+                </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="p-4 bg-surface-container rounded-lg border-l-4 border-primary">
+<h4 class="font-label-md text-label-md text-primary mb-2">Teknik Bilgiler</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">IP adresi, tarayıcı tipi, işletim sistemi ve site içi gezinme süreleri.</p>
+</div>
+<div class="p-4 bg-surface-container rounded-lg border-l-4 border-secondary">
+<h4 class="font-label-md text-label-md text-secondary mb-2">İletişim Verileri</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">İletişim formunu doldurmanız halinde paylaştığınız isim ve e-posta adresi.</p>
+</div>
+</div>
+</section>
+<!-- AdSense Integration Zone -->
+<div class="my-ad-slot bg-[#F3F4F1] p-12 rounded-lg flex flex-col items-center justify-center border border-dashed border-outline-variant opacity-60">
+<span class="font-label-sm text-label-sm text-outline mb-2">Reklam Alanı</span>
+<div class="w-full max-w-[728px] h-[90px] bg-white flex items-center justify-center text-outline-variant font-body-sm italic">
+                    İçerik Arası Reklam Yerleşimi
+                </div>
+</div>
+<section class="prose prose-slate max-w-none">
+<h2 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined" data-icon="cookie">cookie</span>
+                    4. Çerez Politikası
+                </h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                    FinansMatik, kullanıcı deneyimini özelleştirmek ve trafiği analiz etmek için çerezler (cookies) kullanmaktadır. Zorunlu çerezler sitenin temel fonksiyonları için gereklidir. Analitik çerezler ise sitemizi nasıl kullandığınızı anlamamıza yardımcı olur. Tarayıcı ayarlarınızdan çerez tercihlerinizi dilediğiniz zaman değiştirebilirsiniz.
+                </p>
+</section>
+<section class="prose prose-slate max-w-none">
+<h2 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+                    5. Veri Güvenliği
+                </h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                    Verileriniz SSL (Secure Sockets Layer) teknolojisi kullanılarak şifrelenmiş bir şekilde iletilir. Sektör standardı güvenlik önlemleri uygulanarak yetkisiz erişim, veri kaybı veya kötüye kullanımı önlenmeye çalışılmaktadır. Ancak internet üzerinden yapılan hiçbir iletimin %100 güvenli olduğu garanti edilemez.
+                </p>
+</section>
+<div class="bg-primary-container text-on-primary-container p-6 rounded-xl mt-12">
+<h3 class="font-label-md text-label-md font-bold mb-2">Sorunuz mu var?</h3>
+<p class="font-body-sm text-body-sm opacity-90 mb-4">Gizlilik politikamız veya verileriniz hakkında daha fazla bilgi almak için bizimle iletişime geçebilirsiniz.</p>
+<a href="mailto:gizlilik@finansmatik.com" class="inline-flex items-center gap-2 bg-white text-primary px-6 py-2 rounded-full font-label-md text-label-md hover:shadow-lg transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+                    İletişime Geç
+                </a>
+</div>
+</article>
+</main>
+<!-- Footer -->
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-12">
+    <div class="bg-surface-container border border-outline-variant rounded-lg p-8 flex flex-col items-center justify-center opacity-60">
+        <span class="font-label-sm text-label-sm text-outline mb-2">AdSense Reklam Alanı</span>
+        <div class="w-full max-w-[728px] h-[90px] bg-white flex items-center justify-center text-outline-variant font-body-sm italic border border-dashed border-outline-variant">
+            728x90 Leaderboard
+        </div>
+    </div>
+</div><footer class="bg-surface-container-lowest dark:bg-inverse-surface border-t border-outline-variant dark:border-outline mt-ad-slot-margin">
+<div class="flex flex-col md:flex-row justify-between items-center py-8 px-margin-mobile md:px-margin-desktop w-full max-w-container-max mx-auto gap-4">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">FinansMatik</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline">© 2024 FinansMatik. Tüm hakları saklıdır.</span>
+</div>
+<div class="flex gap-6">
+<a href="#" class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant hover:text-secondary-container dark:hover:text-secondary-fixed-dim underline transition-all">Hakkımızda</a>
+<a href="#" class="font-label-sm text-label-sm text-primary dark:text-primary-fixed font-bold hover:text-secondary-container dark:hover:text-secondary-fixed-dim underline transition-all">Gizlilik Politikası</a>
+<a href="#" class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant hover:text-secondary-container dark:hover:text-secondary-fixed-dim underline transition-all">İletişim</a>
+</div>
+<div class="flex gap-4">
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container hover:bg-primary-container hover:text-white transition-all">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container hover:bg-primary-container hover:text-white transition-all">
+<span class="material-symbols-outlined" data-icon="language">language</span>
+</button>
+</div>
+</div>
+</footer>
+<!-- Simple Scroll Progress Indicator -->
+<div id="scroll-indicator" class="fixed top-0 left-0 h-1 bg-secondary z-[60] transition-all duration-100" style="width: 0%"></div>
+<script>
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("scroll-indicator").style.width = scrolled + "%";
+            
+            const header = document.querySelector('header');
+            if (winScroll > 50) {
+                header.classList.add('py-2', 'bg-white/95', 'backdrop-blur-md');
+                header.classList.remove('bg-surface');
+            } else {
+                header.classList.remove('py-2', 'bg-white/95', 'backdrop-blur-md');
+                header.classList.add('bg-surface');
+            }
+        };
+    </script>
+</body></html>

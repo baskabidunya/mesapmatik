@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FinansMatik - Türkiye'nin Finansal Hesaplayıcıları</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#134f4f",
+                    "tertiary-fixed": "#ffdcbf",
+                    "on-primary-fixed": "#002020",
+                    "secondary-fixed": "#a7efef",
+                    "inverse-on-surface": "#eaf1ff",
+                    "surface-variant": "#d9e3f6",
+                    "surface-container-low": "#eff4ff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#306767",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#9ad0d0",
+                    "inverse-primary": "#9ad0d0",
+                    "on-secondary-container": "#1e6d6d",
+                    "surface-container-high": "#dee9fc",
+                    "on-primary-container": "#85bbbb",
+                    "surface-container": "#e6eeff",
+                    "on-surface-variant": "#404848",
+                    "tertiary": "#472600",
+                    "tertiary-container": "#663900",
+                    "secondary-fixed-dim": "#8bd3d2",
+                    "on-secondary-fixed-variant": "#004f50",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#0f4c4c",
+                    "surface-container-highest": "#d9e3f6",
+                    "secondary": "#176969",
+                    "surface-bright": "#f8f9ff",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "inverse-surface": "#27313f",
+                    "outline": "#707978",
+                    "tertiary-fixed-dim": "#ffb872",
+                    "secondary-container": "#a4ecec",
+                    "on-tertiary-container": "#f99b2f",
+                    "background": "#f8f9ff",
+                    "outline-variant": "#bfc8c8",
+                    "on-surface": "#121c2a",
+                    "on-tertiary-fixed-variant": "#6a3b00",
+                    "surface": "#f8f9ff",
+                    "primary": "#003434",
+                    "on-tertiary-fixed": "#2d1600",
+                    "surface-dim": "#d0dbed",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#b5edec",
+                    "on-secondary-fixed": "#002020",
+                    "on-primary": "#ffffff",
+                    "on-background": "#121c2a",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "ad-slot-margin": "48px",
+                    "container-max": "1200px",
+                    "gutter": "24px",
+                    "margin-desktop": "40px",
+                    "base": "8px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "display-num": ["Inter"],
+                    "headline-lg": ["Sora"],
+                    "label-sm": ["Inter"],
+                    "headline-lg-mobile": ["Sora"],
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-md": ["Sora"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-num": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .soft-elevation {
+            box-shadow: 0px 4px 20px rgba(31, 41, 55, 0.04);
+        }
+        .deep-elevation {
+            box-shadow: 0px 10px 30px rgba(15, 76, 76, 0.08);
+        }
+        .transition-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 8px 24px rgba(15, 76, 76, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-surface shadow-[0px_4px_20px_rgba(31,41,55,0.04)] h-16 flex items-center" id="top-app-bar">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="account_balance">account_balance</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">FinansMatik</span>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant/50 p-2 rounded-full transition-colors" data-icon="menu">
+                menu
+            </button>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="pt-24 pb-12 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Hero Section -->
+<section class="relative rounded-xl overflow-hidden mb-12 md:mb-ad-slot-margin flex flex-col md:flex-row items-center bg-surface-container-low min-h-[400px] p-8 md:p-12">
+<div class="z-10 w-full md:w-1/2 space-y-6 text-center md:text-left">
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary leading-tight">
+                    Türkiye'nin Finansal Hesaplayıcıları
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">
+                    Güvenilir, hızlı ve güncel verilerle finansal kararlarınızı kolaylaştırın. Karmaşık hesaplamaları saniyeler içinde çözün.
+                </p>
+<div class="flex flex-wrap gap-4 justify-center md:justify-start">
+<button class="bg-[#F4972B] text-white px-8 py-4 rounded-xl font-bold font-body-md hover:bg-[#e08a27] transition-all transform hover:scale-105 active:opacity-80">
+                        Hemen Hesapla
+                    </button>
+<button class="border-2 border-secondary text-secondary px-8 py-4 rounded-xl font-bold font-body-md hover:bg-secondary-container transition-all">
+                        Tüm Araçlar
+                    </button>
+</div>
+</div>
+<div class="hidden md:block absolute right-0 top-0 w-1/2 h-full">
+<div class="w-full h-full relative">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A clean and professional digital illustration representing financial stability and modern technology. The scene features abstract 3D financial charts and a sleek interface display with soft ambient lighting. The color palette is dominated by petrol greens and warm oranges against a pristine white background, conveying a sense of reliability and meticulous design in a corporate yet approachable light-mode style." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBZ0ZUs90-XhATnv5LVR3BlqgC6hIhM6JBpB7ZFaEkUtK1haAs8UfqebMGJHtA4lilzL15vcJvu5cATxM69UFjBHejD_NjMOTm6iVEFJgFEZtAnCSQE3yFrErkWI434_YiBW8EFPsJjxOYUyRY5APYET0FWkx28aPY1k0tM4tMokxbJMpiEr2uruJh6ttvU6IQ40xq8XZK14sKZEOej0O8odv04HQFhsOKhu70wZJ_DfIh1dSapexHx')"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-surface-container-low via-transparent to-transparent"></div>
+</div>
+</div>
+</section>
+<!-- Trust Elements Bar -->
+<section class="mb-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="flex items-center gap-4 p-6 bg-surface-container-lowest rounded-xl soft-elevation border-l-4 border-[#F4972B]">
+<span class="material-symbols-outlined text-tertiary-container text-3xl" data-icon="update">update</span>
+<div>
+<span class="block font-headline-md text-label-md text-primary font-bold">Güncel TÜİK Verileri</span>
+<span class="text-body-sm text-on-surface-variant">Resmî enflasyon oranları ile uyumlu</span>
+</div>
+</div>
+<div class="flex items-center gap-4 p-6 bg-surface-container-lowest rounded-xl soft-elevation border-l-4 border-secondary">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="bolt">bolt</span>
+<div>
+<span class="block font-headline-md text-label-md text-primary font-bold">Ücretsiz ve Hızlı</span>
+<span class="text-body-sm text-on-surface-variant">Kayıt olmadan anında sonuç</span>
+</div>
+</div>
+<div class="flex items-center gap-4 p-6 bg-surface-container-lowest rounded-xl soft-elevation border-l-4 border-primary">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="shield">shield</span>
+<div>
+<span class="block font-headline-md text-label-md text-primary font-bold">Gizlilik Odaklı</span>
+<span class="text-body-sm text-on-surface-variant">Verileriniz asla saklanmaz</span>
+</div>
+</div>
+</section>
+<!-- Tool Grid (Bento Style) -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-12">
+<!-- 1. Kira Artış -->
+<div class="md:col-span-8 bg-surface-container-lowest rounded-xl p-8 soft-elevation transition-lift group cursor-pointer border-t-4 border-primary relative overflow-hidden">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+<div class="space-y-3 max-w-md">
+<span class="inline-flex items-center px-3 py-1 bg-primary-container/10 text-primary rounded-full text-label-sm font-bold">POPÜLER</span>
+<h3 class="font-headline-md text-headline-md text-primary">Kira Artış Hesaplayıcı</h3>
+<p class="font-body-md text-on-surface-variant">
+                            TÜFE oranına göre yeni dönem kira bedelinizi yasal sınırları gözeterek hesaplayın.
+                        </p>
+</div>
+<div class="w-full md:w-auto">
+<button class="w-full bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-on-primary-fixed-variant transition-colors flex items-center justify-center gap-2">
+                            Hesaplamaya Başla
+                            <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Abstract BG element -->
+<div class="absolute -bottom-8 -right-8 opacity-5 transform group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[160px]" data-icon="real_estate_agent">real_estate_agent</span>
+</div>
+</div>
+<!-- 2. Kıdem Tazminatı -->
+<div class="md:col-span-4 bg-surface-container-lowest rounded-xl p-8 soft-elevation transition-lift group cursor-pointer border-t-4 border-secondary">
+<div class="h-full flex flex-col justify-between space-y-4">
+<div class="space-y-3">
+<div class="w-12 h-12 bg-secondary-container/30 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" data-icon="payments">payments</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary">Kıdem/İhbar Tazminatı</h3>
+<p class="font-body-sm text-on-surface-variant">
+                            İşten ayrılma durumunda alacağınız tazminatı brüt maaşınız üzerinden öğrenin.
+                        </p>
+</div>
+<span class="text-secondary font-bold inline-flex items-center gap-1 group-hover:translate-x-2 transition-transform">
+                        Detaylar <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</span>
+</div>
+</div>
+<!-- 3. Enflasyon/Zam -->
+<div class="md:col-span-4 bg-surface-container-lowest rounded-xl p-8 soft-elevation transition-lift group cursor-pointer border-t-4 border-tertiary-container">
+<div class="h-full flex flex-col justify-between space-y-4">
+<div class="space-y-3">
+<div class="w-12 h-12 bg-tertiary-fixed/30 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary-container" data-icon="trending_up">trending_up</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary">Enflasyon/Zam</h3>
+<p class="font-body-sm text-on-surface-variant">
+                            Maaş ve fiyat artışlarını resmi enflasyon verilerine göre karşılaştırın.
+                        </p>
+</div>
+<span class="text-tertiary-container font-bold inline-flex items-center gap-1 group-hover:translate-x-2 transition-transform">
+                        Hesapla <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</span>
+</div>
+</div>
+<!-- 4. Döviz Bütçe -->
+<div class="md:col-span-8 bg-surface-container-lowest rounded-xl p-8 soft-elevation transition-lift group cursor-pointer border-t-4 border-[#F4972B] relative overflow-hidden">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+<div class="space-y-3 max-w-md">
+<h3 class="font-headline-md text-headline-md text-primary">Döviz Bütçe Planlayıcı</h3>
+<p class="font-body-md text-on-surface-variant">
+                            Bütçenizi döviz bazlı planlayın ve kur dalgalanmalarına karşı finansal yönetiminizi güçlendirin.
+                        </p>
+</div>
+<div class="w-full md:w-auto">
+<button class="w-full bg-[#F4972B] text-white px-6 py-3 rounded-lg font-bold hover:bg-[#e08a27] transition-colors flex items-center justify-center gap-2">
+                            Yönetmeye Başla
+                            <span class="material-symbols-outlined" data-icon="currency_exchange">currency_exchange</span>
+</button>
+</div>
+</div>
+<div class="absolute -bottom-10 -right-4 opacity-5 transform group-hover:rotate-12 transition-transform">
+<span class="material-symbols-outlined text-[140px]" data-icon="savings">savings</span>
+</div>
+</div>
+</section>
+<!-- AdSense Placeholder -->
+<div class="my-ad-slot-margin flex justify-center">
+<div class="bg-[#F3F4F1] w-full max-w-[728px] h-[90px] flex items-center justify-center rounded-lg border border-outline-variant text-outline">
+<span class="text-label-sm uppercase tracking-widest">Reklam Alanı</span>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant">
+<div class="flex flex-col md:flex-row justify-between items-center py-8 px-margin-mobile md:px-margin-desktop w-full max-w-container-max mx-auto gap-4">
+<div class="flex flex-col items-center md:items-start gap-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="account_balance">account_balance</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">FinansMatik</span>
+</div>
+<p class="text-body-sm text-on-surface-variant">© 2024 FinansMatik. Tüm hakları saklıdır.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="font-label-sm text-secondary hover:text-secondary-container underline transition-all" href="#">Hakkımızda</a>
+<a class="font-label-sm text-secondary hover:text-secondary-container underline transition-all" href="#">Gizlilik Politikası</a>
+<a class="font-label-sm text-secondary hover:text-secondary-container underline transition-all" href="#">İletişim</a>
+</div>
+<div class="flex gap-4">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-colors">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-colors">
+<span class="material-symbols-outlined" data-icon="language">language</span>
+</button>
+</div>
+</div>
+</footer>
+<!-- Micro-interaction Scripts -->
+<script>
+        // Simple hover lift effect logic via classes (already in CSS above)
+        // Add subtle animation for the hero image entering the viewport
+        document.addEventListener('DOMContentLoaded', () => {
+            const heroText = document.querySelector('h1');
+            heroText.style.opacity = '0';
+            heroText.style.transform = 'translateY(20px)';
+            heroText.style.transition = 'all 0.8s ease-out';
+            
+            setTimeout(() => {
+                heroText.style.opacity = '1';
+                heroText.style.transform = 'translateY(0)';
+            }, 100);
+        });
+
+        // Floating menu placeholder action
+        const menuBtn = document.querySelector('[data-icon="menu"]');
+        menuBtn.addEventListener('click', () => {
+            console.log('Menu toggle clicked');
+            // Logic for a sidebar or modal menu could go here
+        });
+    </script>
+</body></html>

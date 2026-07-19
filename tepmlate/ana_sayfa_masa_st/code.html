@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FinansMatik - Modern Finansal Hesaplama Araçları</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Sora & Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Sora:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#472600",
+                    "on-error": "#ffffff",
+                    "on-surface": "#121c2a",
+                    "on-secondary-fixed": "#002020",
+                    "primary": "#003434",
+                    "on-tertiary-container": "#f99b2f",
+                    "surface-container-highest": "#d9e3f6",
+                    "on-secondary": "#ffffff",
+                    "inverse-surface": "#27313f",
+                    "on-background": "#121c2a",
+                    "surface-container": "#e6eeff",
+                    "surface": "#f8f9ff",
+                    "outline-variant": "#bfc8c8",
+                    "on-error-container": "#93000a",
+                    "primary-fixed-dim": "#9ad0d0",
+                    "tertiary-fixed-dim": "#ffb872",
+                    "on-primary-container": "#85bbbb",
+                    "inverse-on-surface": "#eaf1ff",
+                    "surface-bright": "#f8f9ff",
+                    "surface-dim": "#d0dbed",
+                    "surface-tint": "#306767",
+                    "on-primary-fixed-variant": "#134f4f",
+                    "surface-container-lowest": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface-container-high": "#dee9fc",
+                    "secondary": "#176969",
+                    "inverse-primary": "#9ad0d0",
+                    "on-tertiary-fixed": "#2d1600",
+                    "background": "#f8f9ff",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#ffdcbf",
+                    "primary-container": "#0f4c4c",
+                    "secondary-fixed-dim": "#8bd3d2",
+                    "on-secondary-fixed-variant": "#004f50",
+                    "outline": "#707978",
+                    "tertiary-container": "#663900",
+                    "secondary-fixed": "#a7efef",
+                    "on-secondary-container": "#1e6d6d",
+                    "surface-variant": "#d9e3f6",
+                    "on-surface-variant": "#404848",
+                    "on-primary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "secondary-container": "#a4ecec",
+                    "surface-container-low": "#eff4ff",
+                    "on-tertiary-fixed-variant": "#6a3b00",
+                    "primary-fixed": "#b5edec",
+                    "on-primary-fixed": "#002020"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1200px",
+                    "base": "8px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "ad-slot-margin": "48px",
+                    "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Sora"],
+                    "display-num": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Sora"],
+                    "body-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Sora"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "display-num": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #FAFAF7;
+            color: #121c2a;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ad-container {
+            background-color: #F3F4F1;
+            border: 1px dashed #bfc8c8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #707978;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface sticky top-0 z-50 shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary font-headline-md" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">FinansMatik</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-label-md text-label-md text-on-surface hover:text-secondary transition-colors" href="#">Krediler</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Mevduat</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Döviz</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Kartlar</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined p-2 rounded-full hover:bg-surface-variant/50 transition-colors" data-icon="search">search</button>
+<button class="material-symbols-outlined p-2 rounded-full hover:bg-surface-variant/50 transition-colors" data-icon="menu">menu</button>
+</div>
+</div>
+</header>
+<main>
+<!-- Header Ad Slot -->
+<section class="mt-base mb-ad-slot-margin px-margin-mobile md:px-margin-desktop">
+<div class="max-w-container-max mx-auto h-[90px] w-full ad-container rounded-lg font-label-sm uppercase tracking-widest">
+                Reklam Alanı (728x90)
+            </div>
+</section>
+<!-- Hero Section -->
+<section class="relative px-margin-mobile md:px-margin-desktop pb-16 pt-8 overflow-hidden">
+<div class="max-w-container-max mx-auto grid md:grid-cols-2 gap-12 items-center">
+<div class="z-10">
+<span class="inline-block px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm mb-6">
+                        Güvenilir &amp; Şeffaf Hesaplama
+                    </span>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-6 leading-tight">
+                        Finansal Geleceğinizi <br/> <span class="text-tertiary">Birlikte Planlayalım.</span>
+</h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant mb-8 max-w-lg">
+                        En güncel veriler ve karmaşık algoritmalar ile kredi, mevduat ve yatırım kararlarınızı saniyeler içinde netleştirin.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-[#F4972B] text-white px-8 py-4 rounded-xl font-bold shadow-lg hover:translate-y-[-2px] transition-all hover:shadow-xl active:scale-95">
+                            Hemen Başla
+                        </button>
+<button class="border-2 border-primary text-primary px-8 py-4 rounded-xl font-bold hover:bg-primary/5 transition-colors">
+                            Nasıl Çalışır?
+                        </button>
+</div>
+</div>
+<div class="relative h-[400px] md:h-[500px]">
+<div class="absolute inset-0 bg-primary-container/5 rounded-[2rem] -rotate-3"></div>
+<div class="absolute inset-0 bg-white shadow-2xl rounded-[2rem] rotate-3 overflow-hidden border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="A professional and high-end 3D isometric financial illustration showing golden coins, floating credit cards, and glowing digital charts on a clean white surface. The scene is illuminated by soft, natural studio lighting with subtle teal and orange accents, creating a modern fintech aesthetic. The background is a minimalist off-white gradient, emphasizing a reliable and meticulous corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5zH_3CU2I2GwT1wQC62TZW-4pMsCVtd3M3PK7tKMqR7MZHYRx4RfuMW5h6ewgznZ1lpGhlDNks978ig7I3njOl1474naCDGqJLxGTeQifsBC8AmYydHfVCv0I-gMqb0TGASHvZ_9ZCYu5P6SbmB6J5gY5mAAbkhFMviZK1wahFaRqPyYNn7vzjvFNu3cSQ8lqdog5oSrWRVAz3Kc9D5q-FTdhzomTQXC8G1Oc5nCoaOvfTBqesKUa"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Tools Grid -->
+<section class="py-16 px-margin-mobile md:px-margin-desktop bg-surface-container-low">
+<div class="max-w-container-max mx-auto">
+<div class="text-center mb-12">
+<h3 class="font-headline-md text-headline-md text-primary mb-2">Popüler Hesaplama Araçları</h3>
+<p class="text-on-surface-variant font-body-sm">En çok tercih edilen finansal araçlarımıza göz atın.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Tool Card 1 -->
+<div class="bg-white p-8 rounded-[1.5rem] shadow-[0px_4px_20px_rgba(31,41,55,0.04)] border-t-4 border-primary hover:shadow-[0px_10px_30px_rgba(15,76,76,0.08)] transition-all group">
+<div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">payments</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-3">Kredi Hesaplama</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-6">İhtiyaç, konut ve taşıt kredilerini güncel faiz oranları ile karşılaştırın.</p>
+<a class="text-primary font-bold flex items-center gap-2 group-hover:gap-4 transition-all" href="#">
+                            Hesapla <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+<!-- Tool Card 2 -->
+<div class="bg-white p-8 rounded-[1.5rem] shadow-[0px_4px_20px_rgba(31,41,55,0.04)] border-t-4 border-secondary hover:shadow-[0px_10px_30px_rgba(15,76,76,0.08)] transition-all group">
+<div class="w-14 h-14 bg-secondary/10 rounded-2xl flex items-center justify-center mb-6 text-secondary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">savings</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-3">Mevduat Getirisi</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-6">Birikimlerinizin ne kadar kazandıracağını farklı vade seçenekleri ile görün.</p>
+<a class="text-secondary font-bold flex items-center gap-2 group-hover:gap-4 transition-all" href="#">
+                            Hesapla <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+<!-- Tool Card 3 -->
+<div class="bg-white p-8 rounded-[1.5rem] shadow-[0px_4px_20px_rgba(31,41,55,0.04)] border-t-4 border-[#F4972B] hover:shadow-[0px_10px_30px_rgba(15,76,76,0.08)] transition-all group">
+<div class="w-14 h-14 bg-[#F4972B]/10 rounded-2xl flex items-center justify-center mb-6 text-[#F4972B] group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">currency_exchange</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-3">Döviz Çevirici</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-6">Anlık kurlar ile 50+ farklı para birimi arasında hızlı dönüşüm yapın.</p>
+<a class="text-[#F4972B] font-bold flex items-center gap-2 group-hover:gap-4 transition-all" href="#">
+                            Hesapla <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+<!-- Tool Card 4 -->
+<div class="bg-white p-8 rounded-[1.5rem] shadow-[0px_4px_20px_rgba(31,41,55,0.04)] border-t-4 border-tertiary-container hover:shadow-[0px_10px_30px_rgba(15,76,76,0.08)] transition-all group">
+<div class="w-14 h-14 bg-tertiary-container/10 rounded-2xl flex items-center justify-center mb-6 text-tertiary-container group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">percent</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-3">Vergi &amp; Maaş</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-6">Brüt-net maaş hesaplamaları ve güncel vergi dilimleri hakkında bilgi alın.</p>
+<a class="text-tertiary-container font-bold flex items-center gap-2 group-hover:gap-4 transition-all" href="#">
+                            Hesapla <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Post-Tools Ad Slot -->
+<section class="my-ad-slot-margin px-margin-mobile md:px-margin-desktop">
+<div class="max-w-container-max mx-auto h-[90px] w-full ad-container rounded-lg font-label-sm uppercase tracking-widest">
+                Reklam Alanı (728x90)
+            </div>
+</section>
+<!-- Trust Elements Section -->
+<section class="py-16 px-margin-mobile md:px-margin-desktop">
+<div class="max-w-container-max mx-auto bg-primary text-white rounded-[2rem] p-12 relative overflow-hidden">
+<!-- Background Shader Animation -->
+
+<div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-12">
+<div class="flex-1">
+<h3 class="font-headline-lg text-headline-lg mb-4">Neden FinansMatik?</h3>
+<p class="font-body-lg text-on-primary-container">Bankacılık standartlarında güvenlik ve tarafsızlık ilkelerimizle 10 yıldır yanınızdayız.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 flex-[2]">
+<div class="text-center">
+<div class="font-display-num text-display-num mb-2">1M+</div>
+<div class="font-label-sm text-label-sm opacity-80">Aylık Kullanıcı</div>
+</div>
+<div class="text-center">
+<div class="font-display-num text-display-num mb-2">50+</div>
+<div class="font-label-sm text-label-sm opacity-80">Aktif Banka</div>
+</div>
+<div class="text-center">
+<div class="font-display-num text-display-num mb-2">100%</div>
+<div class="font-label-sm text-label-sm opacity-80">Doğru Sonuç</div>
+</div>
+<div class="text-center">
+<div class="font-display-num text-display-num mb-2">24/7</div>
+<div class="font-label-sm text-label-sm opacity-80">Canlı Veri</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Pre-Footer Ad Slot -->
+<section class="my-ad-slot-margin px-margin-mobile md:px-margin-desktop">
+<div class="max-w-container-max mx-auto h-[90px] w-full ad-container rounded-lg font-label-sm uppercase tracking-widest">
+                Reklam Alanı (728x90)
+            </div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant">
+<div class="max-w-container-max mx-auto py-12 px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary font-headline-md" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">FinansMatik</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed">
+                        En doğru finansal kararları alabilmeniz için teknoloji ve uzmanlığı bir araya getiriyoruz. Finansal okuryazarlığınızı artırmak için buradayız.
+                    </p>
+</div>
+<div>
+<h5 class="font-label-md text-label-md text-primary font-bold mb-6">Hesaplamalar</h5>
+<ul class="space-y-4">
+<li><a class="text-body-sm font-body-sm text-on-surface-variant hover:text-secondary transition-all" href="#">İhtiyaç Kredisi</a></li>
+<li><a class="text-body-sm font-body-sm text-on-surface-variant hover:text-secondary transition-all" href="#">Konut Kredisi</a></li>
+<li><a class="text-body-sm font-body-sm text-on-surface-variant hover:text-secondary transition-all" href="#">Mevduat Faizi</a></li>
+<li><a class="text-body-sm font-body-sm text-on-surface-variant hover:text-secondary transition-all" href="#">Kredi Kartı</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-md text-label-md text-primary font-bold mb-6">Kurumsal</h5>
+<ul class="space-y-4">
+<li><a class="text-body-sm font-body-sm text-on-surface-variant hover:text-secondary transition-all" href="#">Hakkımızda</a></li>
+<li><a class="text-body-sm font-body-sm text-on-surface-variant hover:text-secondary transition-all" href="#">Gizlilik Politikası</a></li>
+<li><a class="text-body-sm font-body-sm text-on-surface-variant hover:text-secondary transition-all" href="#">KVKK Aydınlatma Metni</a></li>
+<li><a class="text-body-sm font-body-sm text-on-surface-variant hover:text-secondary transition-all" href="#">İletişim</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-md text-label-md text-primary font-bold mb-6">Bizi Takip Edin</h5>
+<div class="flex gap-4">
+<a class="w-10 h-10 bg-primary/5 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-xl">share</span>
+</a>
+<a class="w-10 h-10 bg-primary/5 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-xl">alternate_email</span>
+</a>
+<a class="w-10 h-10 bg-primary/5 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-xl">forum</span>
+</a>
+</div>
+</div>
+</div>
+<div class="pt-8 border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-4">
+<span class="text-label-sm font-label-sm text-on-surface-variant">© 2024 FinansMatik. Tüm hakları saklıdır.</span>
+<div class="flex gap-6">
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:underline transition-all" href="#">Hakkımızda</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:underline transition-all" href="#">Gizlilik Politikası</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:underline transition-all" href="#">İletişim</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- Micro-interactions Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.tool-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-8px)';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body></html>

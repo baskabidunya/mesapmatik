@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FinansMatik | Döviz Bütçe Planlayıcı</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Sora:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#472600",
+                    "on-error": "#ffffff",
+                    "on-surface": "#121c2a",
+                    "on-secondary-fixed": "#002020",
+                    "primary": "#003434",
+                    "on-tertiary-container": "#f99b2f",
+                    "surface-container-highest": "#d9e3f6",
+                    "on-secondary": "#ffffff",
+                    "inverse-surface": "#27313f",
+                    "on-background": "#121c2a",
+                    "surface-container": "#e6eeff",
+                    "surface": "#f8f9ff",
+                    "outline-variant": "#bfc8c8",
+                    "on-error-container": "#93000a",
+                    "primary-fixed-dim": "#9ad0d0",
+                    "tertiary-fixed-dim": "#ffb872",
+                    "on-primary-container": "#85bbbb",
+                    "inverse-on-surface": "#eaf1ff",
+                    "surface-bright": "#f8f9ff",
+                    "surface-dim": "#d0dbed",
+                    "surface-tint": "#306767",
+                    "on-primary-fixed-variant": "#134f4f",
+                    "surface-container-lowest": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface-container-high": "#dee9fc",
+                    "secondary": "#176969",
+                    "inverse-primary": "#9ad0d0",
+                    "on-tertiary-fixed": "#2d1600",
+                    "background": "#f8f9ff",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#ffdcbf",
+                    "primary-container": "#0f4c4c",
+                    "secondary-fixed-dim": "#8bd3d2",
+                    "on-secondary-fixed-variant": "#004f50",
+                    "outline": "#707978",
+                    "tertiary-container": "#663900",
+                    "secondary-fixed": "#a7efef",
+                    "on-secondary-container": "#1e6d6d",
+                    "surface-variant": "#d9e3f6",
+                    "on-surface-variant": "#404848",
+                    "on-primary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "secondary-container": "#a4ecec",
+                    "surface-container-low": "#eff4ff",
+                    "on-tertiary-fixed-variant": "#6a3b00",
+                    "primary-fixed": "#b5edec",
+                    "on-primary-fixed": "#002020"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1200px",
+                    "base": "8px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "ad-slot-margin": "48px",
+                    "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Sora"],
+                    "display-num": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Sora"],
+                    "body-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Sora"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "display-num": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .surface-card {
+            background-color: #ffffff;
+            box-shadow: 0px 4px 20px rgba(31, 41, 55, 0.04);
+            border-radius: 12px;
+        }
+        .result-card {
+            background-color: #ffffff;
+            box-shadow: 0px 10px 30px rgba(15, 76, 76, 0.08);
+            border-radius: 12px;
+            border-top: 4px solid #003434;
+        }
+        .active-chip {
+            background-color: #0f4c4c1a;
+            color: #003434;
+            border: 1px solid #003434;
+        }
+        input:focus {
+            outline: none !important;
+            border-color: #1B6B6B !important;
+            box-shadow: 0 0 0 1px #1B6B6B !important;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface shadow-[0px_4px_20px_rgba(31,41,55,0.04)] sticky top-0 z-50">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl">account_balance</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">FinansMatik</h1>
+</div>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="font-label-md text-label-md text-on-surface hover:text-secondary transition-colors" href="#">Döviz Kurları</a>
+<a class="font-label-md text-label-md text-primary font-bold" href="#">Bütçe Planlayıcı</a>
+<a class="font-label-md text-label-md text-on-surface hover:text-secondary transition-colors" href="#">Hesaplamalar</a>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant/50 p-2 rounded-full transition-colors">menu</button>
+</nav>
+</div>
+</header>
+<!-- Header Ads Slot -->
+<div class="w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-base">
+<div class="bg-[#F3F4F1] h-[90px] flex items-center justify-center rounded-lg text-outline border border-outline-variant/30">
+<span class="font-label-sm uppercase tracking-widest">Reklam Alanı - 728x90</span>
+</div>
+</div>
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-margin-desktop">
+<!-- Hero Section -->
+<div class="mb-margin-desktop text-center md:text-left">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-2">Döviz Bütçe Planlayıcı</h2>
+<p class="text-on-surface-variant font-body-lg max-w-2xl">Gelir ve giderlerinizi döviz bazlı planlayın, gelecekteki birikimlerinizi gerçekçi kurlarla öngörün.</p>
+</div>
+<!-- Calculator Layout -->
+<div class="grid grid-cols-1 gap-gutter">
+<!-- Selection Buttons (Wide Horizontal Layout) -->
+<section class="surface-card p-6 md:p-8 flex flex-col gap-6">
+<div>
+<label class="block font-label-md text-on-surface-variant mb-4">Planlama Para Birimi</label>
+<div class="flex flex-wrap gap-3">
+<button class="px-6 py-3 rounded-xl border border-outline-variant font-label-md flex items-center gap-2 active-chip hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">payments</span> USD - Amerikan Doları
+                        </button>
+<button class="px-6 py-3 rounded-xl border border-outline-variant font-label-md flex items-center gap-2 text-on-surface-variant hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">euro</span> EUR - Euro
+                        </button>
+<button class="px-6 py-3 rounded-xl border border-outline-variant font-label-md flex items-center gap-2 text-on-surface-variant hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">currency_pound</span> GBP - İngiliz Sterlini
+                        </button>
+<button class="px-6 py-3 rounded-xl border border-outline-variant font-label-md flex items-center gap-2 text-on-surface-variant hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">currency_pound</span> ALT - Altın (Gram)
+                        </button>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-on-surface-variant mb-4">Planlama Süresi</label>
+<div class="flex flex-wrap gap-3">
+<button class="px-6 py-3 rounded-xl border border-outline-variant font-label-md text-on-surface-variant hover:bg-surface-container-low transition-all">3 Ay</button>
+<button class="px-6 py-3 rounded-xl border border-outline-variant font-label-md text-on-surface-variant hover:bg-surface-container-low transition-all">6 Ay</button>
+<button class="px-6 py-3 rounded-xl border border-outline-variant font-label-md active-chip transition-all">12 Ay (1 Yıl)</button>
+<button class="px-6 py-3 rounded-xl border border-outline-variant font-label-md text-on-surface-variant hover:bg-surface-container-low transition-all">24 Ay (2 Yıl)</button>
+</div>
+</div>
+</section>
+<!-- Inputs & Results Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+<!-- Calculation Inputs -->
+<section class="surface-card p-6 md:p-8 space-y-6">
+<h3 class="font-headline-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined">calculate</span> Hesaplama Detayları
+                    </h3>
+<div class="space-y-4">
+<div>
+<label class="block font-label-sm text-on-surface-variant mb-1">Aylık Net Gelir (TL)</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-outline">₺</span>
+<input class="w-full h-12 pl-10 pr-4 border border-outline-variant rounded-lg font-body-md" placeholder="Örn: 50.000" type="number" value="45000"/>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-on-surface-variant mb-1">Sabit Giderler (Kira, Fatura vb. TL)</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-outline">₺</span>
+<input class="w-full h-12 pl-10 pr-4 border border-outline-variant rounded-lg font-body-md" placeholder="Örn: 20.000" type="number" value="18000"/>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-on-surface-variant mb-1">Yaşam Giderleri (Mutfak, Sosyal vb. TL)</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-outline">₺</span>
+<input class="w-full h-12 pl-10 pr-4 border border-outline-variant rounded-lg font-body-md" placeholder="Örn: 15.000" type="number" value="12000"/>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-on-surface-variant mb-1">Beklenen Kur Değişimi (Yıllık %)</label>
+<div class="relative">
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-outline">%</span>
+<input class="w-full h-12 px-4 border border-outline-variant rounded-lg font-body-md" placeholder="Örn: 40" type="number" value="35"/>
+</div>
+</div>
+</div>
+<button class="w-full bg-[#F4972B] hover:opacity-90 text-white font-bold h-14 rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#F4972B]/20">
+<span class="material-symbols-outlined">auto_graph</span> BÜTÇEYİ HESAPLA
+                    </button>
+<button class="w-full border-2 border-primary text-primary font-bold h-12 rounded-xl hover:bg-primary-fixed-dim/10 transition-all">
+                        TÜMÜNÜ SIFIRLA
+                    </button>
+</section>
+<!-- Results and Advice (Side by Side in Desk, Stack in Mob) -->
+<div class="space-y-gutter">
+<!-- Results Card -->
+<section class="result-card p-6 md:p-8">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="font-headline-md text-primary">Projeksiyon Özeti</h3>
+<p class="text-body-sm text-on-surface-variant">12 Ay Sonundaki Tahmini Birikim</p>
+</div>
+<span class="bg-primary-container text-on-primary-container px-3 py-1 rounded-full text-label-sm font-bold">USD BAZLI</span>
+</div>
+<div class="space-y-6">
+<div class="text-center py-6 bg-surface-container-low rounded-2xl border border-primary/5">
+<span class="block text-outline font-label-md mb-1">Toplam Tahmini Birikim</span>
+<span class="text-display-num font-display-num text-primary">$ 5,420.00</span>
+<span class="block text-secondary font-label-md mt-2">₺ 194,578.00 (Tahmini Kur)</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 border border-outline-variant rounded-xl">
+<span class="block text-on-surface-variant text-label-sm mb-1">Aylık Tasarruf</span>
+<span class="block font-headline-md text-primary">$ 451.60</span>
+</div>
+<div class="p-4 border border-outline-variant rounded-xl">
+<span class="block text-on-surface-variant text-label-sm mb-1">Gider Oranı</span>
+<span class="block font-headline-md text-error">% 66</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Advice Box -->
+<section class="bg-secondary-container/30 p-6 md:p-8 rounded-xl border-l-4 border-secondary">
+<h4 class="font-headline-md text-on-secondary-container flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined">lightbulb</span> Bütçe Tavsiyesi
+                        </h4>
+<p class="text-on-secondary-container font-body-md leading-relaxed">
+                            Gelirinizin <strong>%34</strong>'ünü döviz bazlı biriktiriyorsunuz. Bu oran finansal özgürlük için oldukça sağlıklı. Ancak, yaşam giderlerinizde yapılacak <strong>%10'luk bir tasarruf</strong>, yıl sonu USD birikiminizi <strong>$620</strong> daha artırabilir. Portföyünüzü çeşitlendirmek için ALTIN (Gram) seçeneğini de değerlendirebilirsiniz.
+                        </p>
+</section>
+</div>
+</div>
+</div>
+<!-- SEO Content Section -->
+<section class="mt-ad-slot-margin grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<div class="lg:col-span-2 space-y-6">
+<h3 class="font-headline-lg text-primary">Neden Döviz Bütçe Planlayıcı Kullanmalısınız?</h3>
+<div class="text-on-surface-variant space-y-4">
+<p>Yüksek enflasyon dönemlerinde Türk Lirası bazlı bütçe yapmak, gerçek satın alma gücünüzü takip etmenizi zorlaştırabilir. FinansMatik Döviz Bütçe Planlayıcı, gelir ve giderlerinizi dolar, euro veya altın bazında takip etmenize olanak tanır.</p>
+<p>Bu araç sayesinde, gelecekteki büyük harcamalarınız (tatil, araç, konut peşinatı vb.) için ne kadar döviz biriktirmeniz gerektiğini net bir şekilde görebilirsiniz. Tahmini kur artışı hesaplamalarımızla, paranızın zaman içerisindeki değerini daha iyi yönetirsiniz.</p>
+</div>
+<!-- FAQ -->
+<div class="space-y-4 pt-8">
+<h4 class="font-headline-md text-primary">Sıkça Sorulan Sorular</h4>
+<div class="border border-outline-variant rounded-xl overflow-hidden">
+<button class="w-full px-6 py-4 flex justify-between items-center hover:bg-surface-container transition-colors text-left" onclick="this.nextElementSibling.classList.toggle('hidden')">
+<span class="font-label-md text-primary">Döviz kurları ne sıklıkla güncelleniyor?</span>
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+<div class="px-6 py-4 bg-surface text-body-sm text-on-surface-variant border-t border-outline-variant">
+                            Sistemimizdeki canlı kurlar her 15 dakikada bir Merkez Bankası ve serbest piyasa verileriyle senkronize edilmektedir.
+                        </div>
+<button class="w-full px-6 py-4 flex justify-between items-center hover:bg-surface-container transition-colors text-left border-t border-outline-variant" onclick="this.nextElementSibling.classList.toggle('hidden')">
+<span class="font-label-md text-primary">Gelecek projeksiyonu kesin sonuç verir mi?</span>
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+<div class="px-6 py-4 bg-surface text-body-sm text-on-surface-variant border-t border-outline-variant hidden">
+                            Hesaplamalar girdiğiniz "Tahmini Kur Değişimi" oranına bağlı matematiksel modellemelerdir. Piyasa koşulları değişkenlik gösterebilir.
+                        </div>
+</div>
+</div>
+</div>
+<!-- Side Image/Callout -->
+<div class="hidden lg:block">
+<div class="sticky top-24">
+<div class="rounded-2xl overflow-hidden shadow-xl mb-6 h-80 bg-primary">
+<img class="w-full h-full object-cover opacity-80 mix-blend-overlay" data-alt="A professional, clean photo of a modern workspace with a laptop displaying financial charts and a smartphone with a banking app. The lighting is bright and airy, with soft shadows and a professional corporate aesthetic. The color palette features deep forest greens, crisp whites, and warm orange accents, reflecting a reliable and welcoming financial planning atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxyWmB1b1UVhsckuAeWsWIbFuSBRAfg0MnH13-GIMliQ6Kf3IdIJAFIuYcrO7GmiV61N_7-0Pr02IGelJQecEVS-T8mbA-Pqf8DJ7T6ln5vNktcp5rbrbpwb4G3sfasyNhhpNv0PV_WmWyIt8o351y3NNVVIW_64NKzBPYfkGaifY1MyH0D9Na_3cghZcSRCtzfVJ2FNFPo-_gBiMYCs8KrM6kvTml0lUhmFnKkita9tD9VrcTuLCc"/>
+</div>
+<div class="bg-primary text-white p-6 rounded-2xl">
+<h5 class="font-headline-md mb-2">Profesyonel Destek</h5>
+<p class="text-body-sm opacity-80 mb-4">Daha kapsamlı yatırım danışmanlığı ve portföy yönetimi için uzman ekibimizle iletişime geçin.</p>
+<button class="w-full bg-[#F4972B] py-3 rounded-lg font-bold text-white">İncele</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer Ads Slot -->
+<div class="w-full mt-ad-slot-margin">
+<div class="bg-[#F3F4F1] h-[250px] flex items-center justify-center rounded-lg text-outline border border-outline-variant/30">
+<span class="font-label-sm uppercase tracking-widest">Reklam Alanı - 970x250 (Geniş Billboard)</span>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-inverse-surface border-t border-outline-variant mt-ad-slot-margin">
+<div class="flex flex-col md:flex-row justify-between items-center py-8 px-margin-mobile md:px-margin-desktop w-full max-w-container-max mx-auto gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">account_balance</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">FinansMatik</span>
+</div>
+<div class="flex gap-6">
+<a class="font-label-sm text-on-surface-variant hover:text-secondary-container underline transition-all" href="#">Hakkımızda</a>
+<a class="font-label-sm text-on-surface-variant hover:text-secondary-container underline transition-all" href="#">Gizlilik Politikası</a>
+<a class="font-label-sm text-on-surface-variant hover:text-secondary-container underline transition-all" href="#">İletişim</a>
+</div>
+<p class="font-label-sm text-on-surface-variant">© 2024 FinansMatik. Tüm hakları saklıdır.</p>
+</div>
+</footer>
+<script>
+        // Simple Micro-interactions
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                btn.style.transform = 'scale(0.98)';
+                btn.style.opacity = '0.8';
+            });
+            btn.addEventListener('mouseup', () => {
+                btn.style.transform = 'scale(1)';
+                btn.style.opacity = '1';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'scale(1)';
+                btn.style.opacity = '1';
+            });
+        });
+
+        // Toggle Chips
+        const currencyButtons = document.querySelectorAll('section:nth-of-type(1) div:nth-child(1) button');
+        currencyButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                currencyButtons.forEach(b => {
+                    b.classList.remove('active-chip');
+                    b.classList.add('text-on-surface-variant');
+                });
+                btn.classList.add('active-chip');
+                btn.classList.remove('text-on-surface-variant');
+            });
+        });
+
+        const periodButtons = document.querySelectorAll('section:nth-of-type(1) div:nth-child(2) button');
+        periodButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                periodButtons.forEach(b => {
+                    b.classList.remove('active-chip');
+                    b.classList.add('text-on-surface-variant');
+                });
+                btn.classList.add('active-chip');
+                btn.classList.remove('text-on-surface-variant');
+            });
+        });
+    </script>
+</body></html>
