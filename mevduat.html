@@ -56,130 +56,183 @@ details summary { list-style: none; cursor: pointer; user-select: none; }
     <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">Mevduat Getirisi Hesaplama</h1>
     <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Birikimlerinizin vade sonunda ne kadar kazandıracağını hesaplayın. Net getiri, brüt faiz ve stopaj kesintisini anında görün.</p>
   </header>
+  <div class="ad-placeholder w-full max-w-[728px] h-[90px] mx-auto mb-6">Reklam Alanı 728x90</div>
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-    <div class="lg:col-span-5 space-y-6">
-      <div class="calc-card p-8">
-        <form class="space-y-6" id="depositForm">
-          <div><label class="block font-label-md text-label-md text-on-surface-variant mb-2">Anapara (TL)</label>
-            <div class="relative"><span class="absolute left-4 top-1/2 -translate-y-1/2 text-outline">₺</span>
-            <input class="w-full pl-10 pr-4 py-3 border border-outline-variant rounded-xl font-body-md" id="principal" placeholder="50000" required type="number"></div>
+    <div class="lg:col-span-8 space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="lg:col-span-5 space-y-6">
+          <div class="calc-card p-8">
+            <form class="space-y-6" id="depositForm">
+              <div><label class="block font-label-md text-label-md text-on-surface-variant mb-2">Anapara (TL)</label>
+                <div class="relative"><span class="absolute left-4 top-1/2 -translate-y-1/2 text-outline">₺</span>
+                <input class="w-full pl-10 pr-4 py-3 border border-outline-variant rounded-xl font-body-md" id="principal" placeholder="50000" required type="number"></div>
+              </div>
+              <div><label class="block font-label-md text-label-md text-on-surface-variant mb-2">Yıllık Faiz Oranı (%)</label>
+                <input class="w-full px-4 py-3 border border-outline-variant rounded-xl font-body-md" id="depositRate" placeholder="Örn: 40" required type="number" step="0.01"></div>
+              <div><label class="block font-label-md text-label-md text-on-surface-variant mb-2">Vade (Gün)</label>
+                <select class="w-full px-4 py-3 border border-outline-variant rounded-xl font-body-md appearance-none bg-white" id="depositTerm">
+                  <option value="32">32 Gün</option><option value="46">46 Gün</option><option value="92">92 Gün</option><option value="180">180 Gün</option><option value="365" selected>365 Gün</option>
+                </select></div>
+              <button class="w-full bg-[#F4972B] hover:bg-[#e08924] text-white font-headline-md text-[20px] py-4 rounded-xl shadow-lg transition-all active:scale-[0.98]" type="submit">Hesapla</button>
+            </form>
           </div>
-          <div><label class="block font-label-md text-label-md text-on-surface-variant mb-2">Yıllık Faiz Oranı (%)</label>
-            <input class="w-full px-4 py-3 border border-outline-variant rounded-xl font-body-md" id="depositRate" placeholder="Örn: 40" required type="number" step="0.01"></div>
-          <div><label class="block font-label-md text-label-md text-on-surface-variant mb-2">Vade (Gün)</label>
-            <select class="w-full px-4 py-3 border border-outline-variant rounded-xl font-body-md appearance-none bg-white" id="depositTerm">
-              <option value="32">32 Gün</option><option value="46">46 Gün</option><option value="92">92 Gün</option><option value="180">180 Gün</option><option value="365" selected>365 Gün</option>
-            </select></div>
-          <button class="w-full bg-[#F4972B] hover:bg-[#e08924] text-white font-headline-md text-[20px] py-4 rounded-xl shadow-lg transition-all active:scale-[0.98]" type="submit">Hesapla</button>
-        </form>
+          <div class="bg-[#F3F4F1] p-6 rounded-xl border border-outline-variant">
+            <div class="flex gap-4 items-start">
+              <span class="material-symbols-outlined text-secondary mt-0.5">info</span>
+              <div>
+                <p class="font-label-md text-label-md text-on-surface font-bold mb-1">Hesaplama Mantığı</p>
+                <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Net getiri şu şekilde hesaplanır: Anapara × Faiz Oranı × Vade Günü / 36500 = Brüt Faiz. Ardından brüt faizden %10 stopaj kesilerek <strong>net getiri</strong> bulunur. Kalan tutar anaparaya eklenerek vade sonu bakiyeniz hesaplanır.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-7">
+          <div class="hidden space-y-6" id="results">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="result-card p-6"><span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Net Getiri</span><span class="font-display-num text-display-num text-primary tab-num" id="netReturn">₺0</span></div>
+              <div class="result-card p-6" style="border-top-color:#663900"><span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Brüt Faiz</span><span class="font-display-num text-display-num text-tertiary tab-num" id="grossInterest">₺0</span></div>
+              <div class="result-card p-6" style="border-top-color:#F4972B"><span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Vade Sonu Bakiye</span><span class="font-display-num text-display-num text-[#F4972B] tab-num" id="maturityBalance">₺0</span></div>
+            </div>
+            <div class="calc-card p-6" id="comparisonSection">
+              <h3 class="font-headline-md text-headline-md text-primary mb-4">Vade Karşılaştırması</h3>
+              <p class="text-body-sm text-on-surface-variant mb-4">Aynı anapara ve faiz oranıyla farklı vadelerde elde edeceğiniz getiriler:</p>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse font-body-sm text-body-sm">
+                  <thead>
+                    <tr class="bg-[#F3F4F1] text-on-surface font-semibold">
+                      <th class="p-3 border-b border-outline-variant whitespace-nowrap">Vade</th>
+                      <th class="p-3 border-b border-outline-variant text-right whitespace-nowrap">Brüt Faiz</th>
+                      <th class="p-3 border-b border-outline-variant text-right whitespace-nowrap">Stopaj (%10)</th>
+                      <th class="p-3 border-b border-outline-variant text-right whitespace-nowrap">Net Getiri</th>
+                      <th class="p-3 border-b border-outline-variant text-right whitespace-nowrap">Vade Sonu</th>
+                    </tr>
+                  </thead>
+                  <tbody id="comparisonTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="ad-placeholder mx-auto max-w-[336px] h-[280px]" id="adSlot2">Reklam Alanı 336x280</div>
+          </div>
+          <div id="placeholder" class="calc-card p-12 text-center"><span class="material-symbols-outlined text-5xl text-outline mb-4">savings</span><p class="text-on-surface-variant">Anapara, faiz ve vade bilgilerini girip hesaplayın.</p></div>
+        </div>
       </div>
-      <div class="bg-[#F3F4F1] p-6 rounded-xl border border-outline-variant">
-        <div class="flex gap-4 items-start">
-          <span class="material-symbols-outlined text-secondary mt-0.5">info</span>
-          <div>
-            <p class="font-label-md text-label-md text-on-surface font-bold mb-1">Hesaplama Mantığı</p>
-            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Net getiri şu şekilde hesaplanır: Anapara × Faiz Oranı × Vade Günü / 36500 = Brüt Faiz. Ardından brüt faizden %10 stopaj kesilerek <strong>net getiri</strong> bulunur. Kalan tutar anaparaya eklenerek vade sonu bakiyeniz hesaplanır.</p>
+      <div class="ad-placeholder max-w-[728px] h-[90px] mx-auto my-8" id="adSlot3">Reklam Alanı 728x90</div>
+      <section class="mt-8 space-y-8">
+        <div class="calc-card p-8">
+          <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">Mevduat Getirisi Nasıl Hesaplanır?</h2>
+          <h3 class="font-headline-md text-headline-md text-primary mb-3">Brüt Faiz ve Stopaj Hesaplama</h3>
+          <p class="text-on-surface-variant mb-4 leading-relaxed">Mevduat faizi hesaplamasında öncelikle anapara, yıllık faiz oranı ve vade gün sayısı kullanılarak <strong>brüt faiz</strong> bulunur. Brüt faiz = (Anapara × Yıllık Faiz Oranı × Vade Günü) / 36500 formülü ile hesaplanır. Elde edilen bu tutar, vade sonunda hesabınıza yansıyacak olan ham faiz getirisidir. Örneğin 100.000 TL anapara, %40 faiz ve 32 gün vade için brüt faiz: (100.000 × 40 × 32) / 36500 ≈ 3.506,85 TL olur.</p>
+          <div class="ad-placeholder w-full h-[120px] mb-4">Reklam Alanı</div>
+          <p class="text-on-surface-variant mb-4 leading-relaxed">Brüt faiz üzerinden %10 oranında <strong>stopaj (vergi kesintisi)</strong> uygulanır. Stopaj oranı, vade uzunluğuna göre değişiklik gösterebilir: 6 aya kadar (182 gün) vadelerde %10, 1 yıla kadar (365 gün) vadelerde %5, 1 yıldan uzun vadelerde ise %0 oranındadır. Bu hesaplamada standart %10 oranı baz alınmıştır. Kalan tutar <strong>net getiri</strong> olarak anaparanıza eklenir ve <strong>vade sonu bakiye</strong>niz ortaya çıkar.</p>
+          <h3 class="font-headline-md text-headline-md text-primary mb-3">Vade Seçiminin Getiriye Etkisi</h3>
+          <p class="text-on-surface-variant mb-6 leading-relaxed">Vade süresi, toplam faiz getirisini doğrudan etkiler. Kısa vadeli hesaplar (32-46 gün) likidite avantajı sunarken uzun vadeli hesaplar (180-365 gün) genellikle daha yüksek faiz oranları ve daha düşük stopaj avantajı sağlar. Vade seçimi yaparken paranıza ne zaman ihtiyacınız olacağını ve faiz oranlarının gelecekteki seyrini göz önünde bulundurmalısınız.</p>
+          <blockquote class="bg-[#F4972B]/10 border-l-4 border-[#F4972B] p-5 rounded-r-xl mb-6">
+            <p class="font-semibold text-[#F4972B] text-sm uppercase tracking-wide mb-1">Hatırlatma</p>
+            <p class="text-on-surface-variant text-sm leading-relaxed">Mevduat getirinizi hesaplarken güncel stopaj oranlarını ve bankaların sunduğu kampanyalı faiz oranlarını dikkate almanız önerilir. Bu araç bilgilendirme amaçlıdır, kesin taahhüt içermez.</p>
+          </blockquote>
+          <div class="relative rounded-xl overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=728&h=300&fit=crop" alt="Birikim" class="w-full h-48 md:h-64 object-cover">
+            <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-center px-8">
+              <span class="text-white text-2xl md:text-3xl font-bold font-headline-lg-mobile">Birikimlerinizi Büyütün</span>
+            </div>
           </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="calc-card p-8">
+            <span class="material-symbols-outlined text-4xl text-secondary mb-4">trending_up</span>
+            <h3 class="font-headline-md text-headline-md text-primary mb-4">Tasarruf Stratejileri</h3>
+            <ul class="space-y-3">
+              <li class="flex gap-3 items-start"><span class="material-symbols-outlined text-green-600 text-sm mt-0.5">check_circle</span><span class="text-body-md text-on-surface-variant"><strong>Düzenli birikim:</strong> Her ay düzenli olarak vadeli hesaba para ekleyerek bileşik etkiden faydalanın.</span></li>
+              <li class="flex gap-3 items-start"><span class="material-symbols-outlined text-green-600 text-sm mt-0.5">check_circle</span><span class="text-body-md text-on-surface-variant"><strong>Faiz karşılaştırması:</strong> Bankaların güncel oranlarını karşılaştırarak en yüksek getiriyi yakalayın.</span></li>
+              <li class="flex gap-3 items-start"><span class="material-symbols-outlined text-green-600 text-sm mt-0.5">check_circle</span><span class="text-body-md text-on-surface-variant"><strong>Vade çeşitlendirmesi:</strong> Farklı vadelerde hesaplar açarak risk ve getiri dengesini optimize edin.</span></li>
+              <li class="flex gap-3 items-start"><span class="material-symbols-outlined text-green-600 text-sm mt-0.5">check_circle</span><span class="text-body-md text-on-surface-variant"><strong>Stopaj avantajı:</strong> Uzun vadelerde stopaj oranı düştüğü için net getiriniz artar.</span></li>
+            </ul>
+          </div>
+          <div class="bg-[#176969] p-8 rounded-xl text-white flex flex-col justify-between">
+            <span class="material-symbols-outlined text-4xl text-[#F4972B] mb-4">account_balance_wallet</span>
+            <div>
+              <h3 class="font-headline-md text-headline-md mb-4">Birikimlerinizi Koruyun</h3>
+              <p class="font-body-md text-body-md opacity-90 mb-6 leading-relaxed">Enflasyon karşısında birikimlerinizin değerini korumak için mevduat faizlerini, döviz ve altın yatırımlarını karşılaştırmayı unutmayın. FinansMatik'in diğer hesaplama araçlarıyla finansal planlamanızı eksiksiz yapın.</p>
+              <a class="inline-flex items-center gap-2 text-[#F4972B] font-bold hover:gap-4 transition-all" href="/enflasyon-zam">Enflasyon Hesaplayıcı<span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+          </div>
+        </div>
+        <div class="calc-card p-8">
+          <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-6">Sıkça Sorulan Sorular</h2>
+          <div class="space-y-3">
+            <details class="border border-outline-variant rounded-xl p-4 group">
+              <summary class="flex items-center justify-between font-headline-md text-label-md text-primary"><span>Stopaj oranı nedir ve nasıl hesaplanır?</span><span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span></summary>
+              <p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">Stopaj, mevduat faiz gelirinizden kesilen vergidir. 6 aya kadar (182 gün) vadelerde %10, 1 yıla kadar (365 gün) vadelerde %5, 1 yıldan uzun vadelerde ise %0 oranında uygulanır. Bu hesaplama aracında standart %10 oranı kullanılmıştır. Stopaj tutarı = Brüt Faiz × Stopaj Oranı formülüyle hesaplanır.</p>
+          </details>
+          <details class="border border-outline-variant rounded-xl p-4 group">
+            <summary class="flex items-center justify-between font-headline-md text-label-md text-primary"><span>En yüksek faiz veren bankalar hangileri?</span><span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span></summary>
+            <p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">En yüksek mevduat faizi oranları bankadan bankaya ve dönemsel kampanyalara göre değişiklik gösterir. Güncel faiz oranlarını karşılaştırmak için bankaların resmi web sitelerini veya finansal karşılaştırma platformlarını ziyaret edebilirsiniz. Genellikle dijital bankalar ve hoş geldin kampanyaları daha avantajlı oranlar sunar.</p>
+          </details>
+          <details class="border border-outline-variant rounded-xl p-4 group">
+            <summary class="flex items-center justify-between font-headline-md text-label-md text-primary"><span>Vadeli hesap açarken nelere dikkat etmeli?</span><span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span></summary>
+            <p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">Vadeli hesap açarken faiz oranı, vade süresi, stopaj oranı, vadeden önce çekim koşulları ve hesap işletim ücreti gibi faktörleri değerlendirmelisiniz. Ayrıca bankanın güvenilirliği, müşteri hizmetleri kalitesi ve dijital bankacılık olanakları da kararınızı etkilemelidir.</p>
+          </details>
+          <details class="border border-outline-variant rounded-xl p-4 group">
+            <summary class="flex items-center justify-between font-headline-md text-label-md text-primary"><span>Bileşik faiz nedir ve nasıl çalışır?</span><span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span></summary>
+            <p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">Bileşik faiz, faizin de faiz kazanması anlamına gelir. Vadeli mevduatta vade sonunda ana para + faiz yeni bir vadeye taşınırsa, bir sonraki dönemde faiz üstüne faiz işler. Uzun vadede bileşik etki, getirilerinizi katlayarak artırır. Örneğin 100.000 TL %40 faizle 1 yılda 140.000 TL olurken, 2. yıl sonunda 196.000 TL'ye ulaşır.</p>
+          </details>
+          <details class="border border-outline-variant rounded-xl p-4 group">
+            <summary class="flex items-center justify-between font-headline-md text-label-md text-primary"><span>Vadeli hesaptan erken çekim yaparsam ne olur?</span><span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span></summary>
+            <p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">Vadeli hesaptan vade bitiminden önce para çekerseniz, genellikle faiz gelirinizin tamamını veya bir kısmını kaybedersiniz. Bankalar erken çekim durumunda faiz oranını düşürerek (örneğin %40 yerine %5 gibi) hesaplama yapar ve aradaki farkı kesinti olarak uygular. Bu nedenle acil durum fonunuzu vadeli hesapta değil, vadesiz hesapta tutmanız önerilir.</p>
+          </details>
         </div>
       </div>
     </div>
-    <div class="lg:col-span-7">
-      <div class="hidden space-y-6" id="results">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="result-card p-6"><span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Net Getiri</span><span class="font-display-num text-display-num text-primary tab-num" id="netReturn">₺0</span></div>
-          <div class="result-card p-6" style="border-top-color:#663900"><span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Brüt Faiz</span><span class="font-display-num text-display-num text-tertiary tab-num" id="grossInterest">₺0</span></div>
-          <div class="result-card p-6" style="border-top-color:#F4972B"><span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Vade Sonu Bakiye</span><span class="font-display-num text-display-num text-[#F4972B] tab-num" id="maturityBalance">₺0</span></div>
-        </div>
-        <div class="calc-card p-6" id="comparisonSection">
-          <h3 class="font-headline-md text-headline-md text-primary mb-4">Vade Karşılaştırması</h3>
-          <p class="text-body-sm text-on-surface-variant mb-4">Aynı anapara ve faiz oranıyla farklı vadelerde elde edeceğiniz getiriler:</p>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse font-body-sm text-body-sm">
-              <thead>
-                <tr class="bg-[#F3F4F1] text-on-surface font-semibold">
-                  <th class="p-3 border-b border-outline-variant whitespace-nowrap">Vade</th>
-                  <th class="p-3 border-b border-outline-variant text-right whitespace-nowrap">Brüt Faiz</th>
-                  <th class="p-3 border-b border-outline-variant text-right whitespace-nowrap">Stopaj (%10)</th>
-                  <th class="p-3 border-b border-outline-variant text-right whitespace-nowrap">Net Getiri</th>
-                  <th class="p-3 border-b border-outline-variant text-right whitespace-nowrap">Vade Sonu</th>
-                </tr>
-              </thead>
-              <tbody id="comparisonTableBody"></tbody>
-            </table>
-          </div>
-        </div>
-        <div class="ad-placeholder mx-auto max-w-[336px] h-[280px]" id="adSlot2">Reklam Alanı 336x280</div>
+    <aside class="lg:col-span-4 space-y-6">
+      <div class="w-full flex justify-center">
+        <div class="ad-placeholder w-[300px] h-[250px] rounded-lg">Reklam Alanı 300x250</div>
       </div>
-      <div id="placeholder" class="calc-card p-12 text-center"><span class="material-symbols-outlined text-5xl text-outline mb-4">savings</span><p class="text-on-surface-variant">Anapara, faiz ve vade bilgilerini girip hesaplayın.</p></div>
-    </div>
-  </div>
-  <div class="ad-placeholder max-w-[728px] h-[90px] mx-auto my-8" id="adSlot3">Reklam Alanı 728x90</div>
-  <section class="mt-8 space-y-8">
-    <div class="calc-card p-8">
-      <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">Mevduat Getirisi Nasıl Hesaplanır?</h2>
-      <h3 class="font-headline-md text-headline-md text-primary mb-3">Brüt Faiz ve Stopaj Hesaplama</h3>
-      <p class="text-on-surface-variant mb-4 leading-relaxed">Mevduat faizi hesaplamasında öncelikle anapara, yıllık faiz oranı ve vade gün sayısı kullanılarak <strong>brüt faiz</strong> bulunur. Brüt faiz = (Anapara × Yıllık Faiz Oranı × Vade Günü) / 36500 formülü ile hesaplanır. Elde edilen bu tutar, vade sonunda hesabınıza yansıyacak olan ham faiz getirisidir. Örneğin 100.000 TL anapara, %40 faiz ve 32 gün vade için brüt faiz: (100.000 × 40 × 32) / 36500 ≈ 3.506,85 TL olur.</p>
-      <div class="ad-placeholder w-full h-[120px] mb-4">Reklam Alanı</div>
-      <p class="text-on-surface-variant mb-4 leading-relaxed">Brüt faiz üzerinden %10 oranında <strong>stopaj (vergi kesintisi)</strong> uygulanır. Stopaj oranı, vade uzunluğuna göre değişiklik gösterebilir: 6 aya kadar (182 gün) vadelerde %10, 1 yıla kadar (365 gün) vadelerde %5, 1 yıldan uzun vadelerde ise %0 oranındadır. Bu hesaplamada standart %10 oranı baz alınmıştır. Kalan tutar <strong>net getiri</strong> olarak anaparanıza eklenir ve <strong>vade sonu bakiye</strong>niz ortaya çıkar.</p>
-      <h3 class="font-headline-md text-headline-md text-primary mb-3">Vade Seçiminin Getiriye Etkisi</h3>
-      <p class="text-on-surface-variant mb-6 leading-relaxed">Vade süresi, toplam faiz getirisini doğrudan etkiler. Kısa vadeli hesaplar (32-46 gün) likidite avantajı sunarken uzun vadeli hesaplar (180-365 gün) genellikle daha yüksek faiz oranları ve daha düşük stopaj avantajı sağlar. Vade seçimi yaparken paranıza ne zaman ihtiyacınız olacağını ve faiz oranlarının gelecekteki seyrini göz önünde bulundurmalısınız.</p>
-      <blockquote class="bg-[#F4972B]/10 border-l-4 border-[#F4972B] p-5 rounded-r-xl mb-6">
-        <p class="font-semibold text-[#F4972B] text-sm uppercase tracking-wide mb-1">Hatırlatma</p>
-        <p class="text-on-surface-variant text-sm leading-relaxed">Mevduat getirinizi hesaplarken güncel stopaj oranlarını ve bankaların sunduğu kampanyalı faiz oranlarını dikkate almanız önerilir. Bu araç bilgilendirme amaçlıdır, kesin taahhüt içermez.</p>
-      </blockquote>
-      <div class="relative rounded-xl overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=728&h=300&fit=crop" alt="Birikim" class="w-full h-48 md:h-64 object-cover">
-        <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-center px-8">
-          <span class="text-white text-2xl md:text-3xl font-bold font-headline-lg-mobile">Birikimlerinizi Büyütün</span>
-        </div>
-      </div>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="calc-card p-8">
-        <span class="material-symbols-outlined text-4xl text-secondary mb-4">trending_up</span>
-        <h3 class="font-headline-md text-headline-md text-primary mb-4">Tasarruf Stratejileri</h3>
+      <div class="bg-surface-container p-6 rounded-xl space-y-6">
+        <h3 class="font-headline-md text-headline-md">Diğer Hesaplayıcılar</h3>
         <ul class="space-y-3">
-          <li class="flex gap-3 items-start"><span class="material-symbols-outlined text-green-600 text-sm mt-0.5">check_circle</span><span class="text-body-md text-on-surface-variant"><strong>Düzenli birikim:</strong> Her ay düzenli olarak vadeli hesaba para ekleyerek bileşik etkiden faydalanın.</span></li>
-          <li class="flex gap-3 items-start"><span class="material-symbols-outlined text-green-600 text-sm mt-0.5">check_circle</span><span class="text-body-md text-on-surface-variant"><strong>Faiz karşılaştırması:</strong> Bankaların güncel oranlarını karşılaştırarak en yüksek getiriyi yakalayın.</span></li>
-          <li class="flex gap-3 items-start"><span class="material-symbols-outlined text-green-600 text-sm mt-0.5">check_circle</span><span class="text-body-md text-on-surface-variant"><strong>Vade çeşitlendirmesi:</strong> Farklı vadelerde hesaplar açarak risk ve getiri dengesini optimize edin.</span></li>
-          <li class="flex gap-3 items-start"><span class="material-symbols-outlined text-green-600 text-sm mt-0.5">check_circle</span><span class="text-body-md text-on-surface-variant"><strong>Stopaj avantajı:</strong> Uzun vadelerde stopaj oranı düştüğü için net getiriniz artar.</span></li>
+          <li>
+            <a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/kira-artis">
+              <span class="material-symbols-outlined text-secondary">home</span>
+              <span class="font-label-md text-label-md group-hover:text-primary">Kira Artış</span>
+            </a>
+          </li>
+          <li>
+            <a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/enflasyon-zam">
+              <span class="material-symbols-outlined text-secondary">trending_up</span>
+              <span class="font-label-md text-label-md group-hover:text-primary">Enflasyon</span>
+            </a>
+          </li>
+          <li>
+            <a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/kidem-tazminati">
+              <span class="material-symbols-outlined text-secondary">receipt_long</span>
+              <span class="font-label-md text-label-md group-hover:text-primary">Tazminat</span>
+            </a>
+          </li>
+          <li>
+            <a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/doviz-butce">
+              <span class="material-symbols-outlined text-secondary">currency_exchange</span>
+              <span class="font-label-md text-label-md group-hover:text-primary">Döviz Bütçe</span>
+            </a>
+          </li>
+          <li>
+            <a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/kredi">
+              <span class="material-symbols-outlined text-secondary">credit_card</span>
+              <span class="font-label-md text-label-md group-hover:text-primary">Kredi</span>
+            </a>
+          </li>
+          <li>
+            <a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/maas">
+              <span class="material-symbols-outlined text-secondary">payments</span>
+              <span class="font-label-md text-label-md group-hover:text-primary">Maaş</span>
+            </a>
+          </li>
         </ul>
       </div>
-      <div class="bg-[#176969] p-8 rounded-xl text-white flex flex-col justify-between">
-        <span class="material-symbols-outlined text-4xl text-[#F4972B] mb-4">account_balance_wallet</span>
-        <div>
-          <h3 class="font-headline-md text-headline-md mb-4">Birikimlerinizi Koruyun</h3>
-          <p class="font-body-md text-body-md opacity-90 mb-6 leading-relaxed">Enflasyon karşısında birikimlerinizin değerini korumak için mevduat faizlerini, döviz ve altın yatırımlarını karşılaştırmayı unutmayın. FinansMatik'in diğer hesaplama araçlarıyla finansal planlamanızı eksiksiz yapın.</p>
-          <a class="inline-flex items-center gap-2 text-[#F4972B] font-bold hover:gap-4 transition-all" href="/enflasyon-zam">Enflasyon Hesaplayıcı<span class="material-symbols-outlined">arrow_forward</span></a>
-        </div>
+      <div class="sticky top-24">
+        <div class="ad-placeholder w-full h-[600px] rounded-lg">Reklam Alanı 300x600</div>
       </div>
-    </div>
-    <div class="calc-card p-8">
-      <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-6">Sıkça Sorulan Sorular</h2>
-      <div class="space-y-3">
-        <details class="border border-outline-variant rounded-xl p-4 group">
-          <summary class="flex items-center justify-between font-headline-md text-label-md text-primary"><span>Stopaj oranı nedir ve nasıl hesaplanır?</span><span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span></summary>
-          <p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">Stopaj, mevduat faiz gelirinizden kesilen vergidir. 6 aya kadar (182 gün) vadelerde %10, 1 yıla kadar (365 gün) vadelerde %5, 1 yıldan uzun vadelerde ise %0 oranında uygulanır. Bu hesaplama aracında standart %10 oranı kullanılmıştır. Stopaj tutarı = Brüt Faiz × Stopaj Oranı formülüyle hesaplanır.</p>
-        </details>
-        <details class="border border-outline-variant rounded-xl p-4 group">
-          <summary class="flex items-center justify-between font-headline-md text-label-md text-primary"><span>En yüksek faiz veren bankalar hangileri?</span><span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span></summary>
-          <p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">En yüksek mevduat faizi oranları bankadan bankaya ve dönemsel kampanyalara göre değişiklik gösterir. Güncel faiz oranlarını karşılaştırmak için bankaların resmi web sitelerini veya finansal karşılaştırma platformlarını ziyaret edebilirsiniz. Genellikle dijital bankalar ve hoş geldin kampanyaları daha avantajlı oranlar sunar.</p>
-        </details>
-        <details class="border border-outline-variant rounded-xl p-4 group">
-          <summary class="flex items-center justify-between font-headline-md text-label-md text-primary"><span>Vadeli hesap açarken nelere dikkat etmeli?</span><span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span></summary>
-          <p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">Vadeli hesap açarken faiz oranı, vade süresi, stopaj oranı, vadeden önce çekim koşulları ve hesap işletim ücreti gibi faktörleri değerlendirmelisiniz. Ayrıca bankanın güvenilirliği, müşteri hizmetleri kalitesi ve dijital bankacılık olanakları da kararınızı etkilemelidir.</p>
-        </details>
-        <details class="border border-outline-variant rounded-xl p-4 group">
-          <summary class="flex items-center justify-between font-headline-md text-label-md text-primary"><span>Bileşik faiz nedir ve nasıl çalışır?</span><span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span></summary>
-          <p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">Bileşik faiz, faizin de faiz kazanması anlamına gelir. Vadeli mevduatta vade sonunda ana para + faiz yeni bir vadeye taşınırsa, bir sonraki dönemde faiz üstüne faiz işler. Uzun vadede bileşik etki, getirilerinizi katlayarak artırır. Örneğin 100.000 TL %40 faizle 1 yılda 140.000 TL olurken, 2. yıl sonunda 196.000 TL'ye ulaşır.</p>
-        </details>
-        <details class="border border-outline-variant rounded-xl p-4 group">
-          <summary class="flex items-center justify-between font-headline-md text-label-md text-primary"><span>Vadeli hesaptan erken çekim yaparsam ne olur?</span><span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span></summary>
-          <p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">Vadeli hesaptan vade bitiminden önce para çekerseniz, genellikle faiz gelirinizin tamamını veya bir kısmını kaybedersiniz. Bankalar erken çekim durumunda faiz oranını düşürerek (örneğin %40 yerine %5 gibi) hesaplama yapar ve aradaki farkı kesinti olarak uygular. Bu nedenle acil durum fonunuzu vadeli hesapta değil, vadesiz hesapta tutmanız önerilir.</p>
-        </details>
-      </div>
-    </div>
-  </section>
+    </aside>
+  </div>
 </main>
 <div class="ad-placeholder mx-auto mt-8 max-w-[728px] h-[90px]" id="adSlot4">Reklam Alanı 728x90</div>
 <footer class="bg-surface-container-lowest border-t border-outline-variant mt-12">

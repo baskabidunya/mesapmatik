@@ -6,7 +6,8 @@
 <title>Kredi Hesaplama | FinansMatik</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script src="/js/tailwind-config.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Sora:wght@100..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 <style>
 html { scroll-behavior: smooth; }
 .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
@@ -15,7 +16,7 @@ body { font-family: 'Inter', sans-serif; background: #FAFAF7; }
 .result-card { background: #fff; box-shadow: 0px 10px 30px rgba(15,76,76,0.08); border-top: 4px solid #003434; border-radius: 1rem; }
 .tab-num { font-variant-numeric: tabular-nums; }
 input:focus { outline: none; border-color: #1B6B6B !important; }
-.ad-placeholder { background: #F3F4F1; border: 2px dashed #C2C7BB; display: flex; align-items: center; justify-content: center; color: #4E5448; font-size: 0.875rem; border-radius: 0.75rem; }
+.ad-placeholder { background: #F3F4F1; border: 2px dashed #C2C7BB; display: flex; align-items: center; justify-content: center; flex-direction: column; color: #4E5448; font-size: 0.875rem; border-radius: 0.75rem; }
 details summary .material-symbols-outlined { transition: transform 0.3s ease; }
 details[open] summary .material-symbols-outlined { transform: rotate(180deg); }
 details summary::-webkit-details-marker { display: none; }
@@ -24,155 +25,263 @@ details summary { list-style: none; cursor: pointer; user-select: none; }
 </head>
 <body class="text-on-surface">
 <header class="bg-surface shadow-[0px_4px_20px_rgba(31,41,55,0.04)] sticky top-0 z-50">
-  <div class="flex justify-between items-center px-4 md:px-10 h-16 w-full max-w-[1200px] mx-auto">
-    <a href="/" class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-3xl">account_balance</span><span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span></a>
-    <div class="hidden md:flex items-center gap-6">
-      <a href="/kira-artis" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Kira Artış</a>
-      <a href="/enflasyon-zam" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Enflasyon</a>
-      <a href="/kidem-tazminati" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Tazminat</a>
-      <a href="/doviz-butce" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Döviz Bütçe</a>
-      <a href="/kredi" class="font-label-md text-sm text-primary font-bold border-b-2 border-primary pb-1">Kredi</a>
-      <a href="/mevduat" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Mevduat</a>
-      <a href="/maas" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Maaş</a>
-    </div>
-    <button class="md:hidden material-symbols-outlined text-on-surface-variant p-2 rounded-full" id="menuBtn_kredi">menu</button>
-  </div>
+<div class="flex justify-between items-center px-4 md:px-10 h-16 w-full max-w-[1200px] mx-auto">
+<a href="/" class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-3xl">account_balance</span><span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span></a>
+<div class="hidden md:flex items-center gap-6">
+<a href="/kira-artis" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Kira Artış</a>
+<a href="/enflasyon-zam" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Enflasyon</a>
+<a href="/kidem-tazminati" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Tazminat</a>
+<a href="/doviz-butce" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Döviz Bütçe</a>
+<a href="/kredi" class="font-label-md text-sm text-primary font-bold border-b-2 border-primary pb-1">Kredi</a>
+<a href="/mevduat" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Mevduat</a>
+<a href="/maas" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Maaş</a>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant/50 p-2 rounded-full md:hidden transition-colors" id="menuBtn_kredi">menu</button>
+</div>
 </header>
 <nav id="mobileMenu_kredi" class="hidden fixed inset-0 z-40 bg-surface/95 backdrop-blur-md pt-24">
-  <div class="flex flex-col items-center gap-6 p-8 text-lg">
-    <a href="/" class="font-headline-md text-primary">Ana Sayfa</a>
-    <a href="/kira-artis" class="font-headline-md text-on-surface-variant">Kira Artış</a>
-    <a href="/enflasyon-zam" class="font-headline-md text-on-surface-variant">Enflasyon</a>
-    <a href="/kidem-tazminati" class="font-headline-md text-on-surface-variant">Tazminat</a>
-    <a href="/doviz-butce" class="font-headline-md text-on-surface-variant">Döviz Bütçe</a>
-    <a href="/kredi" class="font-headline-md text-on-surface-variant">Kredi</a>
-    <a href="/mevduat" class="font-headline-md text-on-surface-variant">Mevduat</a>
-    <a href="/maas" class="font-headline-md text-on-surface-variant">Maaş</a>
-  </div>
+<div class="flex flex-col items-center gap-6 p-8 text-lg">
+<a href="/" class="font-headline-md text-primary">Ana Sayfa</a>
+<a href="/kira-artis" class="font-headline-md text-on-surface-variant">Kira Artış</a>
+<a href="/enflasyon-zam" class="font-headline-md text-on-surface-variant">Enflasyon</a>
+<a href="/kidem-tazminati" class="font-headline-md text-on-surface-variant">Tazminat</a>
+<a href="/doviz-butce" class="font-headline-md text-on-surface-variant">Döviz Bütçe</a>
+<a href="/kredi" class="font-headline-md text-primary font-bold">Kredi</a>
+<a href="/mevduat" class="font-headline-md text-on-surface-variant">Mevduat</a>
+<a href="/maas" class="font-headline-md text-on-surface-variant">Maaş</a>
+</div>
 </nav>
 <main class="max-w-[1200px] mx-auto px-4 md:px-10 py-8">
-  <header class="mb-8">
-    <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">Kredi Hesaplama</h1>
-    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">İhtiyaç, konut veya taşıt kredinizin aylık taksitini ve toplam maliyetini hesaplayın.</p>
-  </header>
-
-  <div class="ad-placeholder mx-auto mb-8 max-w-[320px] h-[50px]" id="adSlot1">Reklam Alanı</div>
-
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-    <div class="lg:col-span-9">
-      <div class="flex flex-col md:flex-row gap-8">
-        <div class="md:w-5/12 calc-card p-8 h-fit">
-          <form class="space-y-6" id="loanForm">
-            <div><label class="block font-label-md text-label-md text-on-surface-variant mb-2">Kredi Tutarı (TL)</label>
-              <div class="relative"><span class="absolute left-4 top-1/2 -translate-y-1/2 text-outline">₺</span>
-              <input class="w-full pl-10 pr-4 py-3 border border-outline-variant rounded-xl font-body-md" id="loanAmount" placeholder="50000" required type="number"></div>
-            </div>
-            <div><label class="block font-label-md text-label-md text-on-surface-variant mb-2">Yıllık Faiz Oranı (%)</label>
-              <input class="w-full px-4 py-3 border border-outline-variant rounded-xl font-body-md" id="interestRate" placeholder="Örn: 36" required type="number" step="0.01"></div>
-            <div><label class="block font-label-md text-label-md text-on-surface-variant mb-2">Vade (Ay)</label>
-              <input class="w-full px-4 py-3 border border-outline-variant rounded-xl font-body-md" id="loanTerm" placeholder="12" required type="number"></div>
-            <button class="w-full bg-[#F4972B] hover:bg-[#e08924] text-white font-headline-md text-[20px] py-4 rounded-xl shadow-lg transition-all active:scale-[0.98]" type="submit">Hesapla</button>
-          </form>
-        </div>
-        <div class="md:w-7/12">
-          <div class="hidden space-y-6" id="results">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div class="result-card p-6"><span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Aylık Taksit</span><span class="font-display-num text-display-num text-primary tab-num" id="monthlyPayment">₺0</span></div>
-              <div class="result-card p-6" style="border-top-color:#176969"><span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Toplam Ödeme</span><span class="font-display-num text-display-num text-secondary tab-num" id="totalPayment">₺0</span></div>
-              <div class="result-card p-6" style="border-top-color:#663900"><span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Toplam Faiz</span><span class="font-display-num text-display-num text-tertiary tab-num" id="totalInterest">₺0</span></div>
-            </div>
-          </div>
-          <div id="placeholder" class="calc-card p-12 text-center"><span class="material-symbols-outlined text-5xl text-outline mb-4">credit_card</span><p class="text-on-surface-variant">Kredi tutarı, faiz oranı ve vade girip hesaplayın.</p></div>
-        </div>
-      </div>
-
-      <div class="ad-placeholder mx-auto my-8 max-w-[336px] h-[280px]" id="adSlot2">Reklam Alanı</div>
-
-      <section class="mt-16 calc-card p-8 md:p-10">
-        <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">Kredi Hesaplama Nasıl Yapılır?</h2>
-        <p class="text-body-md text-on-surface-variant mb-4 leading-relaxed">Kredi hesaplama, çekmeyi planladığınız kredinin aylık taksit tutarını ve toplam geri ödeme miktarını önceden görmenizi sağlayan bir finansal planlama aracıdır. Hesaplama yapılırken kredi tutarı, yıllık faiz oranı ve vade süresi (ay cinsinden) dikkate alınır. Aylık taksit, anapara ve faiz olmak üzere iki bileşenden oluşur; faiz oranı arttıkça veya vade uzadıkça toplam geri ödeme miktarı da artar.</p>
-
-        <div class="ad-placeholder w-full h-[120px] mb-4" id="adSlot3">Reklam Alanı</div>
-
-        <p class="text-body-md text-on-surface-variant mb-6 leading-relaxed">Kredi taksit hesaplamasında genellikle eşit taksitli (annüite) yöntemi kullanılır. Bu yöntemde her ay ödenen taksit sabit kalır, ancak taksitin içindeki faiz ve anapara oranı zamanla değişir. İlk dönemlerde faiz payı daha yüksekken, vade ilerledikçe anapara payı artar. Bu sayede borcunuzu düzenli ve öngörülebilir bir şekilde ödeyebilirsiniz.</p>
-
-        <blockquote class="bg-[#F3F4F1] border-l-4 border-primary rounded-r-xl p-4 md:p-6 mb-6">
-          <p class="font-headline-md text-label-md text-primary mb-1">💡 Bilgi</p>
-          <p class="text-body-md text-on-surface-variant">Kredi başvurusu yapmadan önce mutlaka farklı bankaların faiz oranlarını karşılaştırın. Ufak bir faiz farkı bile uzun vadede binlerce TL tasarruf etmenizi sağlayabilir. Ayrıca dosya masrafı, sigorta gibi ek maliyetleri de göz önünde bulundurun.</p>
-        </blockquote>
-
-        <div class="relative rounded-xl overflow-hidden h-48 bg-gradient-to-r from-[#003434] to-[#1B6B6B] flex items-center justify-center">
-          <span class="material-symbols-outlined text-7xl text-white/10 absolute">credit_score</span>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-          <span class="text-white font-headline-lg text-headline-lg z-10 drop-shadow-lg">Kredinizi Planlayın</span>
-        </div>
-      </section>
-
-      <section class="mt-12 calc-card p-8 md:p-10">
-        <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-6">Sıkça Sorulan Sorular</h2>
-        <div class="space-y-3">
-          <details class="border border-outline-variant rounded-xl p-4 group">
-            <summary class="flex items-center justify-between font-headline-md text-label-md text-primary"><span>Kredi notu nedir ve nasıl yükseltilir?</span><span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span></summary>
-            <p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">Kredi notu, bankaların size kredi verirken kullandığı 0-1900 arasındaki puandır. Düzenli fatura ödemeleri, kredi kartı borcunu zamanında kapatmak ve mevcut kredileri aksatmamak kredi notunuzu yükseltir. Kredi notu yüksek olan kişiler daha düşük faiz oranlarından kredi kullanabilir.</p>
-          </details>
-          <details class="border border-outline-variant rounded-xl p-4 group">
-            <summary class="flex items-center justify-between font-headline-md text-label-md text-primary"><span>Faiz oranı kredi maliyetini nasıl etkiler?</span><span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span></summary>
-            <p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">Faiz oranı, kredinin toplam maliyetini doğrudan belirleyen en önemli faktördür. Örneğin 50.000 TL'lik bir krediyi 12 ayda %36 faizle çektiğinizde yaklaşık 9.800 TL faiz öderken, %24 faizle aynı kredinin faizi yaklaşık 6.500 TL olur. Bu nedenle en düşük faiz oranını bulmak için bankalar arası karşılaştırma yapmak çok önemlidir.</p>
-          </details>
-          <details class="border border-outline-variant rounded-xl p-4 group">
-            <summary class="flex items-center justify-between font-headline-md text-label-md text-primary"><span>İhtiyaç, konut ve taşıt kredisi arasındaki fark nedir?</span><span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span></summary>
-            <p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">İhtiyaç kredisi genellikle daha kısa vadeli ve yüksek faizlidir; herhangi bir teminat gösterilmeden kullanılabilir. Konut kredisi uzun vade (120 aya kadar) ve düşük faiz sunar, ancak ipotek gerektirir. Taşıt kredisi araç satın almak için kullanılır, vade genelde 48-60 ay ile sınırlıdır ve araç üzerine rehin konulur. Hangi kredi türünün size uygun olduğunu ihtiyacınıza göre belirleyin.</p>
-          </details>
-          <details class="border border-outline-variant rounded-xl p-4 group">
-            <summary class="flex items-center justify-between font-headline-md text-label-md text-primary"><span>Vade seçimi yaparken nelere dikkat etmeliyim?</span><span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span></summary>
-            <p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">Vade süresi, aylık taksit miktarını ve toplam faiz maliyetini ters yönde etkiler. Kısa vade seçerseniz aylık taksitler yüksek olur ancak toplam faiz maliyeti düşer. Uzun vade seçerseniz aylık ödemeler düşer ancak toplam faiz artar. Bütçenize uygun bir denge kurmak için aylık gelirinizin en fazla %30-40'ını kredi taksidine ayırmanız önerilir.</p>
-          </details>
-        </div>
-      </section>
-    </div>
-    <div class="lg:col-span-3 space-y-6">
-      <div class="w-full flex justify-center">
-        <div class="ad-placeholder w-[300px] h-[250px] rounded-xl">
-          <span class="material-symbols-outlined text-2xl mb-1">ads_click</span>Reklam Alanı (300x250)
-        </div>
-      </div>
-      <div class="bg-surface-container p-6 rounded-xl space-y-6">
-        <h3 class="font-headline-md text-headline-md">Diğer Hesaplayıcılar</h3>
-        <ul class="space-y-3">
-          <li><a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/kira-artis"><span class="material-symbols-outlined text-secondary">home</span><span class="font-label-md text-label-md group-hover:text-primary">Kira Artış</span></a></li>
-          <li><a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/enflasyon-zam"><span class="material-symbols-outlined text-secondary">trending_up</span><span class="font-label-md text-label-md group-hover:text-primary">Enflasyon</span></a></li>
-          <li><a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/kidem-tazminati"><span class="material-symbols-outlined text-secondary">receipt_long</span><span class="font-label-md text-label-md group-hover:text-primary">Tazminat</span></a></li>
-          <li><a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/mevduat"><span class="material-symbols-outlined text-secondary">savings</span><span class="font-label-md text-label-md group-hover:text-primary">Mevduat</span></a></li>
-          <li><a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/doviz-butce"><span class="material-symbols-outlined text-secondary">currency_exchange</span><span class="font-label-md text-label-md group-hover:text-primary">Döviz Bütçe</span></a></li>
-          <li><a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/maas"><span class="material-symbols-outlined text-secondary">payments</span><span class="font-label-md text-label-md group-hover:text-primary">Maaş</span></a></li>
-        </ul>
-      </div>
-      <div class="sticky top-24">
-        <div class="ad-placeholder w-full h-[600px] rounded-xl">
-          <span class="material-symbols-outlined text-2xl mb-1">ads_click</span>Dikey Reklam Alanı (300x600)
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="mb-12 flex flex-col md:flex-row justify-between items-end gap-gutter">
+<div class="max-w-2xl">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-4">Kredi Hesaplama</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">İhtiyaç, konut veya taşıt kredinizin aylık taksitini, toplam geri ödeme tutarını ve faiz maliyetini anında hesaplayın.</p>
+</div>
+<div class="hidden md:block w-[728px] h-[90px] bg-[#F3F4F1] rounded-lg border border-outline-variant flex items-center justify-center text-label-sm text-outline">Reklam Alanı (728x90)</div>
+</div>
+<div class="mb-8 flex justify-center">
+<div class="ad-placeholder w-[320px] h-[50px] rounded-lg" id="adSlot1">Reklam Alanı (320x50)</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<div class="lg:col-span-8 space-y-gutter">
+<div class="flex flex-col md:flex-row gap-gutter">
+<div class="md:w-5/12 bg-surface-container-lowest p-8 rounded-xl shadow-[0px_4px_20px_rgba(31,41,55,0.04)] border-t-4 border-primary">
+<form class="space-y-6" id="loanForm">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Kredi Tutarı (TL)</label>
+<div class="relative">
+<input class="w-full h-12 pl-12 pr-4 bg-surface border-2 border-outline-variant rounded-lg focus:border-secondary focus:ring-0 transition-all font-display-num text-body-lg outline-none" id="loanAmount" placeholder="50000" required type="number">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-outline font-bold">₺</span>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Yıllık Faiz Oranı (%)</label>
+<div class="relative">
+<input class="w-full h-12 px-4 pr-12 bg-surface border-2 border-outline-variant rounded-lg focus:border-secondary focus:ring-0 transition-all font-display-num text-body-lg outline-none" id="interestRate" placeholder="Örn: 36" required type="number" step="0.01">
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-outline font-bold">%</span>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Vade (Ay)</label>
+<div class="relative">
+<input class="w-full h-12 px-4 pr-12 bg-surface border-2 border-outline-variant rounded-lg focus:border-secondary focus:ring-0 transition-all font-display-num text-body-lg outline-none" id="loanTerm" placeholder="12" required type="number">
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-outline font-bold">Ay</span>
+</div>
+</div>
+<button class="w-full bg-[#F4972B] hover:bg-[#e08924] text-white font-bold text-[18px] py-4 rounded-xl shadow-lg transition-all active:scale-[0.98] flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined">calculate</span> HESAPLA
+</button>
+</form>
+</div>
+<div class="md:w-7/12 space-y-4">
+<div class="hidden space-y-4" id="results">
+<div class="grid grid-cols-1 gap-4">
+<div class="result-card p-6"><span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Aylık Taksit</span><span class="font-display-num text-display-num text-primary tab-num" id="monthlyPayment">₺0</span></div>
+<div class="result-card p-6" style="border-top-color:#176969"><span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Toplam Ödeme</span><span class="font-display-num text-display-num text-secondary tab-num" id="totalPayment">₺0</span></div>
+<div class="result-card p-6" style="border-top-color:#663900"><span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Toplam Faiz</span><span class="font-display-num text-display-num text-tertiary tab-num" id="totalInterest">₺0</span></div>
+</div>
+</div>
+<div id="placeholder" class="calc-card p-8 text-center"><span class="material-symbols-outlined text-5xl text-outline mb-4">credit_card</span><p class="text-on-surface-variant font-body-md">Kredi tutarı, faiz oranı ve vade girip hesaplayın.</p></div>
+</div>
+</div>
+<div class="bg-secondary-container/20 p-6 rounded-xl border border-secondary-container/50">
+<div class="flex gap-4 items-start">
+<span class="material-symbols-outlined text-secondary">info</span>
+<div>
+<p class="font-label-md text-label-md text-on-secondary-container font-bold mb-1">Hesaplama Mantığı</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Kredi hesaplamasında <strong>eşit taksitli (annüite) yöntemi</strong> kullanılır. Aylık taksit = Kredi Tutarı × aylık faiz × (1+aylık faiz)<sup>vade</sup> / ((1+aylık faiz)<sup>vade</sup> − 1) formülü ile hesaplanır. Her ay taksit sabit kalmakla birlikte, ilk dönemlerde faiz payı daha yüksek, vade ilerledikçe anapara payı daha yüksektir.</p>
+</div>
+</div>
+</div>
+<div class="hidden bg-surface-container-lowest p-6 rounded-2xl shadow-[0px_4px_20px_rgba(31,41,55,0.04)]" id="scheduleContainer">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6">Detaylı Ödeme Planı (İlk 12 Ay)</h3>
+<div class="overflow-hidden border border-outline-variant rounded-lg">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container text-on-secondary-container font-label-md text-label-md">
+<th class="p-3 border-b border-outline-variant">Ay</th>
+<th class="p-3 border-b border-outline-variant text-right">Taksit</th>
+<th class="p-3 border-b border-outline-variant text-right">Faiz Payı</th>
+<th class="p-3 border-b border-outline-variant text-right">Anapara Payı</th>
+<th class="p-3 border-b border-outline-variant text-right">Kalan Bakiye</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md" id="scheduleBody"></tbody>
+</table>
+</div>
+</div>
+<div class="flex justify-center">
+<div class="ad-placeholder w-full max-w-[336px] h-[280px] rounded-lg" id="adSlot2">Reklam Alanı (336x280)</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter mt-4">
+<div class="relative overflow-hidden rounded-2xl aspect-video group">
+<img class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" alt="Kredi ve finansal planlama" src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=600&h=400&fit=crop">
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+<h4 class="text-white font-headline-md text-headline-md mb-2">Kredinizi Planlayın</h4>
+<p class="text-white/80 font-body-sm text-body-sm">Doğru vade ve faiz oranı seçimi ile bütçenizi zorlamadan kredinizi yönetin, finansal hedeflerinize ulaşın.</p>
+</div>
+</div>
+<div class="bg-primary-container p-8 rounded-2xl text-white flex flex-col justify-center">
+<span class="material-symbols-outlined text-[#F4972B] text-4xl mb-4">account_balance_wallet</span>
+<h4 class="font-headline-md text-headline-md mb-4">Kredi Skorunuzu Koruyun</h4>
+<p class="font-body-md text-body-md opacity-90 mb-6">Kredi ödemelerinizi zamanında yaparak notunuzu yükseltin, daha avantajlı faiz oranlarına erişin.</p>
+<a class="inline-flex items-center gap-2 text-[#F4972B] font-bold hover:gap-4 transition-all" href="/mevduat">Birikim Araçları<span class="material-symbols-outlined">arrow_forward</span></a>
+</div>
+</div>
+<article class="text-on-surface-variant">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-4">Kredi Hesaplama Nasıl Yapılır?</h2>
+<p class="font-body-md text-body-md mb-4 leading-relaxed">Kredi hesaplama, çekmeyi planladığınız kredinin aylık taksit tutarını ve toplam geri ödeme miktarını önceden görmenizi sağlayan bir finansal planlama aracıdır. Hesaplama yapılırken <strong>kredi tutarı, yıllık faiz oranı ve vade süresi</strong> (ay cinsinden) dikkate alınır. Aylık taksit, anapara ve faiz olmak üzere iki bileşenden oluşur; faiz oranı arttıkça veya vade uzadıkça toplam geri ödeme miktarı da artar.</p>
+<div class="my-6">
+<div class="ad-placeholder w-full h-[120px] rounded-md" id="adSlot3">Reklam Alanı</div>
+</div>
+<p class="font-body-md text-body-md mb-4 leading-relaxed">Kredi taksit hesaplamasında genellikle <strong>eşit taksitli (annüite) yöntemi</strong> kullanılır. Bu yöntemde her ay ödenen taksit sabit kalır, ancak taksitin içindeki faiz ve anapara oranı zamanla değişir. İlk dönemlerde faiz payı daha yüksekken, vade ilerledikçe anapara payı artar. Bu sayede borcunuzu düzenli ve öngörülebilir bir şekilde ödeyebilirsiniz.</p>
+<blockquote class="bg-[#F3F4F1] border-l-4 border-primary rounded-r-xl p-4 md:p-6 mb-4"><p class="font-headline-md text-label-md text-primary mb-1">💡 Bilgi</p><p class="text-body-md text-on-surface-variant">Kredi başvurusu yapmadan önce mutlaka farklı bankaların faiz oranlarını karşılaştırın. Ufak bir faiz farkı bile uzun vadede binlerce TL tasarruf etmenizi sağlayabilir. Ayrıca dosya masrafı, sigorta gibi ek maliyetleri de göz önünde bulundurun.</p></blockquote>
+</article>
+<section class="bg-surface-container-lowest p-8 rounded-2xl shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<h2 class="font-headline-md text-headline-md text-primary mb-6">Hangi Kredi Türünü Seçmelisiniz?</h2>
+<div class="space-y-4 text-body-md text-on-surface-variant leading-relaxed">
+<p>İhtiyacınıza en uygun kredi türünü seçmek, finansal yükümlülüklerinizi sağlıklı bir şekilde yönetmenin ilk adımıdır. <strong>İhtiyaç kredisi</strong> kısa vadeli nakit ihtiyaçları için idealken, <strong>konut kredisi</strong> uzun vadeli düşük faiz avantajı sunar. <strong>Taşıt kredisi</strong> ise araç alımında belirli vade sınırları ile kullanılır.</p>
+<p>Her kredi türünün kendine özgü avantajları ve dezavantajları vardır. Kredi seçimi yaparken ihtiyacınızı, geri ödeme kapasitenizi ve faiz oranlarını dikkate alarak karar vermeniz önemlidir. Aşağıdaki karşılaştırma tablosu ile kredi türleri arasındaki temel farkları görebilirsiniz.</p>
+</div>
+</section>
+<section class="bg-surface-container-lowest p-8 rounded-2xl shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<h2 class="font-headline-md text-headline-md text-primary mb-6">Kredi Başvurusunda Dikkat Edilmesi Gerekenler</h2>
+<div class="space-y-4 text-body-md text-on-surface-variant leading-relaxed">
+<p>Kredi başvurusu yapmadan önce <strong>kredi notunuzu</strong> kontrol etmek, başvurunuzun onaylanma olasılığını artırır. Kredi notu düşük olan kişiler daha yüksek faiz oranları ile karşılaşabilir veya başvuruları reddedilebilir. Düzenli fatura ödemeleri ve kredi kartı borcunu zamanında kapatmak notunuzu yükseltir.</p>
+<p>Başvuru sırasında <strong>dosya masrafı, sigorta ve komisyon</strong> gibi ek maliyetleri mutlaka sorgulayın. Bu masraflar bankadan bankaya değişiklik gösterir ve toplam kredi maliyetinizi önemli ölçüde etkileyebilir. Ayrıca, erken ödeme durumunda herhangi bir ceza uygulanıp uygulanmadığını da sözleşme öncesinde teyit edin.</p>
+<div class="p-4 bg-primary/5 rounded-lg border-l-4 border-primary italic">"Kredi sözleşmesini imzalamadan önce tüm maddeleri dikkatlice okuyun ve anlamadığınız noktaları mutlaka banka yetkilisine sorun."</div>
+</div>
+</section>
+<section class="bg-surface-container-lowest p-8 rounded-2xl shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<h2 class="font-headline-md text-headline-md text-primary mb-6">Kredi Türleri ve Özellikleri</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="calc-card p-6 border-t-4 border-primary text-center">
+<span class="material-symbols-outlined text-5xl text-primary mb-4">shopping_cart</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">İhtiyaç Kredisi</h3>
+<div class="text-2xl font-bold text-[#F4972B] mb-3">%60-120</div>
+<p class="text-body-sm text-on-surface-variant mb-3">Faiz oranı aralığı</p>
+<ul class="text-body-sm text-on-surface-variant space-y-2 text-left">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-600 text-lg">check_circle</span>36 aya kadar vade</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-600 text-lg">check_circle</span>Teminatsız başvuru</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-600 text-lg">check_circle</span>Hızlı onay süreci</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-red-500 text-lg">cancel</span>Yüksek faiz oranı</li>
+</ul>
+</div>
+<div class="calc-card p-6 border-t-4 border-secondary text-center">
+<span class="material-symbols-outlined text-5xl text-secondary mb-4">home</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">Konut Kredisi</h3>
+<div class="text-2xl font-bold text-[#F4972B] mb-3">%30-45</div>
+<p class="text-body-sm text-on-surface-variant mb-3">Faiz oranı aralığı</p>
+<ul class="text-body-sm text-on-surface-variant space-y-2 text-left">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-600 text-lg">check_circle</span>120 aya kadar vade</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-600 text-lg">check_circle</span>Düşük faiz oranı</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-600 text-lg">check_circle</span>Uzun ödeme süresi</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-red-500 text-lg">cancel</span>İpotek zorunluluğu</li>
+</ul>
+</div>
+<div class="calc-card p-6 border-t-4 border-tertiary text-center">
+<span class="material-symbols-outlined text-5xl text-tertiary mb-4">directions_car</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">Taşıt Kredisi</h3>
+<div class="text-2xl font-bold text-[#F4972B] mb-3">%45-80</div>
+<p class="text-body-sm text-on-surface-variant mb-3">Faiz oranı aralığı</p>
+<ul class="text-body-sm text-on-surface-variant space-y-2 text-left">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-600 text-lg">check_circle</span>60 aya kadar vade</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-600 text-lg">check_circle</span>Araç teminatlı</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-600 text-lg">check_circle</span>Orta düzey faiz</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-red-500 text-lg">cancel</span>Rehin şartı</li>
+</ul>
+</div>
+</div>
+</section>
+<section class="bg-surface-container-lowest p-8 rounded-2xl shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<h2 class="font-headline-md text-headline-md text-primary mb-6">Sıkça Sorulan Sorular</h2>
+<div class="space-y-3">
+<details class="border border-outline-variant rounded-xl p-4 group">
+<summary class="flex items-center justify-between font-headline-md text-label-md text-primary cursor-pointer"><span>Kredi notu nedir ve nasıl yükseltilir?</span><span class="material-symbols-outlined text-on-surface-variant transition-transform duration-300">expand_more</span></summary>
+<p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">Kredi notu, bankaların size kredi verirken kullandığı 0-1900 arasındaki puandır. Düzenli fatura ödemeleri, kredi kartı borcunu zamanında kapatmak ve mevcut kredileri aksatmamak kredi notunuzu yükseltir. Kredi notu yüksek olan kişiler daha düşük faiz oranlarından kredi kullanabilir.</p>
+</details>
+<details class="border border-outline-variant rounded-xl p-4 group">
+<summary class="flex items-center justify-between font-headline-md text-label-md text-primary cursor-pointer"><span>Faiz oranı kredi maliyetini nasıl etkiler?</span><span class="material-symbols-outlined text-on-surface-variant transition-transform duration-300">expand_more</span></summary>
+<p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">Faiz oranı, kredinin toplam maliyetini doğrudan belirleyen en önemli faktördür. Örneğin 50.000 TL'lik bir krediyi 12 ayda %36 faizle çektiğinizde yaklaşık 9.800 TL faiz öderken, %24 faizle aynı kredinin faizi yaklaşık 6.500 TL olur. Bu nedenle en düşük faiz oranını bulmak için bankalar arası karşılaştırma yapmak çok önemlidir.</p>
+</details>
+<details class="border border-outline-variant rounded-xl p-4 group">
+<summary class="flex items-center justify-between font-headline-md text-label-md text-primary cursor-pointer"><span>İhtiyaç, konut ve taşıt kredisi arasındaki fark nedir?</span><span class="material-symbols-outlined text-on-surface-variant transition-transform duration-300">expand_more</span></summary>
+<p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">İhtiyaç kredisi genellikle daha kısa vadeli ve yüksek faizlidir; herhangi bir teminat gösterilmeden kullanılabilir. Konut kredisi uzun vade (120 aya kadar) ve düşük faiz sunar, ancak ipotek gerektirir. Taşıt kredisi araç satın almak için kullanılır, vade genelde 48-60 ay ile sınırlıdır ve araç üzerine rehin konulur.</p>
+</details>
+<details class="border border-outline-variant rounded-xl p-4 group">
+<summary class="flex items-center justify-between font-headline-md text-label-md text-primary cursor-pointer"><span>Vade seçimi yaparken nelere dikkat etmeliyim?</span><span class="material-symbols-outlined text-on-surface-variant transition-transform duration-300">expand_more</span></summary>
+<p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">Vade süresi, aylık taksit miktarını ve toplam faiz maliyetini ters yönde etkiler. Kısa vade seçerseniz aylık taksitler yüksek olur ancak toplam faiz maliyeti düşer. Uzun vade seçerseniz aylık ödemeler düşer ancak toplam faiz artar. Bütçenize uygun bir denge kurmak için aylık gelirinizin en fazla %30-40'ını kredi taksidine ayırmanız önerilir.</p>
+</details>
+<details class="border border-outline-variant rounded-xl p-4 group">
+<summary class="flex items-center justify-between font-headline-md text-label-md text-primary cursor-pointer"><span>Kredi yapılandırması nedir ve ne zaman yapılmalıdır?</span><span class="material-symbols-outlined text-on-surface-variant transition-transform duration-300">expand_more</span></summary>
+<p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">Kredi yapılandırması, mevcut kredinizin daha uygun faiz oranı ile yeniden düzenlenmesidir. Faiz oranları düştüğünde veya gelir durumunuz değiştiğinde yapılandırma yaparak aylık taksitlerinizi düşürebilir veya vadeyi kısaltarak toplam faiz yükünüzü azaltabilirsiniz. Yapılandırma masraflarını da hesaba katarak karar vermelisiniz.</p>
+</details>
+</div>
+</section>
+</div>
+<aside class="lg:col-span-4 space-y-6">
+<div class="w-full flex justify-center">
+<div class="ad-placeholder w-[300px] h-[250px] rounded-xl"><span class="material-symbols-outlined text-2xl mb-1">ads_click</span>Reklam Alanı (300x250)</div>
+</div>
+<div class="bg-surface-container p-6 rounded-xl space-y-6">
+<h3 class="font-headline-md text-headline-md">Diğer Hesaplayıcılar</h3>
+<ul class="space-y-3">
+<li><a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/kira-artis"><span class="material-symbols-outlined text-secondary">home</span><span class="font-label-md text-label-md group-hover:text-primary">Kira Artış</span></a></li>
+<li><a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/enflasyon-zam"><span class="material-symbols-outlined text-secondary">trending_up</span><span class="font-label-md text-label-md group-hover:text-primary">Enflasyon</span></a></li>
+<li><a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/kidem-tazminati"><span class="material-symbols-outlined text-secondary">receipt_long</span><span class="font-label-md text-label-md group-hover:text-primary">Tazminat</span></a></li>
+<li><a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/mevduat"><span class="material-symbols-outlined text-secondary">savings</span><span class="font-label-md text-label-md group-hover:text-primary">Mevduat</span></a></li>
+<li><a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/doviz-butce"><span class="material-symbols-outlined text-secondary">currency_exchange</span><span class="font-label-md text-label-md group-hover:text-primary">Döviz Bütçe</span></a></li>
+<li><a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/maas"><span class="material-symbols-outlined text-secondary">payments</span><span class="font-label-md text-label-md group-hover:text-primary">Maaş</span></a></li>
+</ul>
+</div>
+<div class="sticky top-24">
+<div class="ad-placeholder w-full h-[600px] rounded-xl"><span class="material-symbols-outlined text-2xl mb-1">ads_click</span>Dikey Reklam Alanı (300x600)</div>
+</div>
+</aside>
+</div>
+<div class="mt-ad-slot-margin mb-8">
+<div class="ad-placeholder w-full max-w-[728px] h-[90px] mx-auto rounded-lg" id="adSlot4">Reklam Alanı (728x90)</div>
+</div>
 </main>
-
-<div class="ad-placeholder mx-auto mt-12 max-w-[728px] h-[90px]" id="adSlot4">Reklam Alanı</div>
-
 <footer class="bg-surface-container-lowest border-t border-outline-variant mt-12">
-  <div class="flex flex-col md:flex-row justify-between items-center py-8 px-4 md:px-10 w-full max-w-[1200px] mx-auto gap-4">
-    <div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-2xl">account_balance</span><span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span><span class="text-body-sm text-on-surface-variant ml-4">© 2024 FinansMatik</span></div>
-    <div class="flex gap-6">
-      <a href="/hakkimizda" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">Hakkımızda</a>
-      <a href="/gizlilik" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">Gizlilik</a>
-      <a href="/iletisim" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">İletişim</a>
-    </div>
-  </div>
+<div class="flex flex-col md:flex-row justify-between items-center py-8 px-4 md:px-10 w-full max-w-[1200px] mx-auto gap-4">
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-2xl">account_balance</span><span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span><span class="text-body-sm text-on-surface-variant ml-4">© 2024 FinansMatik</span></div>
+<div class="flex gap-6">
+<a href="/hakkimizda" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">Hakkımızda</a>
+<a href="/gizlilik" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">Gizlilik</a>
+<a href="/iletisim" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">İletişim</a>
+</div>
+</div>
 </footer>
 <script>
 document.getElementById('menuBtn_kredi')?.addEventListener('click', () => document.getElementById('mobileMenu_kredi')?.classList.toggle('hidden'));
 
 function formatCurrency(n) {
   return '₺' + new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
+}
+
+function fmt(n) {
+  return new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n) + ' ₺';
 }
 
 function animateValue(element, end, duration) {
@@ -191,14 +300,41 @@ function animateValue(element, end, duration) {
 
 document.getElementById('loanForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  const t = parseFloat(document.getElementById('loanAmount').value), f = parseFloat(document.getElementById('interestRate').value), v = parseInt(document.getElementById('loanTerm').value);
-  if (isNaN(t) || isNaN(f) || isNaN(v)) return;
-  const af = f / 100 / 12, taksit = t * af * Math.pow(1+af, v) / (Math.pow(1+af, v) - 1), top = taksit * v, faiz = top - t;
-  document.getElementById('results').classList.remove('hidden'); document.getElementById('placeholder').classList.add('hidden');
-  document.getElementById('monthlyPayment').textContent = '₺0'; document.getElementById('totalPayment').textContent = '₺0'; document.getElementById('totalInterest').textContent = '₺0';
+  const t = parseFloat(document.getElementById('loanAmount').value);
+  const f = parseFloat(document.getElementById('interestRate').value);
+  const v = parseInt(document.getElementById('loanTerm').value);
+  if (isNaN(t) || isNaN(f) || isNaN(v) || t <= 0 || f <= 0 || v <= 0) return;
+  const af = f / 100 / 12;
+  const taksit = t * af * Math.pow(1 + af, v) / (Math.pow(1 + af, v) - 1);
+  const top = taksit * v;
+  const faiz = top - t;
+  document.getElementById('results').classList.remove('hidden');
+  document.getElementById('placeholder').classList.add('hidden');
+  document.getElementById('scheduleContainer').classList.remove('hidden');
+  document.getElementById('monthlyPayment').textContent = '₺0';
+  document.getElementById('totalPayment').textContent = '₺0';
+  document.getElementById('totalInterest').textContent = '₺0';
   animateValue(document.getElementById('monthlyPayment'), taksit);
   animateValue(document.getElementById('totalPayment'), top);
   animateValue(document.getElementById('totalInterest'), faiz);
+  let balance = t;
+  let html = '';
+  const monthsToShow = Math.min(v, 12);
+  for (let i = 1; i <= monthsToShow; i++) {
+    const faizPay = balance * af;
+    const anaparaPay = taksit - faizPay;
+    balance -= anaparaPay;
+    if (balance < 0) balance = 0;
+    const rowClass = i % 2 === 0 ? 'bg-surface-container-low/30' : '';
+    html += '<tr class="' + rowClass + ' hover:bg-surface-container-low transition-colors">';
+    html += '<td class="p-3 border-b border-outline-variant font-bold">' + i + '</td>';
+    html += '<td class="p-3 border-b border-outline-variant text-right tab-num">' + fmt(taksit) + '</td>';
+    html += '<td class="p-3 border-b border-outline-variant text-right tab-num">' + fmt(faizPay) + '</td>';
+    html += '<td class="p-3 border-b border-outline-variant text-right tab-num">' + fmt(anaparaPay) + '</td>';
+    html += '<td class="p-3 border-b border-outline-variant text-right tab-num">' + fmt(balance) + '</td>';
+    html += '</tr>';
+  }
+  document.getElementById('scheduleBody').innerHTML = html;
 });
 </script>
 </body>
