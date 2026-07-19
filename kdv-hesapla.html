@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html class="light" lang="tr">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>KDV Hesaplayıcı | FinansMatik</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="/js/tailwind-config.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Sora:wght@100..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<style>
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+body { font-family: 'Inter', sans-serif; background: #FAFAF7; min-height: max(884px, 100dvh); }
+.calculator-card { background: #fff; box-shadow: 0px 4px 20px rgba(31,41,55,0.04); border-radius: 1rem; }
+.result-card { background: #fff; box-shadow: 0px 10px 30px rgba(15,76,76,0.08); border-top: 4px solid #1B6B6B; border-radius: 1rem; }
+.tab-num { font-variant-numeric: tabular-nums; }
+input:focus, select:focus { outline: none; border-color: #1B6B6B !important; }
+.faq-item[open] .faq-icon { transform: rotate(180deg); }
+.ad-placeholder { background-color: #F3F4F1; border: 1px dashed #bfc8c8; display: flex; align-items: center; justify-content: center; flex-direction: column; color: #707978; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; }
+.mode-chip.active { background: #176969; color: #fff; border-color: #176969; }
+</style>
+</head>
+<body class="text-on-surface">
+<header class="bg-surface shadow-[0px_4px_20px_rgba(31,41,55,0.04)] sticky top-0 z-50">
+<div class="flex justify-between items-center px-4 md:px-10 h-16 w-full max-w-[1200px] mx-auto">
+<a href="/" class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">account_balance</span>
+<span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span>
+</a>
+<div class="hidden md:flex items-center gap-6">
+<a href="/kira-artis" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Kira Artış</a>
+<a href="/enflasyon-zam" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Enflasyon</a>
+<a href="/kidem-tazminati" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Tazminat</a>
+<a href="/doviz-butce" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Döviz Bütçe</a>
+<a href="/kredi" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Kredi</a>
+<a href="/mevduat" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Mevduat</a>
+<a href="/maas" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Maaş</a>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant/50 p-2 rounded-full md:hidden transition-colors" id="menuBtn_kdv">menu</button>
+</div>
+</header>
+<nav id="mobileMenu_kdv" class="hidden fixed inset-0 z-40 bg-surface/95 backdrop-blur-md pt-24">
+<div class="flex flex-col items-center gap-6 p-8 text-lg">
+<a href="/" class="font-headline-md text-primary">Ana Sayfa</a>
+<a href="/kira-artis" class="font-headline-md text-on-surface-variant">Kira Artış</a>
+<a href="/enflasyon-zam" class="font-headline-md text-on-surface-variant">Enflasyon</a>
+<a href="/kidem-tazminati" class="font-headline-md text-on-surface-variant">Tazminat</a>
+<a href="/doviz-butce" class="font-headline-md text-on-surface-variant">Döviz Bütçe</a>
+<a href="/kredi" class="font-headline-md text-on-surface-variant">Kredi</a>
+<a href="/mevduat" class="font-headline-md text-on-surface-variant">Mevduat</a>
+<a href="/maas" class="font-headline-md text-on-surface-variant">Maaş</a>
+</div>
+</nav>
+<div class="max-w-[1200px] mx-auto px-4 md:px-10 mt-4">
+<div class="ad-placeholder w-full max-w-[320px] h-[50px] mx-auto rounded-lg">
+<span class="material-symbols-outlined text-sm mb-1">ads_click</span>AdSense Reklam Alanı (320x50)
+</div>
+</div>
+<main class="max-w-[1200px] mx-auto px-4 md:px-10 py-8">
+<section class="mb-12">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">KDV Hesaplayıcı</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">KDV dahil/hariç tutarları, KDV tutarını ve matrahı anında hesaplayın. Tüm KDV oranları (%1, %10, %20) desteklenmektedir.</p>
+</section>
+<div class="flex flex-col md:flex-row gap-6 items-start">
+<div class="w-full md:w-2/3 space-y-6">
+<section class="calculator-card overflow-hidden">
+<div class="h-1 bg-primary w-full"></div>
+<div class="p-8">
+<h2 class="font-headline-md text-headline-md mb-2">KDV Hesaplama</h2>
+<p class="text-on-surface-variant mb-8 font-body-md">İşlem türünü seçin, tutar ve KDV oranını girerek sonucu hesaplayın.</p>
+<form class="space-y-6" id="kdvForm">
+<div>
+<label class="block font-label-md text-label-md mb-2 text-on-surface">İşlem Türü</label>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-2" id="modeGroup">
+<button class="mode-chip active px-4 py-3 rounded-lg border border-secondary bg-secondary text-white font-label-md text-sm transition-all" data-mode="1" type="button">KDV Dahil → Hariç</button>
+<button class="mode-chip px-4 py-3 rounded-lg border border-outline-variant text-on-surface-variant font-label-md text-sm hover:border-secondary transition-all" data-mode="2" type="button">KDV Hariç → Dahil</button>
+<button class="mode-chip px-4 py-3 rounded-lg border border-outline-variant text-on-surface-variant font-label-md text-sm hover:border-secondary transition-all" data-mode="3" type="button">KDV Tutarı Hesapla</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block font-label-md text-label-md mb-2 text-on-surface" for="tutar">Tutar (TL)</label>
+<div class="relative">
+<input class="w-full h-12 px-4 pr-12 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary bg-surface transition-all" id="tutar" placeholder="0.00" type="number" step="any">
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-outline font-bold">₺</span>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md mb-2 text-on-surface" for="kdvOran">KDV Oranı (%)</label>
+<select class="w-full h-12 px-4 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary bg-surface transition-all" id="kdvOran">
+<option value="1">%1</option>
+<option value="10" selected>%10</option>
+<option value="20">%20</option>
+</select>
+</div>
+</div>
+<div id="modeInfo" class="flex items-center gap-2 text-body-sm text-on-surface-variant bg-surface-container-low p-3 rounded-lg">
+<span class="material-symbols-outlined text-secondary text-lg">info</span>
+<span>KDV Dahil tutardan KDV Hariç fiyatı hesaplar.</span>
+</div>
+<button class="w-full bg-[#F4972B] hover:bg-[#e08924] text-white font-headline-md text-[20px] py-4 rounded-xl shadow-lg transition-transform active:scale-[0.98]" type="submit">Hesapla</button>
+</form>
+</div>
+</section>
+<section class="hidden" id="resultCard">
+<div class="calculator-card p-8">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-secondary text-[32px]">task_alt</span>
+<h2 class="font-headline-md text-headline-md">Hesaplama Sonucu</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface p-4 rounded-lg">
+<span class="block text-body-sm text-on-surface-variant mb-1">KDV Hariç Tutar</span>
+<span class="font-display-num text-display-num text-on-surface tab-num" id="resultHaric">0,00 ₺</span>
+</div>
+<div class="bg-primary p-4 rounded-lg">
+<span class="block text-body-sm text-primary-fixed-dim mb-1">KDV Tutarı</span>
+<span class="font-display-num text-display-num text-white tab-num" id="resultKdv">0,00 ₺</span>
+</div>
+<div class="bg-surface p-4 rounded-lg">
+<span class="block text-body-sm text-on-surface-variant mb-1">KDV Dahil Tutar</span>
+<span class="font-display-num text-display-num text-on-surface tab-num" id="resultDahil">0,00 ₺</span>
+</div>
+</div>
+<div class="mt-8 p-4 bg-surface-container-low rounded-lg border border-outline-variant/30 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">info</span>
+<p class="text-body-sm text-on-surface-variant" id="resultInfo">Hesaplanan KDV oranı %10 üzerinden yapılmıştır.</p>
+</div>
+</div>
+<div class="mt-6">
+<div class="ad-placeholder w-full max-w-[300px] h-[250px] mx-auto rounded-xl">
+<span class="material-symbols-outlined text-2xl mb-2">ads_click</span>AdSense Reklam Alanı (300x250)
+</div>
+</div>
+</section>
+<article class="calculator-card p-8 space-y-6">
+<h2 class="font-headline-lg text-headline-lg">KDV Hesaplama Mantığı</h2>
+<p class="font-body-md text-on-surface-variant leading-relaxed">KDV (Katma Değer Vergisi), mal ve hizmet teslimlerinde oluşan katma değer üzerinden alınan bir dolaylı vergidir. Türkiye'de standart KDV oranı %20 olup, belirli ürün ve hizmetler için %10 ve %1 gibi indirilmiş oranlar uygulanmaktadır.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-4">
+<h3 class="font-headline-md text-headline-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">calculate</span>KDV Dahil → Hariç
+</h3>
+<p class="font-body-sm text-on-surface-variant">KDV dahil fiyatı <strong>1 + (KDV oranı / 100)</strong>'e bölerek KDV hariç tutarı bulabilirsiniz. KDV tutarı = KDV dahil fiyat − KDV hariç fiyat.</p>
+</div>
+<div class="space-y-4">
+<h3 class="font-headline-md text-headline-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">add_shopping_cart</span>KDV Hariç → Dahil
+</h3>
+<p class="font-body-sm text-on-surface-variant">KDV hariç fiyatı <strong>1 + (KDV oranı / 100)</strong> ile çarparak KDV dahil fiyatı bulabilirsiniz. KDV tutarı = KDV dahil fiyat − KDV hariç fiyat.</p>
+</div>
+</div>
+<div class="ad-placeholder w-full h-[120px] rounded-xl my-6">
+<span class="material-symbols-outlined text-2xl mb-2">ads_click</span>AdSense Yerel Reklam Alanı
+</div>
+</article>
+<section class="space-y-4">
+<h2 class="font-headline-lg text-headline-lg">KDV Hakkında Sıkça Sorulan Sorular</h2>
+<div class="space-y-2">
+<details class="faq-item group calculator-card cursor-pointer">
+<summary class="flex justify-between items-center p-5 list-none font-label-md text-label-md text-on-surface hover:bg-surface transition-colors">
+KDV nedir ve kim tarafından ödenir?
+<span class="material-symbols-outlined faq-icon transition-transform duration-300">expand_more</span>
+</summary>
+<div class="px-5 pb-5 text-body-md text-on-surface-variant">KDV (Katma Değer Vergisi), mal ve hizmet teslimlerinde nihai tüketici tarafından ödenen, işletmeler tarafından tahsil edilerek vergi dairesine beyan edilen bir dolaylı vergidir. Her aşamada yaratılan katma değer üzerinden hesaplanır.</div>
+</details>
+<details class="faq-item group calculator-card cursor-pointer">
+<summary class="flex justify-between items-center p-5 list-none font-label-md text-label-md text-on-surface hover:bg-surface transition-colors">
+Türkiye'de hangi KDV oranları uygulanır?
+<span class="material-symbols-outlined faq-icon transition-transform duration-300">expand_more</span>
+</summary>
+<div class="px-5 pb-5 text-body-md text-on-surface-variant">Türkiye'de üç farklı KDV oranı bulunur: %1 (temel gıda, kitap, gazete gibi indirimli ürünler), %10 (konaklama, tekstil gibi ürünler), %20 (standart oran - çoğu mal ve hizmet). Hangi oranın uygulanacağı mal/hizmetin türüne göre belirlenir.</div>
+</details>
+<details class="faq-item group calculator-card cursor-pointer">
+<summary class="flex justify-between items-center p-5 list-none font-label-md text-label-md text-on-surface hover:bg-surface transition-colors">
+KDV dahil fiyattan KDV hariç fiyat nasıl hesaplanır?
+<span class="material-symbols-outlined faq-icon transition-transform duration-300">expand_more</span>
+</summary>
+<div class="px-5 pb-5 text-body-md text-on-surface-variant">KDV dahil fiyatı, 1 + (KDV oranı / 100) formülüne bölerek hesaplanır. Örneğin, %20 KDV ile 1.200 TL'lik bir ürünün KDV hariç fiyatı: 1.200 / 1,20 = 1.000 TL'dir. KDV tutarı ise 1.200 - 1.000 = 200 TL olur.</div>
+</details>
+<details class="faq-item group calculator-card cursor-pointer">
+<summary class="flex justify-between items-center p-5 list-none font-label-md text-label-md text-on-surface hover:bg-surface transition-colors">
+KDV iadesi kimlere yapılır?
+<span class="material-symbols-outlined faq-icon transition-transform duration-300">expand_more</span>
+</summary>
+<div class="px-5 pb-5 text-body-md text-on-surface-variant">İhracat yapan firmalar, araç alımında KDV ödeyenler, engelliler için özel tertibatlı araç alanlar ve indirimli orana tabi işlemleri olan mükellefler belirli şartlar altında KDV iadesi alabilir. İade süreci gelir idaresi tarafından düzenlenir.</div>
+</details>
+</div>
+</section>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+  <div class="relative overflow-hidden rounded-2xl aspect-video group">
+    <img class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" alt="Vergi hesaplama" src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&h=400&fit=crop">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+      <h4 class="text-white font-headline-md text-headline-md mb-2">Vergi Planlaması</h4>
+      <p class="text-white/80 font-body-sm text-body-sm">KDV hesaplamalarınızı doğru yapın, muhasebe süreçlerinizi profesyonelce yönetin.</p>
+    </div>
+  </div>
+  <div class="bg-primary-container p-8 rounded-2xl text-white flex flex-col justify-center">
+    <span class="material-symbols-outlined text-[#F4972B] text-4xl mb-4">receipt_long</span>
+    <h4 class="font-headline-md text-headline-md mb-4">Tüm Finansal Hesaplarınız
+Tek Yerde</h4>
+    <p class="font-body-md text-body-md opacity-90 mb-6">Kira artışından enflasyona, krediden mevduata kadar tüm finansal araçlarımızı keşfedin.</p>
+    <a class="inline-flex items-center gap-2 text-[#F4972B] font-bold hover:gap-4 transition-all" href="/kredi">Kredi Hesaplama<span class="material-symbols-outlined">arrow_forward</span></a>
+  </div>
+</div>
+</div>
+<aside class="w-full md:w-1/3 space-y-6">
+<div class="w-full flex justify-center">
+<div class="ad-placeholder w-[300px] h-[250px] rounded-lg">
+<span class="material-symbols-outlined text-2xl mb-1">ads_click</span>Reklam Alanı (300x250)
+</div>
+</div>
+<div class="bg-surface-container p-6 rounded-xl space-y-6">
+<h3 class="font-headline-md text-headline-md">Diğer Hesaplayıcılar</h3>
+<ul class="space-y-3">
+<li>
+<a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/kira-artis">
+<span class="material-symbols-outlined text-secondary">home_work</span>
+<span class="font-label-md text-label-md group-hover:text-primary">Kira Artışı</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/enflasyon-zam">
+<span class="material-symbols-outlined text-secondary">trending_up</span>
+<span class="font-label-md text-label-md group-hover:text-primary">Enflasyon Hesaplama</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/kidem-tazminati">
+<span class="material-symbols-outlined text-secondary">receipt_long</span>
+<span class="font-label-md text-label-md group-hover:text-primary">Kıdem Tazminatı</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/kredi">
+<span class="material-symbols-outlined text-secondary">calculate</span>
+<span class="font-label-md text-label-md group-hover:text-primary">Kredi Ödeme Planı</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/mevduat">
+<span class="material-symbols-outlined text-secondary">savings</span>
+<span class="font-label-md text-label-md group-hover:text-primary">Mevduat Getirisi</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/maas">
+<span class="material-symbols-outlined text-secondary">payments</span>
+<span class="font-label-md text-label-md group-hover:text-primary">Maaş Hesaplama</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="sticky top-24">
+<div class="ad-placeholder w-full h-[600px] rounded-lg">
+<span class="material-symbols-outlined text-2xl mb-1">ads_click</span>Dikey Reklam Alanı (300x600)
+</div>
+</div>
+</aside>
+</div>
+<div class="w-full flex justify-center mt-12">
+<div class="ad-placeholder w-[728px] h-[90px] rounded-lg">Reklam Alanı (728x90)</div>
+</div>
+</main>
+<footer class="bg-surface-container-lowest border-t border-outline-variant mt-12">
+<div class="flex flex-col md:flex-row justify-between items-center py-8 px-4 md:px-10 w-full max-w-[1200px] mx-auto gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-2xl">account_balance</span>
+<span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span>
+<span class="text-body-sm text-on-surface-variant ml-4">© 2024 FinansMatik</span>
+</div>
+<div class="flex gap-6">
+<a href="/hakkimizda" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">Hakkımızda</a>
+<a href="/gizlilik" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">Gizlilik</a>
+<a href="/iletisim" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">İletişim</a>
+</div>
+</div>
+</footer>
+<script>
+const formatCurrency = (num) => new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(num) + ' ₺';
+const modeLabels = {
+  1: 'KDV Dahil tutardan KDV Hariç fiyatı hesaplar.',
+  2: 'KDV Hariç tutardan KDV Dahil fiyatı hesaplar.',
+  3: 'Girilen matrah üzerinden KDV tutarını hesaplar.'
+};
+const modeTitles = {
+  1: 'Tutar (KDV Dahil TL)',
+  2: 'Tutar (KDV Hariç TL)',
+  3: 'Matrah (TL)'
+};
+let currentMode = 1;
+document.getElementById('menuBtn_kdv')?.addEventListener('click', () => document.getElementById('mobileMenu_kdv')?.classList.toggle('hidden'));
+document.querySelectorAll('.mode-chip').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.mode-chip').forEach(b => { b.classList.remove('active'); b.classList.remove('bg-secondary', 'text-white', 'border-secondary'); b.classList.add('border-outline-variant', 'text-on-surface-variant'); });
+    this.classList.add('active', 'bg-secondary', 'text-white', 'border-secondary');
+    this.classList.remove('border-outline-variant', 'text-on-surface-variant');
+    currentMode = parseInt(this.dataset.mode);
+    document.getElementById('modeInfo').querySelector('span:last-child').textContent = modeLabels[currentMode];
+    document.querySelector('label[for="tutar"]').textContent = modeTitles[currentMode];
+  });
+});
+document.getElementById('kdvForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const tutar = parseFloat(document.getElementById('tutar').value);
+  const oran = parseFloat(document.getElementById('kdvOran').value);
+  if (isNaN(tutar) || tutar <= 0) return;
+  let haric, kdv, dahil;
+  switch (currentMode) {
+    case 1:
+      dahil = tutar;
+      haric = dahil / (1 + oran / 100);
+      kdv = dahil - haric;
+      break;
+    case 2:
+      haric = tutar;
+      kdv = haric * oran / 100;
+      dahil = haric + kdv;
+      break;
+    case 3:
+      haric = tutar;
+      kdv = haric * oran / 100;
+      dahil = haric + kdv;
+      break;
+  }
+  const resultCard = document.getElementById('resultCard');
+  resultCard.classList.remove('hidden');
+  resultCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  document.getElementById('resultInfo').textContent = `Hesaplanan KDV oranı %${oran} üzerinden yapılmıştır.`;
+  const startTime = performance.now();
+  const duration = 800;
+  const animate = (now) => {
+    const progress = Math.min((now - startTime) / duration, 1);
+    document.getElementById('resultHaric').textContent = formatCurrency(haric * progress);
+    document.getElementById('resultKdv').textContent = formatCurrency(kdv * progress);
+    document.getElementById('resultDahil').textContent = formatCurrency(dahil * progress);
+    if (progress < 1) requestAnimationFrame(animate);
+  };
+  requestAnimationFrame(animate);
+});
+</script>
+</body>
+</html>

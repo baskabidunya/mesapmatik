@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html class="light" lang="tr">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Gider Paylaştırıcı | Arkadaş ve Ev Arkadaşı Arasında Masraf Bölüşme | FinansMatik</title>
+<meta name="description" content="Arkadaşlarınız veya ev arkadaşlarınız arasında giderleri adil şekilde paylaştırın. Kim kime ne kadar borçlu? Gider paylaştırıcı ile hesapla.">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="/js/tailwind-config.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Sora:wght@100..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<style>
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+body { font-family: 'Inter', sans-serif; background: #FAFAF7; min-height: max(884px, 100dvh); }
+.calc-card { background: #fff; box-shadow: 0px 4px 20px rgba(31,41,55,0.04); border-radius: 1rem; }
+.result-card { background: #fff; box-shadow: 0px 10px 30px rgba(15,76,76,0.08); border-radius: 1rem; border-top: 4px solid #176969; }
+.ad-placeholder { background-color: #F3F4F1; border: 1px dashed #bfc8c8; display: flex; align-items: center; justify-content: center; flex-direction: column; color: #707978; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; }
+.tab-num { font-variant-numeric: tabular-nums; }
+input:focus, select:focus { outline: none; border-color: #176969 !important; }
+.chip { display: inline-flex; align-items: center; gap: 4px; padding: 6px 14px; background: #E8F0F0; color: #176969; border-radius: 999px; font-size: 14px; font-weight: 600; }
+.chip .remove { cursor: pointer; font-size: 18px; line-height: 1; opacity: 0.6; }
+.chip .remove:hover { opacity: 1; }
+.debt-positive { color: #176969; font-weight: 700; }
+.debt-negative { color: #B91C1C; font-weight: 700; }
+.debt-arrow { color: #F4972B; font-weight: 700; }
+</style>
+</head>
+<body class="text-on-surface">
+<header class="bg-surface shadow-[0px_4px_20px_rgba(31,41,55,0.04)] sticky top-0 z-50">
+<div class="flex justify-between items-center px-4 md:px-10 h-16 w-full max-w-[1200px] mx-auto">
+<a href="/" class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">account_balance</span>
+<span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span>
+</a>
+<div class="hidden md:flex items-center gap-6">
+<a href="/kira-artis" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Kira Artış</a>
+<a href="/enflasyon-zam" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Enflasyon</a>
+<a href="/kidem-tazminati" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Tazminat</a>
+<a href="/doviz-butce" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Döviz Bütçe</a>
+<a href="/kredi" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Kredi</a>
+<a href="/mevduat" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Mevduat</a>
+<a href="/maas" class="font-label-md text-sm text-on-surface-variant hover:text-primary transition-colors">Maaş</a>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant/50 p-2 rounded-full md:hidden transition-colors" id="menuBtn_gider">menu</button>
+</div>
+</header>
+<nav id="mobileMenu_gider" class="hidden fixed inset-0 z-40 bg-surface/95 backdrop-blur-md pt-24">
+<div class="flex flex-col items-center gap-6 p-8 text-lg">
+<a href="/" class="font-headline-md text-primary">Ana Sayfa</a>
+<a href="/kira-artis" class="font-headline-md text-on-surface-variant">Kira Artış</a>
+<a href="/enflasyon-zam" class="font-headline-md text-on-surface-variant">Enflasyon</a>
+<a href="/kidem-tazminati" class="font-headline-md text-on-surface-variant">Tazminat</a>
+<a href="/doviz-butce" class="font-headline-md text-on-surface-variant">Döviz Bütçe</a>
+<a href="/kredi" class="font-headline-md text-on-surface-variant">Kredi</a>
+<a href="/mevduat" class="font-headline-md text-on-surface-variant">Mevduat</a>
+<a href="/maas" class="font-headline-md text-on-surface-variant">Maaş</a>
+</div>
+</nav>
+
+<div class="max-w-[1200px] mx-auto px-4 md:px-10 mt-4">
+<div class="ad-placeholder w-full max-w-[320px] h-[50px] mx-auto rounded-lg">
+<span class="material-symbols-outlined text-sm mb-1">ads_click</span>AdSense Reklam Alanı (320x50)
+</div>
+</div>
+
+<main class="max-w-[1200px] mx-auto px-4 md:px-10 py-8">
+
+<section class="mb-10">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">Gider Paylaştırıcı</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl">Arkadaşlarınız veya ev arkadaşlarınızla yaptığınız ortak harcamaları adil şekilde bölüşün. Kimin kime ne kadar borçlu olduğunu anında görün.</p>
+</section>
+
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+<div class="lg:col-span-8 space-y-8">
+
+<section class="calc-card p-6 md:p-8">
+<h2 class="font-headline-md text-[20px] text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-[#F4972B]">group_add</span>
+Kişiler
+</h2>
+<div class="flex flex-wrap gap-3 items-center mb-4">
+<input class="h-11 border border-outline-variant rounded-lg px-4 focus:ring-2 focus:ring-primary/20 outline-none transition-all flex-1 min-w-[160px]" id="personNameInput" placeholder="İsim girin..." maxlength="20">
+<button class="h-11 bg-[#F4972B] text-white font-bold px-6 rounded-lg hover:brightness-110 active:scale-95 transition-all flex items-center gap-1" onclick="addPerson()">
+<span class="material-symbols-outlined text-lg">add</span> Ekle
+</button>
+</div>
+<div class="flex flex-wrap gap-2 min-h-[40px]" id="personChips"></div>
+<p class="text-xs text-on-surface-variant mt-2" id="personCount">En az 2 kişi ekleyin.</p>
+</section>
+
+<section class="calc-card p-6 md:p-8">
+<h2 class="font-headline-md text-[20px] text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-[#F4972B]">receipt_long</span>
+Giderler
+</h2>
+<div class="grid grid-cols-1 sm:grid-cols-4 gap-3 mb-4">
+<input class="h-11 border border-outline-variant rounded-lg px-4 focus:ring-2 focus:ring-primary/20 outline-none transition-all sm:col-span-2" id="expenseDesc" placeholder="Açıklama (market, fatura...)" maxlength="40">
+<input class="h-11 border border-outline-variant rounded-lg px-4 focus:ring-2 focus:ring-primary/20 outline-none transition-all tab-num" id="expenseAmount" placeholder="Tutar" type="number" min="0" step="0.01">
+<select class="h-11 border border-outline-variant rounded-lg px-4 focus:ring-2 focus:ring-primary/20 outline-none transition-all bg-white" id="expensePayer">
+<option value="">Ödeyen seç</option>
+</select>
+</div>
+<div class="flex items-center gap-4 mb-4">
+<label class="flex items-center gap-2 text-sm text-on-surface-variant cursor-pointer">
+<input type="checkbox" id="expenseEqual" checked class="rounded border-outline-variant text-primary focus:ring-primary">
+Eşit Bölüş
+</label>
+<button class="h-11 bg-primary text-white font-bold px-6 rounded-lg hover:brightness-110 active:scale-95 transition-all flex items-center gap-1" onclick="addExpense()">
+<span class="material-symbols-outlined text-lg">post_add</span> Gider Ekle
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-sm" id="expenseTable">
+<thead>
+<tr class="border-b border-outline-variant/50 text-left text-on-surface-variant">
+<th class="pb-2 font-medium">Açıklama</th>
+<th class="pb-2 font-medium tab-num">Tutar</th>
+<th class="pb-2 font-medium">Ödeyen</th>
+<th class="pb-2 font-medium">Bölüşüm</th>
+<th class="pb-2"></th>
+</tr>
+</thead>
+<tbody id="expenseTableBody"></tbody>
+</table>
+</div>
+<p class="text-xs text-on-surface-variant mt-2" id="expenseCount">Henüz gider eklenmedi.</p>
+</section>
+
+<button class="w-full h-14 bg-[#F4972B] text-white font-bold text-lg rounded-xl shadow-lg hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed" id="calculateBtn" onclick="calculateDebts()" disabled>
+<span class="material-symbols-outlined">calculate</span>
+HESAPLA
+</button>
+
+<section class="space-y-6 hidden" id="resultsSection">
+<div class="flex items-center gap-4">
+<div class="h-px flex-1 bg-outline-variant"></div>
+<h2 class="font-headline-md text-[20px] text-primary uppercase tracking-widest">Sonuçlar</h2>
+<div class="h-px flex-1 bg-outline-variant"></div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6" id="summaryCards"></div>
+
+<h3 class="font-headline-md text-[18px] text-primary mb-4">Kim Kime Ne Kadar Borçlu?</h3>
+<div class="space-y-3" id="debtList"></div>
+
+<div class="ad-placeholder w-full h-[90px] mt-8 rounded-lg">
+<span class="material-symbols-outlined text-sm mb-1">ads_click</span>Reklam Alanı - 728x90
+</div>
+</section>
+
+</div>
+
+<aside class="lg:col-span-4 space-y-6">
+<div class="calc-card p-6">
+<h3 class="font-headline-md text-[16px] text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[#F4972B]">info</span>
+Nasıl Çalışır?
+</h3>
+<ul class="space-y-3 text-sm text-on-surface-variant">
+<li class="flex gap-3"><span class="text-[#F4972B] font-bold">1.</span> Gider paylaşımına katılacak kişilerin isimlerini ekleyin.</li>
+<li class="flex gap-3"><span class="text-[#F4972B] font-bold">2.</span> Yapılan harcamaları tek tek girin: açıklama, tutar ve ödeyen kişiyi seçin.</li>
+<li class="flex gap-3"><span class="text-[#F4972B] font-bold">3.</span> "Hesapla" butonuna basın, kimin kime ne kadar borçlu olduğunu görün.</li>
+</ul>
+</div>
+<div class="ad-placeholder w-full h-[250px] rounded-lg">
+<span class="material-symbols-outlined text-2xl mb-1">ads_click</span>AdSense Reklam Alanı (300x250)
+</div>
+</aside>
+
+</div>
+
+<section class="mt-20 grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+<div class="lg:col-span-7 space-y-6 text-on-surface-variant leading-relaxed">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">Gider Paylaştırıcı Nedir?</h2>
+<p class="font-body-md text-[16px]">Gider paylaştırıcı, arkadaş grubunuz veya ev arkadaşlarınızla ortak harcamalarınızı adil bir şekilde bölüşmenizi sağlayan dijital bir araçtır. Tatil masrafları, ev alışverişi, faturalar veya dışarıda yenen yemekler gibi ortak harcamaların kim tarafından yapıldığını takip eder ve herkesin ne kadar ödemesi gerektiğini hesaplar.</p>
+<p class="font-body-md text-[16px]">Geleneksel yöntemlerde herkes ne kadar harcadığını not alır, sonra kağıt üzerinde hesaplamalar yapılır ve bu genellikle kafa karışıklığına yol açar. FinansMatik Gider Paylaştırıcı ise tüm bu süreci otomatikleştirir: her harcamayı kaydeder, herkesin ne kadar ödemesi gerektiğini belirler ve son olarak en az sayıda ödeme işlemiyle borçların kapatılmasını sağlayan basit bir borç zinciri oluşturur.</p>
+
+<div class="ad-placeholder w-full min-h-[100px] p-4 rounded-lg my-6">
+<span class="material-symbols-outlined text-sm mb-1">ads_click</span>
+<span class="text-label-md text-on-surface-variant font-medium">AdSense Reklam Alanı (Native In-Content)</span>
+</div>
+
+<p class="font-body-md text-[16px]">Ev arkadaşları arasında gider paylaşımı, özellikle büyük şehirlerde yaşayan öğrenciler ve genç profesyoneller için önemli bir ihtiyaçtır. Kira, elektrik, su, doğalgaz, internet ve market alışverişi gibi düzenli harcamaların yanı sıra, ortak alınan mobilya veya beyaz eşya gibi tek seferlik masraflar da paylaştırıcı sayesinde kolayca bölüşülebilir.</p>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-4 rounded-lg border-l-4 border-primary">
+<h3 class="font-bold text-primary mb-2">Eşit Bölüşüm</h3>
+<p class="text-[14px]">Herkesin aynı miktarda ödediği durumlar için idealdir. Toplam harcama kişi sayısına bölünür.</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg border-l-4 border-secondary">
+<h3 class="font-bold text-secondary mb-2">Borç Zinciri</h3>
+<p class="text-[14px]">Gereksiz para transferlerini önler. A'dan B'ye, B'den C'ye yerine doğrudan A'dan C'ye ödeme yapılmasını sağlar.</p>
+</div>
+</div>
+
+<div class="ad-placeholder relative h-64 rounded-xl overflow-hidden shadow-md bg-surface-variant mt-6">
+<div class="flex flex-col items-center justify-center h-full text-outline">
+<span class="material-symbols-outlined text-5xl mb-2">group</span>
+<span class="font-label-md text-sm px-4 text-center">Gider Paylaştırıcı - Arkadaş ve ev arkadaşı arasında masraf bölüşme aracı. Ortak harcamaları adil şekilde paylaştırın.</span>
+</div>
+</div>
+</div>
+
+<div class="lg:col-span-5 space-y-4">
+<h2 class="font-headline-md text-[20px] text-primary mb-4">Sıkça Sorulan Sorular</h2>
+
+<div class="border border-outline-variant rounded-lg overflow-hidden bg-surface-container-lowest transition-all">
+<button class="w-full p-4 flex justify-between items-center text-left hover:bg-surface-container-low transition-colors" onclick="toggleFaq(0)">
+<span class="font-label-md text-[14px] text-primary">Gider paylaştırıcı ücretsiz mi?</span>
+<span class="material-symbols-outlined transition-transform duration-300" id="faq-icon-0">expand_more</span>
+</button>
+<div class="max-h-0 overflow-hidden transition-all duration-300" id="faq-content-0">
+<p class="p-4 text-[14px] text-on-surface-variant border-t border-outline-variant/30">Evet, FinansMatik Gider Paylaştırıcı tamamen ücretsizdir. Kayıt olmanız gerekmez, tüm hesaplamalar tarayıcınızda gerçekleşir ve hiçbir veriniz sunuculara gönderilmez.</p>
+</div>
+</div>
+
+<div class="border border-outline-variant rounded-lg overflow-hidden bg-surface-container-lowest transition-all">
+<button class="w-full p-4 flex justify-between items-center text-left hover:bg-surface-container-low transition-colors" onclick="toggleFaq(1)">
+<span class="font-label-md text-[14px] text-primary">Kaç kişiye kadar gider paylaşımı yapabilirim?</span>
+<span class="material-symbols-outlined transition-transform duration-300" id="faq-icon-1">expand_more</span>
+</button>
+<div class="max-h-0 overflow-hidden transition-all duration-300" id="faq-content-1">
+<p class="p-4 text-[14px] text-on-surface-variant border-t border-outline-variant/30">Sınırsız sayıda kişi ekleyebilirsiniz. İster 2 arkadaş arasında, ister kalabalık bir grup tatilinde tüm harcamaları kolayca yönetebilirsiniz.</p>
+</div>
+</div>
+
+<div class="border border-outline-variant rounded-lg overflow-hidden bg-surface-container-lowest transition-all">
+<button class="w-full p-4 flex justify-between items-center text-left hover:bg-surface-container-low transition-colors" onclick="toggleFaq(2)">
+<span class="font-label-md text-[14px] text-primary">Eşit olmayan bölüşüm yapabilir miyim?</span>
+<span class="material-symbols-outlined transition-transform duration-300" id="faq-icon-2">expand_more</span>
+</button>
+<div class="max-h-0 overflow-hidden transition-all duration-300" id="faq-content-2">
+<p class="p-4 text-[14px] text-on-surface-variant border-t border-outline-variant/30">Şu anki sürüm tüm giderleri eşit bölüşmektedir. Gelecek güncellemelerde kişi bazında farklı oranlarda bölüşüm desteği eklenecektir.</p>
+</div>
+</div>
+
+<div class="mt-8">
+<h3 class="font-headline-md text-[18px] text-primary mb-4">Diğer Hesaplayıcılar</h3>
+<div class="space-y-3">
+<a href="/kira-artis" class="flex items-center gap-3 p-3 rounded-lg bg-surface-container-lowest hover:bg-surface-container-low transition-colors border border-outline-variant/50">
+<span class="material-symbols-outlined text-primary">home</span>
+<div><span class="font-medium text-sm text-primary">Kira Artış Hesaplayıcı</span><span class="text-xs text-on-surface-variant block">TÜFE'ye göre kira artışınızı hesaplayın</span></div>
+</a>
+<a href="/kidem-tazminati" class="flex items-center gap-3 p-3 rounded-lg bg-surface-container-lowest hover:bg-surface-container-low transition-colors border border-outline-variant/50">
+<span class="material-symbols-outlined text-secondary">payments</span>
+<div><span class="font-medium text-sm text-primary">Kıdem Tazminatı</span><span class="text-xs text-on-surface-variant block">İşten ayrılma tazminatınızı hesaplayın</span></div>
+</a>
+<a href="/enflasyon-zam" class="flex items-center gap-3 p-3 rounded-lg bg-surface-container-lowest hover:bg-surface-container-low transition-colors border border-outline-variant/50">
+<span class="material-symbols-outlined text-tertiary-container">trending_up</span>
+<div><span class="font-medium text-sm text-primary">Enflasyon/Zam</span><span class="text-xs text-on-surface-variant block">Enflasyon verileriyle zam karşılaştırması</span></div>
+</a>
+<a href="/doviz-butce" class="flex items-center gap-3 p-3 rounded-lg bg-surface-container-lowest hover:bg-surface-container-low transition-colors border border-outline-variant/50">
+<span class="material-symbols-outlined text-[#F4972B]">currency_exchange</span>
+<div><span class="font-medium text-sm text-primary">Döviz Bütçe Planlayıcı</span><span class="text-xs text-on-surface-variant block">Kur dalgalanmalarına karşı bütçe yönetimi</span></div>
+</a>
+</div>
+</div>
+</div>
+
+</section>
+
+<div class="ad-placeholder w-full h-[90px] mt-16 mb-8 rounded-lg">
+<span class="material-symbols-outlined text-sm mb-1">ads_click</span>AdSense Reklam Alanı - 728x90 Geniş Yatay Banner
+</div>
+
+</main>
+
+<footer class="bg-surface-container-lowest border-t border-outline-variant mt-12">
+<div class="flex flex-col md:flex-row justify-between items-center py-8 px-4 md:px-10 w-full max-w-[1200px] mx-auto gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-2xl">account_balance</span>
+<span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span>
+<span class="text-body-sm text-on-surface-variant ml-4">© 2024 FinansMatik</span>
+</div>
+<div class="flex gap-6">
+<a href="/hakkimizda" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">Hakkımızda</a>
+<a href="/gizlilik" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">Gizlilik</a>
+<a href="/iletisim" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">İletişim</a>
+</div>
+</div>
+</footer>
+
+<script>
+let people = [];
+let expenses = [];
+
+function addPerson() {
+const input = document.getElementById('personNameInput');
+const name = input.value.trim();
+if (!name) return;
+if (people.includes(name)) { input.value = ''; return; }
+people.push(name);
+input.value = '';
+renderPeople();
+updatePayerSelect();
+updateCalculateBtn();
+}
+
+function removePerson(name) {
+people = people.filter(p => p !== name);
+expenses = expenses.filter(e => e.payer !== name);
+renderPeople();
+updatePayerSelect();
+renderExpenses();
+updateCalculateBtn();
+}
+
+function renderPeople() {
+const container = document.getElementById('personChips');
+container.innerHTML = people.map(p =>
+`<span class="chip">${escapeHtml(p)}<span class="remove" onclick="removePerson('${escapeHtml(p)}')">&times;</span></span>`
+).join('');
+document.getElementById('personCount').textContent = people.length < 2
+? 'En az 2 kişi ekleyin.'
+: `${people.length} kişi eklendi.`;
+}
+
+function escapeHtml(str) {
+return str.replace(/&/g, '&amp;').replace(/'/g, '&#39;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function updatePayerSelect() {
+const select = document.getElementById('expensePayer');
+const val = select.value;
+select.innerHTML = '<option value="">Ödeyen seç</option>' + people.map(p =>
+`<option value="${escapeHtml(p)}">${escapeHtml(p)}</option>`
+).join('');
+if (people.includes(val)) select.value = val;
+}
+
+function addExpense() {
+const desc = document.getElementById('expenseDesc').value.trim();
+const amount = parseFloat(document.getElementById('expenseAmount').value);
+const payer = document.getElementById('expensePayer').value;
+if (!desc || isNaN(amount) || amount <= 0 || !payer) return;
+const isEqual = document.getElementById('expenseEqual').checked;
+expenses.push({ desc, amount, payer, isEqual });
+document.getElementById('expenseDesc').value = '';
+document.getElementById('expenseAmount').value = '';
+renderExpenses();
+updateCalculateBtn();
+}
+
+function removeExpense(index) {
+expenses.splice(index, 1);
+renderExpenses();
+updateCalculateBtn();
+}
+
+function renderExpenses() {
+const tbody = document.getElementById('expenseTableBody');
+if (expenses.length === 0) {
+tbody.innerHTML = '';
+document.getElementById('expenseCount').textContent = 'Henüz gider eklenmedi.';
+return;
+}
+tbody.innerHTML = expenses.map((e, i) =>
+`<tr class="border-b border-outline-variant/20">
+<td class="py-2">${escapeHtml(e.desc)}</td>
+<td class="py-2 tab-num font-medium">${formatCurrency(e.amount)}</td>
+<td class="py-2"><span class="chip text-xs">${escapeHtml(e.payer)}</span></td>
+<td class="py-2 text-on-surface-variant">${e.isEqual ? 'Eşit' : 'Özel'}</td>
+<td class="py-2"><button class="text-error hover:text-red-700 transition-colors" onclick="removeExpense(${i})"><span class="material-symbols-outlined text-lg">delete</span></button></td>
+</tr>`
+).join('');
+document.getElementById('expenseCount').textContent = `${expenses.length} gider eklendi. Toplam: ${formatCurrency(expenses.reduce((s, e) => s + e.amount, 0))}`;
+}
+
+function updateCalculateBtn() {
+document.getElementById('calculateBtn').disabled = people.length < 2 || expenses.length === 0;
+}
+
+function formatCurrency(n) {
+return new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n) + ' ₺';
+}
+
+function calculateDebts() {
+if (people.length < 2 || expenses.length === 0) return;
+
+const totalAmount = expenses.reduce((s, e) => s + e.amount, 0);
+const sharePerPerson = totalAmount / people.length;
+
+const paid = {};
+people.forEach(p => paid[p] = 0);
+expenses.forEach(e => { paid[e.payer] = (paid[e.payer] || 0) + e.amount; });
+
+const balance = {};
+people.forEach(p => { balance[p] = paid[p] - sharePerPerson; });
+
+document.getElementById('resultsSection').classList.remove('hidden');
+
+renderSummaryCards(totalAmount, sharePerPerson, balance, paid);
+renderDebts(balance);
+
+document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function renderSummaryCards(total, share, balance, paid) {
+const container = document.getElementById('summaryCards');
+
+const totalCard = `<div class="result-card p-4 text-center">
+<p class="text-xs text-on-surface-variant mb-1">Toplam Harcama</p>
+<p class="text-2xl font-bold text-primary tab-num">${formatCurrency(total)}</p>
+</div>`;
+
+const shareCard = `<div class="result-card p-4 text-center">
+<p class="text-xs text-on-surface-variant mb-1">Kişi Başı Düşen</p>
+<p class="text-2xl font-bold text-[#F4972B] tab-num">${formatCurrency(share)}</p>
+</div>`;
+
+const personCountCard = `<div class="result-card p-4 text-center">
+<p class="text-xs text-on-surface-variant mb-1">Kişi Sayısı</p>
+<p class="text-2xl font-bold text-secondary tab-num">${people.length}</p>
+</div>`;
+
+container.innerHTML = totalCard + shareCard + personCountCard;
+}
+
+function renderDebts(balance) {
+const container = document.getElementById('debtList');
+
+const creditors = [];
+const debtors = [];
+Object.entries(balance).forEach(([person, bal]) => {
+if (bal > 0.01) creditors.push({ person, amount: bal });
+else if (bal < -0.01) debtors.push({ person, amount: -bal });
+});
+
+const settlements = [];
+let ci = 0, di = 0;
+while (ci < creditors.length && di < debtors.length) {
+const transfer = Math.min(creditors[ci].amount, debtors[di].amount);
+settlements.push({ from: debtors[di].person, to: creditors[ci].person, amount: transfer });
+creditors[ci].amount -= transfer;
+debtors[di].amount -= transfer;
+if (creditors[ci].amount < 0.01) ci++;
+if (debtors[di].amount < 0.01) di++;
+}
+
+if (settlements.length === 0) {
+container.innerHTML = '<div class="calc-card p-8 text-center text-on-surface-variant"><span class="material-symbols-outlined text-4xl text-primary mb-2">balance</span><p class="font-medium">Herkes eşit ödemiş, borçlu/alacaklı yok.</p></div>';
+return;
+}
+
+container.innerHTML = settlements.map(s =>
+`<div class="calc-card p-5 flex items-center gap-4 border-l-4 border-[#F4972B]">
+<div class="flex items-center gap-2 min-w-0 flex-1 flex-wrap">
+<span class="debt-negative">${escapeHtml(s.from)}</span>
+<span class="debt-arrow material-symbols-outlined">arrow_forward</span>
+<span class="debt-positive">${escapeHtml(s.to)}</span>
+</div>
+<div class="text-xl font-bold text-primary tab-num whitespace-nowrap">${formatCurrency(s.amount)}</div>
+</div>`
+).join('');
+}
+
+function toggleFaq(index) {
+const content = document.getElementById('faq-content-' + index);
+const icon = document.getElementById('faq-icon-' + index);
+if (!content.style.maxHeight || content.style.maxHeight === '0px') {
+content.style.maxHeight = content.scrollHeight + 'px';
+icon.style.transform = 'rotate(180deg)';
+} else {
+content.style.maxHeight = '0px';
+icon.style.transform = 'rotate(0deg)';
+}
+}
+
+document.querySelectorAll('[id^="faq-content-"]').forEach(el => el.style.maxHeight = '0px');
+document.getElementById('menuBtn_gider')?.addEventListener('click', () => document.getElementById('mobileMenu_gider')?.classList.toggle('hidden'));
+</script>
+
+</body>
+</html>

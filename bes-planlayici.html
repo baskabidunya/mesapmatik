@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html class="light" lang="tr">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>BES (Bireysel Emeklilik) Planlayıcı | FinansMatik</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="/js/tailwind-config.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<style>
+html { scroll-behavior: smooth; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+body { font-family: 'Inter', sans-serif; background: #FAFAF7; }
+.calc-card { background: #fff; box-shadow: 0px 4px 20px rgba(31,41,55,0.04); border-radius: 1rem; }
+.result-card { background: #fff; box-shadow: 0px 10px 30px rgba(15,76,76,0.08); border-top: 4px solid #176969; border-radius: 1rem; }
+.tab-num { font-variant-numeric: tabular-nums; }
+input:focus, select:focus { outline: none; border-color: #1B6B6B !important; }
+.ad-placeholder { background: #F3F4F1; border: 2px dashed #C2C7BB; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; color: #4E5448; font-size: 0.875rem; font-weight: 500; }
+details summary .material-symbols-outlined { transition: transform 0.3s ease; }
+details[open] summary .material-symbols-outlined { transform: rotate(180deg); }
+details summary::-webkit-details-marker { display: none; }
+details summary { list-style: none; cursor: pointer; user-select: none; }
+</style>
+</head>
+<body class="text-on-surface">
+<header class="bg-surface shadow-[0px_4px_20px_rgba(31,41,55,0.04)] sticky top-0 z-50">
+  <div class="flex justify-between items-center px-4 md:px-10 h-16 w-full max-w-[1200px] mx-auto">
+    <a href="/" class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-3xl">account_balance</span><span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span></a>
+    <div class="hidden md:flex items-center gap-6">
+      <a href="/kira-artis" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Kira Artış</a>
+      <a href="/enflasyon-zam" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Enflasyon</a>
+      <a href="/kidem-tazminati" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Tazminat</a>
+      <a href="/doviz-butce" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Döviz Bütçe</a>
+      <a href="/kredi" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Kredi</a>
+      <a href="/mevduat" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Mevduat</a>
+      <a href="/maas" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Maaş</a>
+    </div>
+    <button class="md:hidden material-symbols-outlined text-on-surface-variant p-2 rounded-full" id="menuBtn_bes">menu</button>
+  </div>
+</header>
+<nav id="mobileMenu_bes" class="hidden fixed inset-0 z-40 bg-surface/95 backdrop-blur-md pt-24">
+  <div class="flex flex-col items-center gap-6 p-8 text-lg">
+    <a href="/" class="font-headline-md text-primary">Ana Sayfa</a>
+    <a href="/kira-artis" class="font-headline-md text-on-surface-variant">Kira Artış</a>
+    <a href="/enflasyon-zam" class="font-headline-md text-on-surface-variant">Enflasyon</a>
+    <a href="/kidem-tazminati" class="font-headline-md text-on-surface-variant">Tazminat</a>
+    <a href="/doviz-butce" class="font-headline-md text-on-surface-variant">Döviz Bütçe</a>
+    <a href="/kredi" class="font-headline-md text-on-surface-variant">Kredi</a>
+    <a href="/mevduat" class="font-headline-md text-on-surface-variant">Mevduat</a>
+    <a href="/maas" class="font-headline-md text-on-surface-variant">Maaş</a>
+  </div>
+</nav>
+<div class="ad-placeholder mx-auto my-6 max-w-[320px] h-[50px]" id="adSlot1">Reklam Alanı 320x50</div>
+<main class="max-w-[1200px] mx-auto px-4 md:px-10 py-6">
+  <header class="mb-6">
+    <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">BES (Bireysel Emeklilik) Planlayıcı</h1>
+    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Aylık katkı payınız ve beklenen getiri oranına göre emeklilikte birikecek toplam tutarı hesaplayın. Devlet katkısı ve yönetim ücretleri dahildir.</p>
+  </header>
+  <div class="ad-placeholder w-full max-w-[728px] h-[90px] mx-auto mb-6">Reklam Alanı 728x90</div>
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <div class="lg:col-span-8 space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="lg:col-span-5 space-y-6">
+          <div class="calc-card p-8">
+            <form class="space-y-6" id="besForm">
+              <div><label class="block font-label-md text-label-md text-on-surface-variant mb-2">Aylık Katkı (TL)</label>
+                <div class="relative"><span class="absolute left-4 top-1/2 -translate-y-1/2 text-outline">₺</span>
+                <input class="w-full pl-10 pr-4 py-3 border border-outline-variant rounded-xl font-body-md" id="monthlyContribution" placeholder="2000" required type="number"></div>
+              </div>
+              <div><label class="block font-label-md text-label-md text-on-surface-variant mb-2">Yıllık Getiri Oranı (%)</label>
+                <input class="w-full px-4 py-3 border border-outline-variant rounded-xl font-body-md" id="annualReturn" placeholder="Örn: 25" required type="number" step="0.1"></div>
+              <div><label class="block font-label-md text-label-md text-on-surface-variant mb-2">Katkı Payı Oranı (%) <span class="text-body-sm text-outline">(BES yönetim ücreti)</span></label>
+                <input class="w-full px-4 py-3 border border-outline-variant rounded-xl font-body-md" id="feeRate" placeholder="5" value="5" required type="number" step="0.1"></div>
+              <div><label class="block font-label-md text-label-md text-on-surface-variant mb-2">Kaç Yıl?</label>
+                <select class="w-full px-4 py-3 border border-outline-variant rounded-xl font-body-md appearance-none bg-white" id="years">
+                  <option value="3">3 Yıl</option>
+                  <option value="5">5 Yıl</option>
+                  <option value="10" selected>10 Yıl</option>
+                  <option value="15">15 Yıl</option>
+                  <option value="20">20 Yıl</option>
+                  <option value="25">25 Yıl</option>
+                  <option value="30">30 Yıl</option>
+                  <option value="35">35 Yıl</option>
+                  <option value="40">40 Yıl</option>
+                </select></div>
+              <button class="w-full bg-[#F4972B] hover:bg-[#e08924] text-white font-headline-md text-[20px] py-4 rounded-xl shadow-lg transition-all active:scale-[0.98]" type="submit">Hesapla</button>
+            </form>
+          </div>
+          <div class="bg-[#F3F4F1] p-6 rounded-xl border border-outline-variant">
+            <div class="flex gap-4 items-start">
+              <span class="material-symbols-outlined text-secondary mt-0.5">info</span>
+              <div>
+                <p class="font-label-md text-label-md text-on-surface font-bold mb-1">Hesaplama Mantığı</p>
+                <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Aylık katkınıza %30 devlet katkısı eklenir. Toplam tutardan BES yönetim ücreti (%5 varsayılan) düşülür. Kalan miktar, seçilen yıllık getiri oranıyla <strong>bileşik olarak</strong> büyütülür. Gelecek değer formülü kullanılarak emeklilikteki toplam birikiminiz hesaplanır.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-7">
+          <div class="hidden space-y-6" id="results">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="result-card p-6"><span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Toplam Birikim</span><span class="font-display-num text-display-num text-primary tab-num" id="totalAccumulation">₺0</span></div>
+              <div class="result-card p-6" style="border-top-color:#F4972B"><span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Toplam Devlet Katkısı</span><span class="font-display-num text-display-num text-[#F4972B] tab-num" id="totalStateContribution">₺0</span></div>
+              <div class="result-card p-6" style="border-top-color:#663900"><span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Toplam Yatırılan</span><span class="font-display-num text-display-num text-tertiary tab-num" id="totalInvested">₺0</span></div>
+              <div class="result-card p-6" style="border-top-color:#176969"><span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Getiri</span><span class="font-display-num text-display-num text-secondary tab-num" id="totalReturn">₺0</span></div>
+            </div>
+            <div class="ad-placeholder mx-auto max-w-[336px] h-[280px]" id="adSlot2">Reklam Alanı 336x280</div>
+          </div>
+          <div id="placeholder" class="calc-card p-12 text-center"><span class="material-symbols-outlined text-5xl text-outline mb-4">savings</span><p class="text-on-surface-variant">Aylık katkı, getiri oranı ve süre bilgilerini girip hesaplayın.</p></div>
+        </div>
+      </div>
+      <div class="ad-placeholder max-w-[728px] h-[90px] mx-auto my-8" id="adSlot3">Reklam Alanı 728x90</div>
+      <section class="mt-8 space-y-8">
+        <div class="calc-card p-8">
+          <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">Bireysel Emeklilik Sistemi (BES) Nedir?</h2>
+          <h3 class="font-headline-md text-headline-md text-primary mb-3">BES Nasıl Çalışır?</h3>
+          <p class="text-on-surface-variant mb-4 leading-relaxed">Bireysel Emeklilik Sistemi (BES), gönüllü katılım esasına dayalı, devlet destekli uzun vadeli bir tasarruf sistemidir. Katılımcılar, belirledikleri birikim planı doğrultusunda düzenli olarak katkı payı öder ve bu birikimler profesyonel fon yöneticileri tarafından değerlendirilir. Sistemin en önemli avantajı, her ay yatırdığınız katkı payının %30'u oranında <strong>devlet katkısı</strong> almanızdır. Devlet katkısı tutarı, yıllık brüt asgari ücretin %30'unu geçmeyecek şekilde sınırlandırılmıştır.</p>
+          <div class="ad-placeholder w-full h-[120px] mb-4">Reklam Alanı</div>
+          <p class="text-on-surface-variant mb-4 leading-relaxed">BES'te birikimleriniz, risk tercihinize göre belirlenen emeklilik fonlarında değerlendirilir. Düşük riskli (kamu borçlanma araçları), dengeli (karma) veya yüksek riskli (hisse senedi ağırlıklı) fonlar arasından seçim yapabilirsiniz. Uzun vadede bileşik getiri etkisi sayesinde birikimleriniz enflasyonun üzerinde büyüme potansiyeline sahiptir. Sistemden 56 yaşını doldurmak ve en az 10 yıl sistemde bulunmak kaydıyla emekli olabilirsiniz.</p>
+          <h3 class="font-headline-md text-headline-md text-primary mb-3">Devlet Katkısı ve Vergi Avantajları</h3>
+          <p class="text-on-surface-variant mb-6 leading-relaxed">Devlet katkısı, yatırdığınız her 100 TL için ekstra 30 TL devlet desteği anlamına gelir. Bu, yıllık toplam katkı payınızın %30'u oranında hesaplanır ve hesabınıza doğrudan yatırılır. Ayrıca BES katkı paylarınız, yıllık gelir vergisi beyannamesinde bildirilen gelirin %15'ine kadar vergi matrahından düşülebilir. Emeklilik döneminde yapılan ödemeler ise gelir vergisine tabidir ancak birikimleriniz üzerinden yıllar boyunca stopaj kesintisi yapılmaz.</p>
+          <blockquote class="bg-[#F4972B]/10 border-l-4 border-[#F4972B] p-5 rounded-r-xl mb-6">
+            <p class="font-semibold text-[#F4972B] text-sm uppercase tracking-wide mb-1">Hatırlatma</p>
+            <p class="text-on-surface-variant text-sm leading-relaxed">BES avantajlarından tam olarak faydalanmak için en az 10 yıl sistemde kalmanız ve 56 yaşını beklemeniz önerilir. Erken ayrılma durumunda devlet katkısının önemli bir kısmı geri alınır.</p>
+          </blockquote>
+          <div class="relative rounded-xl overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=728&h=300&fit=crop" alt="Emeklilik Birikimi" class="w-full h-48 md:h-64 object-cover">
+            <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-center px-8">
+              <span class="text-white text-2xl md:text-3xl font-bold font-headline-lg-mobile">Geleceğinizi Planlayın</span>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="calc-card p-8">
+            <span class="material-symbols-outlined text-4xl text-secondary mb-4">trending_up</span>
+            <h3 class="font-headline-md text-headline-md text-primary mb-4">BES Stratejileri</h3>
+            <ul class="space-y-3">
+              <li class="flex gap-3 items-start"><span class="material-symbols-outlined text-green-600 text-sm mt-0.5">check_circle</span><span class="text-body-md text-on-surface-variant"><strong>Erken başlayın:</strong> Ne kadar erken başlarsanız bileşik getiri etkisinden o kadar fazla faydalanırsınız.</span></li>
+              <li class="flex gap-3 items-start"><span class="material-symbols-outlined text-green-600 text-sm mt-0.5">check_circle</span><span class="text-body-md text-on-surface-variant"><strong>Fon çeşitlendirmesi:</strong> Risk ve getiri dengesi için farklı fon türlerine yatırım yapın.</span></li>
+              <li class="flex gap-3 items-start"><span class="material-symbols-outlined text-green-600 text-sm mt-0.5">check_circle</span><span class="text-body-md text-on-surface-variant"><strong>Katkı payını artırın:</strong> Yıllık gelir artışlarınızda katkı payınızı da yükseltmeyi ihmal etmeyin.</span></li>
+              <li class="flex gap-3 items-start"><span class="material-symbols-outlined text-green-600 text-sm mt-0.5">check_circle</span><span class="text-body-md text-on-surface-variant"><strong>Vergi avantajı:</strong> BES katkı paylarınızı vergi matrahından düşerek yıllık vergi yükünüzü azaltın.</span></li>
+            </ul>
+          </div>
+          <div class="bg-[#176969] p-8 rounded-xl text-white flex flex-col justify-between">
+            <span class="material-symbols-outlined text-4xl text-[#F4972B] mb-4">account_balance_wallet</span>
+            <div>
+              <h3 class="font-headline-md text-headline-md mb-4">Birikimlerinizi Büyütün</h3>
+              <p class="font-body-md text-body-md opacity-90 mb-6 leading-relaxed">BES, devlet katkısı ve vergi avantajlarıyla Türkiye'nin en cazip uzun vadeli tasarruf araçlarından biridir. FinansMatik'in diğer hesaplama araçlarıyla finansal planlamanızı eksiksiz yapın.</p>
+              <a class="inline-flex items-center gap-2 text-[#F4972B] font-bold hover:gap-4 transition-all" href="/mevduat">Mevduat Hesaplayıcı<span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+          </div>
+        </div>
+        <div class="calc-card p-8">
+          <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-6">Sıkça Sorulan Sorular</h2>
+          <div class="space-y-3">
+            <details class="border border-outline-variant rounded-xl p-4 group">
+              <summary class="flex items-center justify-between font-headline-md text-label-md text-primary"><span>BES'ten ne zaman emekli olabilirim?</span><span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span></summary>
+              <p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">BES'ten emeklilik için en az 10 yıl sistemde bulunma ve 56 yaşını doldurma şartı aranır. Bu iki koşulu da sağladığınızda birikimlerinizi toplu olarak veya maaş şeklinde almaya hak kazanırsınız. Erken ayrılma durumunda devlet katkısının önemli bir bölümünü kaybedersiniz.</p>
+            </details>
+            <details class="border border-outline-variant rounded-xl p-4 group">
+              <summary class="flex items-center justify-between font-headline-md text-label-md text-primary"><span>Devlet katkısı ne kadar ve nasıl alınır?</span><span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span></summary>
+              <p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">Devlet katkısı, yatırdığınız her katkı payının %30'u oranındadır. Örneğin aylık 2.000 TL yatırıyorsanız devlet her ay 600 TL ekler. Yıllık devlet katkısı üst limiti, yıllık brüt asgari ücretin %30'u ile sınırlıdır. Devlet katkısı doğrudan emeklilik hesabınıza yatırılır ve sizin adınıza fonlarda değerlendirilir.</p>
+            </details>
+            <details class="border border-outline-variant rounded-xl p-4 group">
+              <summary class="flex items-center justify-between font-headline-md text-label-md text-primary"><span>BES fon getirileri nasıl hesaplanır?</span><span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span></summary>
+              <p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">BES'te birikimleriniz, seçtiğiniz emeklilik fonlarının performansına göre değer kazanır. Fonlar; hisse senedi, devlet iç borçlanma senetleri, özel sektör tahvilleri, altın ve yabancı menkul kıymetler gibi farklı yatırım araçlarına yönlendirilir. Fon getirileri piyasa koşullarına bağlı olarak değişkenlik gösterir. Bu hesaplama aracı, sabit bir yıllık getiri varsayımıyla gelecekteki birikiminizi tahmin eder.</p>
+            </details>
+            <details class="border border-outline-variant rounded-xl p-4 group">
+              <summary class="flex items-center justify-between font-headline-md text-label-md text-primary"><span>BES'teki birikimime erişebilir miyim?</span><span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span></summary>
+              <p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">BES'te birikimlerinize emeklilik dönemine kadar tam olarak erişemezsiniz. Ancak sistemden çıkmak isterseniz, birikimlerinizi belirli kesintilerle alabilirsiniz. Erken ayrılmada devlet katkısının büyük kısmı geri alınır ve getirilerinizden stopaj kesintisi yapılır. Bu nedenle BES, uzun vadeli bir tasarruf aracı olarak değerlendirilmelidir.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+    </div>
+    <aside class="lg:col-span-4 space-y-6">
+      <div class="w-full flex justify-center">
+        <div class="ad-placeholder w-[300px] h-[250px] rounded-lg">Reklam Alanı 300x250</div>
+      </div>
+      <div class="bg-surface-container p-6 rounded-xl space-y-6">
+        <h3 class="font-headline-md text-headline-md">Diğer Hesaplayıcılar</h3>
+        <ul class="space-y-3">
+          <li><a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/kira-artis"><span class="material-symbols-outlined text-secondary">home</span><span class="font-label-md text-label-md group-hover:text-primary">Kira Artış</span></a></li>
+          <li><a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/enflasyon-zam"><span class="material-symbols-outlined text-secondary">trending_up</span><span class="font-label-md text-label-md group-hover:text-primary">Enflasyon</span></a></li>
+          <li><a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/kidem-tazminati"><span class="material-symbols-outlined text-secondary">receipt_long</span><span class="font-label-md text-label-md group-hover:text-primary">Tazminat</span></a></li>
+          <li><a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/doviz-butce"><span class="material-symbols-outlined text-secondary">currency_exchange</span><span class="font-label-md text-label-md group-hover:text-primary">Döviz Bütçe</span></a></li>
+          <li><a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/kredi"><span class="material-symbols-outlined text-secondary">credit_card</span><span class="font-label-md text-label-md group-hover:text-primary">Kredi</span></a></li>
+          <li><a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/mevduat"><span class="material-symbols-outlined text-secondary">savings</span><span class="font-label-md text-label-md group-hover:text-primary">Mevduat</span></a></li>
+          <li><a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/maas"><span class="material-symbols-outlined text-secondary">payments</span><span class="font-label-md text-label-md group-hover:text-primary">Maaş</span></a></li>
+        </ul>
+      </div>
+      <div class="sticky top-24">
+        <div class="ad-placeholder w-full h-[600px] rounded-lg">Reklam Alanı 300x600</div>
+      </div>
+    </aside>
+  </div>
+</main>
+<div class="ad-placeholder mx-auto mt-8 max-w-[728px] h-[90px]" id="adSlot4">Reklam Alanı 728x90</div>
+<footer class="bg-surface-container-lowest border-t border-outline-variant mt-12">
+  <div class="flex flex-col md:flex-row justify-between items-center py-8 px-4 md:px-10 w-full max-w-[1200px] mx-auto gap-4">
+    <div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-2xl">account_balance</span><span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span><span class="text-body-sm text-on-surface-variant ml-4">&copy; 2024 FinansMatik</span></div>
+    <div class="flex gap-6">
+      <a href="/hakkimizda" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">Hakkımızda</a>
+      <a href="/gizlilik" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">Gizlilik</a>
+      <a href="/iletisim" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">&İletişim</a>
+    </div>
+  </div>
+</footer>
+<script>
+document.getElementById('menuBtn_bes')?.addEventListener('click', () => document.getElementById('mobileMenu_bes')?.classList.toggle('hidden'));
+function formatCurrency(n) {
+  return '₺' + new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2 }).format(n);
+}
+function animateValue(el, start, end, duration) {
+  const startTime = performance.now();
+  function step(now) {
+    const p = Math.min((now - startTime) / duration, 1);
+    el.textContent = formatCurrency(start + (end - start) * p);
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+document.getElementById('besForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const monthly = parseFloat(document.getElementById('monthlyContribution').value);
+  const annualRate = parseFloat(document.getElementById('annualReturn').value);
+  const fee = parseFloat(document.getElementById('feeRate').value);
+  const years = parseInt(document.getElementById('years').value);
+  if (isNaN(monthly) || isNaN(annualRate)) return;
+  const stateShare = monthly * 0.30;
+  const monthlyTotal = monthly + stateShare;
+  const monthlyAfterFee = monthlyTotal * (1 - fee / 100);
+  const r = annualRate / 100 / 12;
+  const n = years * 12;
+  const futureValue = monthlyAfterFee * (Math.pow(1 + r, n) - 1) / r;
+  const totalInvested = monthly * n;
+  const totalState = stateShare * n;
+  const totalReturn = futureValue - totalInvested - totalState;
+  document.getElementById('results').classList.remove('hidden');
+  document.getElementById('placeholder').classList.add('hidden');
+  animateValue(document.getElementById('totalAccumulation'), 0, futureValue, 800);
+  animateValue(document.getElementById('totalStateContribution'), 0, totalState, 800);
+  animateValue(document.getElementById('totalInvested'), 0, totalInvested, 800);
+  animateValue(document.getElementById('totalReturn'), 0, Math.max(0, totalReturn), 800);
+});
+</script>
+</body>
+</html>
