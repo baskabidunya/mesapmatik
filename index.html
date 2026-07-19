@@ -9,142 +9,143 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <style>
-  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-  body { background: #FAFAF7; min-height: 100dvh; }
-  .card-shadow { box-shadow: 0px 4px 20px rgba(31,41,55,0.04); }
-  .card-lift:hover { transform: translateY(-2px); box-shadow: 0px 8px 24px rgba(15,76,76,0.06); }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+body { font-family: 'Inter', sans-serif; background: #FAFAF7; }
+.soft-elevation { box-shadow: 0px 4px 20px rgba(31,41,55,0.04); }
+.transition-lift:hover { transform: translateY(-2px); box-shadow: 0px 8px 24px rgba(15,76,76,0.06); }
 </style>
 </head>
-<body class="font-body-md text-on-surface">
-<div id="nav-placeholder"></div>
+<body class="text-on-surface font-body-md overflow-x-hidden">
+<header class="bg-surface shadow-[0px_4px_20px_rgba(31,41,55,0.04)] sticky top-0 z-50">
+  <div class="flex justify-between items-center px-4 md:px-10 h-16 w-full max-w-[1200px] mx-auto">
+    <a href="/" class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-3xl">account_balance</span><span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span></a>
+    <div class="hidden md:flex items-center gap-6">
+      <a href="/kira-artis" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Kira Artış</a>
+      <a href="/enflasyon-zam" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Enflasyon</a>
+      <a href="/kidem-tazminati" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Tazminat</a>
+      <a href="/doviz-butce" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Döviz Bütçe</a>
+      <a href="/kredi" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Kredi</a>
+      <a href="/mevduat" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Mevduat</a>
+      <a href="/maas" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Maaş</a>
+    </div>
+    <button class="md:hidden material-symbols-outlined text-on-surface-variant p-2 rounded-full" id="menuBtn_index">menu</button>
+  </div>
+</header>
+<nav id="mobileMenu_index" class="hidden fixed inset-0 z-40 bg-surface/95 backdrop-blur-md pt-24">
+  <div class="flex flex-col items-center gap-6 p-8 text-lg">
+    <a href="/" class="font-headline-md text-primary">Ana Sayfa</a>
+    <a href="/kira-artis" class="font-headline-md text-on-surface-variant">Kira Artış</a>
+    <a href="/enflasyon-zam" class="font-headline-md text-on-surface-variant">Enflasyon</a>
+    <a href="/kidem-tazminati" class="font-headline-md text-on-surface-variant">Tazminat</a>
+    <a href="/doviz-butce" class="font-headline-md text-on-surface-variant">Döviz Bütçe</a>
+    <a href="/kredi" class="font-headline-md text-on-surface-variant">Kredi</a>
+    <a href="/mevduat" class="font-headline-md text-on-surface-variant">Mevduat</a>
+    <a href="/maas" class="font-headline-md text-on-surface-variant">Maaş</a>
+  </div>
+</nav>
 <main class="max-w-[1200px] mx-auto px-4 md:px-10 pt-24 pb-12">
   <section class="relative rounded-xl overflow-hidden mb-12 flex flex-col md:flex-row items-center bg-surface-container-low min-h-[400px] p-8 md:p-12">
     <div class="z-10 w-full md:w-1/2 space-y-6 text-center md:text-left">
       <h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary leading-tight">Türkiye'nin Finansal Hesaplayıcıları</h1>
-      <p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">Güvenilir, hızlı ve güncel verilerle finansal kararlarınızı kolaylaştırın. Karmaşık hesaplamaları saniyeler içinde çözün.</p>
+      <p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">Güvenilir, hızlı ve güncel verilerle finansal kararlarınızı kolaylaştırın.</p>
       <div class="flex flex-wrap gap-4 justify-center md:justify-start">
         <a href="/kira-artis" class="inline-block bg-[#F4972B] text-white px-8 py-4 rounded-xl font-bold hover:bg-[#e08a27] transition-all hover:scale-105">Hemen Hesapla</a>
         <a href="#tools" class="inline-block border-2 border-secondary text-secondary px-8 py-4 rounded-xl font-bold hover:bg-secondary-container transition-all">Tüm Araçlar</a>
       </div>
     </div>
-    <div class="hidden md:block absolute right-0 top-0 w-1/2 h-full">
-      <div class="w-full h-full bg-gradient-to-r from-surface-container-low via-transparent to-transparent"></div>
-    </div>
   </section>
   <section class="mb-12 grid grid-cols-1 md:grid-cols-3 gap-6" id="tools">
-    <div class="flex items-center gap-4 p-6 bg-surface-container-lowest rounded-xl card-shadow border-l-4 border-[#F4972B]">
+    <div class="flex items-center gap-4 p-6 bg-surface-container-lowest rounded-xl soft-elevation border-l-4 border-[#F4972B]">
       <span class="material-symbols-outlined text-tertiary-container text-3xl">update</span>
-      <div>
-        <span class="block font-headline-md text-label-md text-primary font-bold">Güncel TÜİK Verileri</span>
-        <span class="text-body-sm text-on-surface-variant">Resmî enflasyon oranları ile uyumlu</span>
-      </div>
+      <div><span class="block font-headline-md text-label-md text-primary font-bold">Güncel TÜİK Verileri</span><span class="text-body-sm text-on-surface-variant">Resmî enflasyon oranları ile uyumlu</span></div>
     </div>
-    <div class="flex items-center gap-4 p-6 bg-surface-container-lowest rounded-xl card-shadow border-l-4 border-secondary">
+    <div class="flex items-center gap-4 p-6 bg-surface-container-lowest rounded-xl soft-elevation border-l-4 border-secondary">
       <span class="material-symbols-outlined text-secondary text-3xl">bolt</span>
-      <div>
-        <span class="block font-headline-md text-label-md text-primary font-bold">Ücretsiz ve Hızlı</span>
-        <span class="text-body-sm text-on-surface-variant">Kayıt olmadan anında sonuç</span>
-      </div>
+      <div><span class="block font-headline-md text-label-md text-primary font-bold">Ücretsiz ve Hızlı</span><span class="text-body-sm text-on-surface-variant">Kayıt olmadan anında sonuç</span></div>
     </div>
-    <div class="flex items-center gap-4 p-6 bg-surface-container-lowest rounded-xl card-shadow border-l-4 border-primary">
+    <div class="flex items-center gap-4 p-6 bg-surface-container-lowest rounded-xl soft-elevation border-l-4 border-primary">
       <span class="material-symbols-outlined text-primary text-3xl">shield</span>
-      <div>
-        <span class="block font-headline-md text-label-md text-primary font-bold">Gizlilik Odaklı</span>
-        <span class="text-body-sm text-on-surface-variant">Verileriniz asla saklanmaz</span>
-      </div>
+      <div><span class="block font-headline-md text-label-md text-primary font-bold">Gizlilik Odaklı</span><span class="text-body-sm text-on-surface-variant">Verileriniz asla saklanmaz</span></div>
     </div>
   </section>
   <section class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-12">
-    <a href="/kira-artis" class="md:col-span-8 bg-surface-container-lowest rounded-xl p-8 card-shadow card-lift group cursor-pointer border-t-4 border-primary relative overflow-hidden">
+    <a href="/kira-artis" class="md:col-span-8 bg-surface-container-lowest rounded-xl p-8 soft-elevation transition-lift group cursor-pointer border-t-4 border-primary relative overflow-hidden">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-        <div class="space-y-3 max-w-md">
-          <span class="inline-flex items-center px-3 py-1 bg-primary-container/10 text-primary rounded-full text-label-sm font-bold">POPÜLER</span>
-          <h3 class="font-headline-md text-headline-md text-primary">Kira Artış Hesaplayıcı</h3>
-          <p class="font-body-md text-on-surface-variant">TÜFE oranına göre yeni dönem kira bedelinizi yasal sınırları gözeterek hesaplayın.</p>
-        </div>
-        <div class="w-full md:w-auto">
-          <span class="inline-block w-full bg-primary text-white px-6 py-3 rounded-lg font-bold text-center">Hesaplamaya Başla</span>
-        </div>
+        <div class="space-y-3 max-w-md"><span class="inline-flex items-center px-3 py-1 bg-primary-container/10 text-primary rounded-full text-label-sm font-bold">POPÜLER</span><h3 class="font-headline-md text-[20px] text-primary">Kira Artış Hesaplayıcı</h3><p class="font-body-md text-on-surface-variant">TÜFE oranına göre yeni dönem kira bedelinizi hesaplayın.</p></div>
+        <span class="inline-block bg-primary text-white px-6 py-3 rounded-lg font-bold text-center whitespace-nowrap">Hesaplamaya Başla →</span>
       </div>
     </a>
-    <a href="/kidem-tazminati" class="md:col-span-4 bg-surface-container-lowest rounded-xl p-8 card-shadow card-lift group cursor-pointer border-t-4 border-secondary">
+    <a href="/kidem-tazminati" class="md:col-span-4 bg-surface-container-lowest rounded-xl p-8 soft-elevation transition-lift group cursor-pointer border-t-4 border-secondary">
       <div class="h-full flex flex-col justify-between space-y-4">
         <div class="space-y-3">
-          <div class="w-12 h-12 bg-secondary-container/30 rounded-xl flex items-center justify-center">
-            <span class="material-symbols-outlined text-secondary">payments</span>
-          </div>
-          <h3 class="font-headline-md text-headline-md text-primary">Kıdem/İhbar Tazminatı</h3>
-          <p class="font-body-sm text-on-surface-variant">İşten ayrılma durumunda alacağınız tazminatı brüt maaşınız üzerinden öğrenin.</p>
+          <div class="w-12 h-12 bg-secondary-container/30 rounded-xl flex items-center justify-center"><span class="material-symbols-outlined text-secondary">payments</span></div>
+          <h3 class="font-headline-md text-[20px] text-primary">Kıdem/İhbar Tazminatı</h3>
+          <p class="font-body-sm text-on-surface-variant">İşten ayrılma durumunda alacağınız tazminatı öğrenin.</p>
         </div>
         <span class="text-secondary font-bold inline-flex items-center gap-1 group-hover:translate-x-2 transition-transform">Detaylar →</span>
       </div>
     </a>
-    <a href="/enflasyon-zam" class="md:col-span-4 bg-surface-container-lowest rounded-xl p-8 card-shadow card-lift group cursor-pointer border-t-4 border-tertiary-container">
+    <a href="/enflasyon-zam" class="md:col-span-4 bg-surface-container-lowest rounded-xl p-8 soft-elevation transition-lift group cursor-pointer border-t-4 border-tertiary-container">
       <div class="h-full flex flex-col justify-between space-y-4">
         <div class="space-y-3">
-          <div class="w-12 h-12 bg-tertiary-fixed/30 rounded-xl flex items-center justify-center">
-            <span class="material-symbols-outlined text-tertiary-container">trending_up</span>
-          </div>
-          <h3 class="font-headline-md text-headline-md text-primary">Enflasyon/Zam</h3>
-          <p class="font-body-sm text-on-surface-variant">Maaş ve fiyat artışlarını resmi enflasyon verilerine göre karşılaştırın.</p>
+          <div class="w-12 h-12 bg-tertiary-fixed/30 rounded-xl flex items-center justify-center"><span class="material-symbols-outlined text-tertiary-container">trending_up</span></div>
+          <h3 class="font-headline-md text-[20px] text-primary">Enflasyon/Zam</h3>
+          <p class="font-body-sm text-on-surface-variant">Maaş ve fiyat artışlarını enflasyon verilerine göre karşılaştırın.</p>
         </div>
         <span class="text-tertiary-container font-bold inline-flex items-center gap-1 group-hover:translate-x-2 transition-transform">Hesapla →</span>
       </div>
     </a>
-    <a href="/doviz-butce" class="md:col-span-8 bg-surface-container-lowest rounded-xl p-8 card-shadow card-lift group cursor-pointer border-t-4 border-[#F4972B] relative overflow-hidden">
+    <a href="/doviz-butce" class="md:col-span-8 bg-surface-container-lowest rounded-xl p-8 soft-elevation transition-lift group cursor-pointer border-t-4 border-[#F4972B] relative overflow-hidden">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-        <div class="space-y-3 max-w-md">
-          <h3 class="font-headline-md text-headline-md text-primary">Döviz Bütçe Planlayıcı</h3>
-          <p class="font-body-md text-on-surface-variant">Bütçenizi döviz bazlı planlayın ve kur dalgalanmalarına karşı finansal yönetiminizi güçlendirin.</p>
-        </div>
-        <div class="w-full md:w-auto">
-          <span class="inline-block w-full bg-[#F4972B] text-white px-6 py-3 rounded-lg font-bold text-center">Yönetmeye Başla →</span>
-        </div>
+        <div class="space-y-3 max-w-md"><h3 class="font-headline-md text-[20px] text-primary">Döviz Bütçe Planlayıcı</h3><p class="font-body-md text-on-surface-variant">Bütçenizi döviz bazlı planlayın ve kur dalgalanmalarına karşı finansal yönetiminizi güçlendirin.</p></div>
+        <span class="inline-block bg-[#F4972B] text-white px-6 py-3 rounded-lg font-bold text-center whitespace-nowrap">Yönetmeye Başla →</span>
       </div>
     </a>
-    <a href="/kredi" class="md:col-span-4 bg-surface-container-lowest rounded-xl p-8 card-shadow card-lift group cursor-pointer border-t-4 border-primary">
+    <a href="/kredi" class="md:col-span-4 bg-surface-container-lowest rounded-xl p-8 soft-elevation transition-lift group cursor-pointer border-t-4 border-primary">
       <div class="h-full flex flex-col justify-between space-y-4">
         <div class="space-y-3">
-          <div class="w-12 h-12 bg-primary-container/30 rounded-xl flex items-center justify-center">
-            <span class="material-symbols-outlined text-primary">credit_card</span>
-          </div>
-          <h3 class="font-headline-md text-headline-md text-primary">Kredi Hesaplama</h3>
-          <p class="font-body-sm text-on-surface-variant">İhtiyaç, konut ve taşıt kredilerini karşılaştırın, taksitlerinizi görün.</p>
+          <div class="w-12 h-12 bg-primary-container/30 rounded-xl flex items-center justify-center"><span class="material-symbols-outlined text-primary">credit_card</span></div>
+          <h3 class="font-headline-md text-[20px] text-primary">Kredi Hesaplama</h3>
+          <p class="font-body-sm text-on-surface-variant">İhtiyaç, konut ve taşıt kredilerini karşılaştırın.</p>
         </div>
         <span class="text-primary font-bold inline-flex items-center gap-1 group-hover:translate-x-2 transition-transform">Hesapla →</span>
       </div>
     </a>
-    <a href="/mevduat" class="md:col-span-4 bg-surface-container-lowest rounded-xl p-8 card-shadow card-lift group cursor-pointer border-t-4 border-secondary">
+    <a href="/mevduat" class="md:col-span-4 bg-surface-container-lowest rounded-xl p-8 soft-elevation transition-lift group cursor-pointer border-t-4 border-secondary">
       <div class="h-full flex flex-col justify-between space-y-4">
         <div class="space-y-3">
-          <div class="w-12 h-12 bg-secondary-container/30 rounded-xl flex items-center justify-center">
-            <span class="material-symbols-outlined text-secondary">savings</span>
-          </div>
-          <h3 class="font-headline-md text-headline-md text-primary">Mevduat Getirisi</h3>
-          <p class="font-body-sm text-on-surface-variant">Birikimlerinizin getirisini farklı vade seçenekleriyle hesaplayın.</p>
+          <div class="w-12 h-12 bg-secondary-container/30 rounded-xl flex items-center justify-center"><span class="material-symbols-outlined text-secondary">savings</span></div>
+          <h3 class="font-headline-md text-[20px] text-primary">Mevduat Getirisi</h3>
+          <p class="font-body-sm text-on-surface-variant">Birikimlerinizin getirisini hesaplayın.</p>
         </div>
         <span class="text-secondary font-bold inline-flex items-center gap-1 group-hover:translate-x-2 transition-transform">Hesapla →</span>
       </div>
     </a>
-    <a href="/maas" class="md:col-span-4 bg-surface-container-lowest rounded-xl p-8 card-shadow card-lift group cursor-pointer border-t-4 border-tertiary-container">
+    <a href="/maas" class="md:col-span-4 bg-surface-container-lowest rounded-xl p-8 soft-elevation transition-lift group cursor-pointer border-t-4 border-tertiary-container">
       <div class="h-full flex flex-col justify-between space-y-4">
         <div class="space-y-3">
-          <div class="w-12 h-12 bg-tertiary-fixed/30 rounded-xl flex items-center justify-center">
-            <span class="material-symbols-outlined text-tertiary-container">percent</span>
-          </div>
-          <h3 class="font-headline-md text-headline-md text-primary">Brüt-Net Maaş</h3>
-          <p class="font-body-sm text-on-surface-variant">Brüt maaştan net maaşa, tüm kesintileriyle birlikte hesaplayın.</p>
+          <div class="w-12 h-12 bg-tertiary-fixed/30 rounded-xl flex items-center justify-center"><span class="material-symbols-outlined text-tertiary-container">percent</span></div>
+          <h3 class="font-headline-md text-[20px] text-primary">Brüt-Net Maaş</h3>
+          <p class="font-body-sm text-on-surface-variant">Brüt maaştan net maaşa tüm kesintileri görün.</p>
         </div>
         <span class="text-tertiary-container font-bold inline-flex items-center gap-1 group-hover:translate-x-2 transition-transform">Hesapla →</span>
       </div>
     </a>
   </section>
 </main>
-<div id="footer-placeholder"></div>
-<script src="/js/finansmatik.js"></script>
+<footer class="bg-surface-container-lowest border-t border-outline-variant">
+  <div class="flex flex-col md:flex-row justify-between items-center py-8 px-4 md:px-10 w-full max-w-[1200px] mx-auto gap-4">
+    <div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-2xl">account_balance</span><span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span><span class="text-body-sm text-on-surface-variant ml-4">© 2024 FinansMatik</span></div>
+    <div class="flex gap-6">
+      <a href="/hakkimizda" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">Hakkımızda</a>
+      <a href="/gizlilik" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">Gizlilik</a>
+      <a href="/iletisim" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">İletişim</a>
+    </div>
+  </div>
+</footer>
 <script>
-  document.getElementById('nav-placeholder').innerHTML = FINANSMATIK.nav;
-  document.getElementById('footer-placeholder').innerHTML = FINANSMATIK.footer;
+document.getElementById('menuBtn_index')?.addEventListener('click', () => document.getElementById('mobileMenu_index')?.classList.toggle('hidden'));
+document.getElementById('menuBtn_index_hidden')?.addEventListener('click', () => document.getElementById('mobileMenu_index')?.classList.toggle('hidden'));
 </script>
 </body>
 </html>

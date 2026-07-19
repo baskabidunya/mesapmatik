@@ -1,89 +1,101 @@
 <!DOCTYPE html>
 <html class="light" lang="tr">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>Kredi Hesaplama | FinansMatik</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script src="/js/tailwind-config.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 <style>
-  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-  body { background: #FAFAF7; min-height: 100dvh; }
-  .card-s { box-shadow: 0px 4px 20px rgba(31,41,55,0.04); }
-  .card-r { box-shadow: 0px 10px 30px rgba(15,76,76,0.08); border-top: 4px solid #003434; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+body { font-family: 'Inter', sans-serif; background: #FAFAF7; }
+.calc-card { background: #fff; box-shadow: 0px 4px 20px rgba(31,41,55,0.04); border-radius: 1rem; }
+.result-card { background: #fff; box-shadow: 0px 10px 30px rgba(15,76,76,0.08); border-top: 4px solid #003434; border-radius: 1rem; }
+.tab-num { font-variant-numeric: tabular-nums; }
+input:focus { outline: none; border-color: #1B6B6B !important; }
 </style>
 </head>
-<body class="font-body-md text-on-surface">
-<div id="nav-placeholder"></div>
+<body class="text-on-surface">
+<header class="bg-surface shadow-[0px_4px_20px_rgba(31,41,55,0.04)] sticky top-0 z-50">
+  <div class="flex justify-between items-center px-4 md:px-10 h-16 w-full max-w-[1200px] mx-auto">
+    <a href="/" class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-3xl">account_balance</span><span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span></a>
+    <div class="hidden md:flex items-center gap-6">
+      <a href="/kira-artis" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Kira Artış</a>
+      <a href="/enflasyon-zam" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Enflasyon</a>
+      <a href="/kidem-tazminati" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Tazminat</a>
+      <a href="/doviz-butce" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Döviz Bütçe</a>
+      <a href="/kredi" class="font-label-md text-sm text-primary font-bold border-b-2 border-primary pb-1">Kredi</a>
+      <a href="/mevduat" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Mevduat</a>
+      <a href="/maas" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Maaş</a>
+    </div>
+    <button class="md:hidden material-symbols-outlined text-on-surface-variant p-2 rounded-full" id="menuBtn_kredi">menu</button>
+  </div>
+</header>
+<nav id="mobileMenu_kredi" class="hidden fixed inset-0 z-40 bg-surface/95 backdrop-blur-md pt-24">
+  <div class="flex flex-col items-center gap-6 p-8 text-lg">
+    <a href="/" class="font-headline-md text-primary">Ana Sayfa</a>
+    <a href="/kira-artis" class="font-headline-md text-on-surface-variant">Kira Artış</a>
+    <a href="/enflasyon-zam" class="font-headline-md text-on-surface-variant">Enflasyon</a>
+    <a href="/kidem-tazminati" class="font-headline-md text-on-surface-variant">Tazminat</a>
+    <a href="/doviz-butce" class="font-headline-md text-on-surface-variant">Döviz Bütçe</a>
+    <a href="/kredi" class="font-headline-md text-on-surface-variant">Kredi</a>
+    <a href="/mevduat" class="font-headline-md text-on-surface-variant">Mevduat</a>
+    <a href="/maas" class="font-headline-md text-on-surface-variant">Maaş</a>
+  </div>
+</nav>
 <main class="max-w-[1200px] mx-auto px-4 md:px-10 py-8">
   <header class="mb-8">
-    <h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">Kredi Hesaplama</h1>
+    <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">Kredi Hesaplama</h1>
     <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">İhtiyaç, konut veya taşıt kredinizin aylık taksitini ve toplam maliyetini hesaplayın.</p>
   </header>
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-    <div class="lg:col-span-5 card-s bg-surface-container-lowest p-8 rounded-xl h-fit">
+    <div class="lg:col-span-5 calc-card p-8 h-fit">
       <form class="space-y-6" id="loanForm">
-        <div>
-          <label class="block font-label-md text-label-md text-on-surface-variant mb-2">Kredi Tutarı (TL)</label>
-          <div class="relative">
-            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-outline">₺</span>
-            <input class="w-full pl-10 pr-4 py-3 border-2 border-outline-variant focus:border-secondary outline-none rounded-xl" id="loanAmount" placeholder="50000" required type="number"/>
-          </div>
+        <div><label class="block font-label-md text-label-md text-on-surface-variant mb-2">Kredi Tutarı (TL)</label>
+          <div class="relative"><span class="absolute left-4 top-1/2 -translate-y-1/2 text-outline">₺</span>
+          <input class="w-full pl-10 pr-4 py-3 border border-outline-variant rounded-xl font-body-md" id="loanAmount" placeholder="50000" required type="number"></div>
         </div>
-        <div>
-          <label class="block font-label-md text-label-md text-on-surface-variant mb-2">Yıllık Faiz Oranı (%)</label>
-          <input class="w-full px-4 py-3 border-2 border-outline-variant focus:border-secondary outline-none rounded-xl" id="interestRate" placeholder="Örn: 36" required type="number" step="0.01"/>
-        </div>
-        <div>
-          <label class="block font-label-md text-label-md text-on-surface-variant mb-2">Vade (Ay)</label>
-          <input class="w-full px-4 py-3 border-2 border-outline-variant focus:border-secondary outline-none rounded-xl" id="loanTerm" placeholder="12" required type="number"/>
-        </div>
-        <button class="w-full bg-[#F4972B] hover:bg-[#e08924] text-white font-headline-md text-headline-md py-4 rounded-xl shadow-lg transition-all active:scale-[0.98]" type="submit">Hesapla</button>
+        <div><label class="block font-label-md text-label-md text-on-surface-variant mb-2">Yıllık Faiz Oranı (%)</label>
+          <input class="w-full px-4 py-3 border border-outline-variant rounded-xl font-body-md" id="interestRate" placeholder="Örn: 36" required type="number" step="0.01"></div>
+        <div><label class="block font-label-md text-label-md text-on-surface-variant mb-2">Vade (Ay)</label>
+          <input class="w-full px-4 py-3 border border-outline-variant rounded-xl font-body-md" id="loanTerm" placeholder="12" required type="number"></div>
+        <button class="w-full bg-[#F4972B] hover:bg-[#e08924] text-white font-headline-md text-[20px] py-4 rounded-xl shadow-lg transition-all active:scale-[0.98]" type="submit">Hesapla</button>
       </form>
     </div>
     <div class="lg:col-span-7">
       <div class="hidden space-y-6" id="results">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="card-r p-6 rounded-xl bg-surface-container-lowest">
-            <span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Aylık Taksit</span>
-            <span class="font-display-num text-display-num text-primary tab-num" id="monthlyPayment">₺0</span>
-          </div>
-          <div class="card-r p-6 rounded-xl bg-surface-container-lowest" style="border-top-color: #176969;">
-            <span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Toplam Ödeme</span>
-            <span class="font-display-num text-display-num text-secondary tab-num" id="totalPayment">₺0</span>
-          </div>
-          <div class="card-r p-6 rounded-xl bg-surface-container-lowest" style="border-top-color: #663900;">
-            <span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Toplam Faiz</span>
-            <span class="font-display-num text-display-num text-tertiary tab-num" id="totalInterest">₺0</span>
-          </div>
+          <div class="result-card p-6"><span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Aylık Taksit</span><span class="font-display-num text-display-num text-primary tab-num" id="monthlyPayment">₺0</span></div>
+          <div class="result-card p-6" style="border-top-color:#176969"><span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Toplam Ödeme</span><span class="font-display-num text-display-num text-secondary tab-num" id="totalPayment">₺0</span></div>
+          <div class="result-card p-6" style="border-top-color:#663900"><span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Toplam Faiz</span><span class="font-display-num text-display-num text-tertiary tab-num" id="totalInterest">₺0</span></div>
         </div>
       </div>
-      <div id="loadingPlaceholder" class="bg-surface-container-lowest rounded-xl p-12 text-center">
-        <span class="material-symbols-outlined text-4xl text-outline mb-4">credit_card</span>
-        <p class="text-on-surface-variant">Kredi tutarı, faiz oranı ve vade girip hesaplayın.</p>
-      </div>
+      <div id="placeholder" class="calc-card p-12 text-center"><span class="material-symbols-outlined text-5xl text-outline mb-4">credit_card</span><p class="text-on-surface-variant">Kredi tutarı, faiz oranı ve vade girip hesaplayın.</p></div>
     </div>
   </div>
 </main>
-<div id="footer-placeholder"></div>
-<script src="/js/finansmatik.js"></script>
+<footer class="bg-surface-container-lowest border-t border-outline-variant mt-12">
+  <div class="flex flex-col md:flex-row justify-between items-center py-8 px-4 md:px-10 w-full max-w-[1200px] mx-auto gap-4">
+    <div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-2xl">account_balance</span><span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span><span class="text-body-sm text-on-surface-variant ml-4">© 2024 FinansMatik</span></div>
+    <div class="flex gap-6">
+      <a href="/hakkimizda" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">Hakkımızda</a>
+      <a href="/gizlilik" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">Gizlilik</a>
+      <a href="/iletisim" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">İletişim</a>
+    </div>
+  </div>
+</footer>
 <script>
-  document.getElementById('loanForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const tutar = parseFloat(document.getElementById('loanAmount').value);
-    const faiz = parseFloat(document.getElementById('interestRate').value);
-    const vade = parseInt(document.getElementById('loanTerm').value);
-    if (isNaN(tutar) || isNaN(faiz) || isNaN(vade)) return;
-    const result = FINANSMATIK.calculate.kredi(tutar, faiz, vade);
-
-    document.getElementById('results').classList.remove('hidden');
-    document.getElementById('loadingPlaceholder').classList.add('hidden');
-    document.getElementById('monthlyPayment').textContent = FINANSMATIK.format.currency(result.taksit);
-    document.getElementById('totalPayment').textContent = FINANSMATIK.format.currency(result.toplamOdeme);
-    document.getElementById('totalInterest').textContent = FINANSMATIK.format.currency(result.toplamFaiz);
-  });
+document.getElementById('menuBtn_kredi')?.addEventListener('click', () => document.getElementById('mobileMenu_kredi')?.classList.toggle('hidden'));
+document.getElementById('loanForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const t = parseFloat(document.getElementById('loanAmount').value), f = parseFloat(document.getElementById('interestRate').value), v = parseInt(document.getElementById('loanTerm').value);
+  if (isNaN(t) || isNaN(f) || isNaN(v)) return;
+  const af = f / 100 / 12, taksit = t * af * Math.pow(1+af, v) / (Math.pow(1+af, v) - 1), top = taksit * v, faiz = top - t;
+  const fmt = n => '₺' + new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2 }).format(n);
+  document.getElementById('results').classList.remove('hidden'); document.getElementById('placeholder').classList.add('hidden');
+  document.getElementById('monthlyPayment').textContent = fmt(taksit); document.getElementById('totalPayment').textContent = fmt(top); document.getElementById('totalInterest').textContent = fmt(faiz);
+});
 </script>
 </body>
 </html>

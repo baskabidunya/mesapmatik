@@ -1,44 +1,79 @@
 <!DOCTYPE html>
 <html class="light" lang="tr">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>Hakkımızda | FinansMatik</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script src="/js/tailwind-config.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 <style>
-  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-  body { background: #FAFAF7; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+body { font-family: 'Inter', sans-serif; background: #FAFAF7; }
+.card-surface { background: #fff; border-radius: 1rem; box-shadow: 0px 4px 20px rgba(31,41,55,0.04); }
 </style>
 </head>
-<body class="font-body-md text-on-surface">
-<div id="nav-placeholder"></div>
-<main class="max-w-[1200px] mx-auto px-4 md:px-10 py-12">
+<body class="text-on-surface font-body-md">
+<header class="bg-surface shadow-[0px_4px_20px_rgba(31,41,55,0.04)] sticky top-0 z-50">
+  <div class="flex justify-between items-center px-4 md:px-10 h-16 w-full max-w-[1200px] mx-auto">
+    <a href="/" class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-3xl">account_balance</span><span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span></a>
+    <div class="hidden md:flex items-center gap-6">
+      <a href="/kira-artis" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Kira Artış</a>
+      <a href="/enflasyon-zam" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Enflasyon</a>
+      <a href="/kidem-tazminati" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Tazminat</a>
+      <a href="/doviz-butce" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Döviz Bütçe</a>
+      <a href="/kredi" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Kredi</a>
+      <a href="/mevduat" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Mevduat</a>
+      <a href="/maas" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Maaş</a>
+    </div>
+    <button class="md:hidden material-symbols-outlined text-on-surface-variant p-2 rounded-full" id="menuBtn_hak">menu</button>
+  </div>
+</header>
+<nav id="mobileMenu_hak" class="hidden fixed inset-0 z-40 bg-surface/95 backdrop-blur-md pt-24">
+  <div class="flex flex-col items-center gap-6 p-8 text-lg">
+    <a href="/" class="font-headline-md text-primary">Ana Sayfa</a>
+    <a href="/kira-artis" class="font-headline-md text-on-surface-variant">Kira Artış</a>
+    <a href="/enflasyon-zam" class="font-headline-md text-on-surface-variant">Enflasyon</a>
+    <a href="/kidem-tazminati" class="font-headline-md text-on-surface-variant">Tazminat</a>
+    <a href="/doviz-butce" class="font-headline-md text-on-surface-variant">Döviz Bütçe</a>
+    <a href="/kredi" class="font-headline-md text-on-surface-variant">Kredi</a>
+    <a href="/mevduat" class="font-headline-md text-on-surface-variant">Mevduat</a>
+    <a href="/maas" class="font-headline-md text-on-surface-variant">Maaş</a>
+  </div>
+</nav>
+<main class="w-full max-w-[1200px] mx-auto px-4 md:px-10 py-12 md:py-20">
   <section class="mb-16 text-center md:text-left">
-    <h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-6">Hakkımızda</h1>
-    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl">FinansMatik, Türkiye'nin karmaşık finansal verilerini her seviyeden kullanıcı için erişilebilir, anlaşılır ve güvenilir kılmak amacıyla yola çıkmış bir teknoloji girişimidir.</p>
+    <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-6">Hakkımızda</h1>
+    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl leading-relaxed">FinansMatik, Türkiye'nin karmaşık finansal verilerini her seviyeden kullanıcı için erişilebilir, anlaşılır ve güvenilir kılmak amacıyla yola çıkmış bir teknoloji girişimidir.</p>
   </section>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-    <div class="bg-surface-container-lowest p-8 rounded-xl border-t-4 border-primary">
-      <span class="material-symbols-outlined text-3xl text-secondary mb-4">update</span>
-      <h3 class="font-headline-md text-headline-md text-primary mb-4">Güncel Veri</h3>
-      <p class="font-body-md text-body-md text-on-surface-variant">Hesaplamalarımızda en güncel TCMB verilerini ve banka oranlarını kullanarak hata payını sıfıra indiriyoruz.</p>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+    <div class="card-surface p-8 border-t-4 border-primary">
+      <div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center mb-6 text-secondary"><span class="material-symbols-outlined text-3xl">update</span></div>
+      <h3 class="font-headline-md text-[20px] text-primary mb-4">Güncel Veri</h3>
+      <p class="font-body-md text-body-md text-on-surface-variant">Hesaplamalarımızda en güncel TCMB verilerini kullanarak hata payını sıfıra indiriyoruz.</p>
     </div>
-    <div class="bg-surface-container-lowest p-8 rounded-xl border-t-4 border-primary">
-      <span class="material-symbols-outlined text-3xl text-secondary mb-4">bolt</span>
-      <h3 class="font-headline-md text-headline-md text-primary mb-4">Hız ve Verimlilik</h3>
-      <p class="font-body-md text-body-md text-on-surface-variant">Karmaşık finansal hesaplamaları milisaniyeler içinde sonuçlandırıyoruz.</p>
+    <div class="card-surface p-8 border-t-4 border-primary">
+      <div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center mb-6 text-secondary"><span class="material-symbols-outlined text-3xl">bolt</span></div>
+      <h3 class="font-headline-md text-[20px] text-primary mb-4">Hız ve Verimlilik</h3>
+      <p class="font-body-md text-body-md text-on-surface-variant">Karmaşık hesaplamaları milisaniyeler içinde sonuçlandırıyoruz.</p>
     </div>
-    <div class="bg-surface-container-lowest p-8 rounded-xl border-t-4 border-primary">
-      <span class="material-symbols-outlined text-3xl text-secondary mb-4">security</span>
-      <h3 class="font-headline-md text-headline-md text-primary mb-4">Mutlak Gizlilik</h3>
-      <p class="font-body-md text-body-md text-on-surface-variant">Hiçbir hesaplama veriniz sunucularımızda saklanmaz veya üçüncü taraflarla paylaşılmaz.</p>
+    <div class="card-surface p-8 border-t-4 border-primary">
+      <div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center mb-6 text-secondary"><span class="material-symbols-outlined text-3xl">security</span></div>
+      <h3 class="font-headline-md text-[20px] text-primary mb-4">Mutlak Gizlilik</h3>
+      <p class="font-body-md text-body-md text-on-surface-variant">Hiçbir hesaplama veriniz sunucularımızda saklanmaz veya paylaşılmaz.</p>
     </div>
   </div>
 </main>
-<div id="footer-placeholder"></div>
-<script src="/js/finansmatik.js"></script>
+<footer class="bg-surface-container-lowest border-t border-outline-variant">
+  <div class="flex flex-col md:flex-row justify-between items-center py-8 px-4 md:px-10 w-full max-w-[1200px] mx-auto gap-4">
+    <div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-2xl">account_balance</span><span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span><span class="text-body-sm text-on-surface-variant ml-4">© 2024 FinansMatik</span></div>
+    <div class="flex gap-6">
+      <a href="/hakkimizda" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">Hakkımızda</a>
+      <a href="/gizlilik" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">Gizlilik</a>
+      <a href="/iletisim" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">İletişim</a>
+    </div>
+  </div>
+</footer>
+<script>document.getElementById('menuBtn_hak')?.addEventListener('click',()=>document.getElementById('mobileMenu_hak')?.classList.toggle('hidden'));</script>
 </body>
 </html>

@@ -1,109 +1,146 @@
 <!DOCTYPE html>
 <html class="light" lang="tr">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>Kıdem ve İhbar Tazminatı Hesaplayıcı | FinansMatik</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script src="/js/tailwind-config.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 <style>
-  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-  body { background: #FAFAF7; min-height: 100dvh; }
-  .calc-card { box-shadow: 0px 4px 20px rgba(31,41,55,0.04); }
-  .result-card { box-shadow: 0px 10px 30px rgba(15,76,76,0.08); border-top: 4px solid #003434; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+body { font-family: 'Inter', sans-serif; background: #f8f9ff; }
+.calculation-card { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+.calculation-card:hover { transform: translateY(-2px); box-shadow: 0px 10px 30px rgba(15,76,76,0.08); }
+input:focus { outline: none; border-color: #1B6B6B !important; }
 </style>
 </head>
-<body class="font-body-md text-on-surface">
-<div id="nav-placeholder"></div>
-<main class="max-w-[1200px] mx-auto px-4 md:px-10 py-8">
-  <header class="mb-8">
-    <h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">Kıdem ve İhbar Tazminatı Hesaplayıcı</h1>
-    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Güncel mevzuat ve tavan fiyatlara göre tazminatınızı hesaplayın.</p>
-  </header>
+<body class="bg-background text-on-background font-body-md selection:bg-secondary-container">
+<header class="bg-surface shadow-[0px_4px_20px_rgba(31,41,55,0.04)] sticky top-0 z-50">
+  <div class="flex justify-between items-center px-4 md:px-10 h-16 w-full max-w-[1200px] mx-auto">
+    <a href="/" class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-3xl font-headline-md">account_balance</span><span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span></a>
+    <div class="hidden md:flex items-center gap-6">
+      <a href="/kira-artis" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Kira Artış</a>
+      <a href="/enflasyon-zam" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Enflasyon</a>
+      <a href="/kidem-tazminati" class="font-label-md text-sm text-primary font-bold border-b-2 border-primary pb-1">Tazminat</a>
+      <a href="/doviz-butce" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Döviz Bütçe</a>
+      <a href="/kredi" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Kredi</a>
+      <a href="/mevduat" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Mevduat</a>
+      <a href="/maas" class="font-label-md text-sm text-on-surface-variant hover:text-primary">Maaş</a>
+    </div>
+    <button class="md:hidden material-symbols-outlined text-primary p-2 rounded-full" id="menuBtn_kidem">menu</button>
+  </div>
+</header>
+<nav id="mobileMenu_kidem" class="hidden fixed inset-0 z-40 bg-surface/95 backdrop-blur-md pt-24">
+  <div class="flex flex-col items-center gap-6 p-8 text-lg">
+    <a href="/" class="font-headline-md text-primary">Ana Sayfa</a>
+    <a href="/kira-artis" class="font-headline-md text-on-surface-variant">Kira Artış</a>
+    <a href="/enflasyon-zam" class="font-headline-md text-on-surface-variant">Enflasyon</a>
+    <a href="/kidem-tazminati" class="font-headline-md text-on-surface-variant">Tazminat</a>
+    <a href="/doviz-butce" class="font-headline-md text-on-surface-variant">Döviz Bütçe</a>
+    <a href="/kredi" class="font-headline-md text-on-surface-variant">Kredi</a>
+    <a href="/mevduat" class="font-headline-md text-on-surface-variant">Mevduat</a>
+    <a href="/maas" class="font-headline-md text-on-surface-variant">Maaş</a>
+  </div>
+</nav>
+<main class="max-w-[1200px] mx-auto px-4 md:px-10 py-8 md:py-12">
+  <div class="mb-10">
+    <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">Kıdem ve İhbar Tazminatı Hesaplayıcı</h1>
+    <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Güncel mevzuat ve tavan fiyatlara göre kıdem ve ihbar tazminatınızı saniyeler içinde hesaplayın.</p>
+  </div>
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
     <div class="lg:col-span-7">
-      <div class="calc-card bg-surface-container-lowest p-8 rounded-xl">
+      <div class="bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(31,41,55,0.04)] p-6 md:p-8">
         <form class="space-y-6" id="calcForm">
-          <div>
-            <label class="block font-label-md text-label-md text-on-surface-variant mb-2">Brüt Maaş (TL)</label>
-            <div class="relative">
-              <span class="absolute left-4 top-1/2 -translate-y-1/2 text-outline">₺</span>
-              <input class="w-full pl-8 pr-4 py-3 bg-surface-container-low border-2 border-transparent focus:border-secondary outline-none rounded-xl font-body-md" id="grossSalary" placeholder="Örn: 45000" required type="number"/>
-            </div>
+          <div class="space-y-2">
+            <label class="block font-label-md text-label-md text-on-surface-variant">Brüt Maaş (TL)</label>
+            <div class="relative"><span class="absolute left-4 top-1/2 -translate-y-1/2 text-outline font-body-md">₺</span>
+            <input class="w-full pl-8 pr-4 h-12 bg-surface-container-low border-2 border-transparent focus:border-secondary rounded-lg transition-all outline-none font-body-md" id="grossSalary" placeholder="Örn: 45.000" required type="number"></div>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="block font-label-md text-label-md text-on-surface-variant mb-2">İşe Başlama Tarihi</label>
-              <input class="w-full px-4 py-3 bg-surface-container-low border-2 border-transparent focus:border-secondary outline-none rounded-xl" id="startDate" required type="date"/>
-            </div>
-            <div>
-              <label class="block font-label-md text-label-md text-on-surface-variant mb-2">İşten Ayrılma Tarihi</label>
-              <input class="w-full px-4 py-3 bg-surface-container-low border-2 border-transparent focus:border-secondary outline-none rounded-xl" id="endDate" required type="date"/>
-            </div>
+            <div class="space-y-2"><label class="block font-label-md text-label-md text-on-surface-variant">İşe Başlama Tarihi</label>
+            <input class="w-full px-4 h-12 bg-surface-container-low border-2 border-transparent focus:border-secondary rounded-lg transition-all outline-none font-body-md" id="startDate" required type="date"></div>
+            <div class="space-y-2"><label class="block font-label-md text-label-md text-on-surface-variant">İşten Ayrılma Tarihi</label>
+            <input class="w-full px-4 h-12 bg-surface-container-low border-2 border-transparent focus:border-secondary rounded-lg transition-all outline-none font-body-md" id="endDate" required type="date"></div>
           </div>
-          <button class="w-full bg-[#F4972B] text-white rounded-xl font-headline-md text-headline-md py-4 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all active:scale-[0.98]" type="submit">Hesapla</button>
+          <button class="w-full h-14 bg-[#F4972B] text-white rounded-lg font-headline-md text-[20px] shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all active:scale-[0.98]" type="submit">Hesapla</button>
         </form>
       </div>
     </div>
     <div class="lg:col-span-5 space-y-6">
       <div class="hidden" id="results">
-        <div class="bg-surface-container-lowest rounded-xl result-card p-8">
-          <h3 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-2">
-            <span class="material-symbols-outlined">receipt_long</span> Hesaplama Sonucu
-          </h3>
+        <div class="bg-surface-container-lowest rounded-xl shadow-[0px_10px_30px_rgba(15,76,76,0.08)] overflow-hidden border-t-4 border-primary p-6 md:p-8 calculation-card">
+          <h3 class="font-headline-md text-[20px] text-primary mb-6 flex items-center gap-2"><span class="material-symbols-outlined">receipt_long</span> Hesaplama Sonucu</h3>
           <div class="space-y-4">
-            <div class="flex justify-between items-center pb-3 border-b border-outline-variant">
-              <span class="text-on-surface-variant font-body-md">Kıdem Tazminatı</span>
-              <span class="font-display-num text-display-num text-primary tab-num" id="kidem_val">₺0</span>
-            </div>
-            <div class="flex justify-between items-center pb-3 border-b border-outline-variant">
-              <span class="text-on-surface-variant font-body-md">İhbar Tazminatı</span>
-              <span class="font-display-num text-display-num text-secondary tab-num" id="ihbar_val">₺0</span>
-            </div>
-            <div class="flex justify-between items-center pt-2">
-              <span class="text-primary font-bold font-body-lg">Toplam Ödeme</span>
-              <span class="font-display-num text-display-num text-[#F4972B] tab-num" id="toplam_val">₺0</span>
-            </div>
+            <div class="flex justify-between items-center pb-3 border-b border-outline-variant"><span class="text-on-surface-variant font-body-md">Kıdem Tazminatı</span><span class="font-display-num text-display-num text-primary tab-num" id="kidem_val">₺0</span></div>
+            <div class="flex justify-between items-center pb-3 border-b border-outline-variant"><span class="text-on-surface-variant font-body-md">İhbar Tazminatı</span><span class="font-display-num text-display-num text-secondary tab-num" id="ihbar_val">₺0</span></div>
+            <div class="flex justify-between items-center pt-2"><span class="text-primary font-bold font-body-lg">Toplam Ödeme</span><span class="font-display-num text-display-num text-[#F4972B] tab-num" id="toplam_val">₺0</span></div>
           </div>
         </div>
       </div>
-      <div id="loadingPlaceholder" class="bg-surface-container-lowest rounded-xl p-12 text-center">
-        <span class="material-symbols-outlined text-4xl text-outline mb-4">payments</span>
-        <p class="text-on-surface-variant">Brüt maaş ve çalışma tarihlerini girip hesaplayın.</p>
+      <div id="placeholder" class="bg-surface-container-lowest rounded-xl p-12 text-center"><span class="material-symbols-outlined text-5xl text-outline mb-4">payments</span><p class="text-on-surface-variant">Brüt maaş ve çalışma tarihlerini girip hesaplayın.</p></div>
+    </div>
+  </div>
+  <div class="mt-12 space-y-8">
+    <section>
+      <h2 class="font-headline-md text-[20px] text-primary mb-4">Kıdem Tazminatı Nasıl Hesaplanır?</h2>
+      <div class="font-body-md text-body-md text-on-surface-variant space-y-4">
+        <p>Kıdem tazminatı, bir çalışanın en az 1 yıl boyunca aynı işverene bağlı olarak çalışması durumunda ödenen toplu paradır. Her tam yıl için 30 günlük brüt ücret tutarında hesaplanır.</p>
+        <p><strong>İhbar tazminatı</strong> ise, işten ayrılma bildirim sürelerine uymayan tarafın diğer tarafa ödediği tutardır. Çalışma süresine göre 2 haftadan 8 haftaya kadar değişebilir.</p>
+      </div>
+    </section>
+    <div class="space-y-4">
+      <h3 class="font-headline-md text-[20px] text-primary">Sıkça Sorulan Sorular</h3>
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden">
+        <button class="w-full flex justify-between items-center p-4 text-left font-label-md text-label-md text-on-surface hover:bg-surface-container-low transition-colors" onclick="this.parentElement.classList.toggle('accordion-open')">
+          <span>Kıdem tazminatı tavanı nedir?</span><span class="material-symbols-outlined">expand_more</span>
+        </button>
+        <div class="max-h-0 overflow-hidden transition-all duration-300 bg-surface-bright px-4 accordion-content">
+          <div class="py-4 text-body-sm text-on-surface-variant">Kıdem tazminatı tavanı, her yıl Ocak ve Temmuz aylarında Hazine ve Maliye Bakanlığı tarafından belirlenir. Brüt maaşınız bu tavanın üzerindeyse, hesaplama tavan rakam üzerinden yapılır.</div>
+        </div>
+      </div>
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden">
+        <button class="w-full flex justify-between items-center p-4 text-left font-label-md text-label-md text-on-surface hover:bg-surface-container-low transition-colors" onclick="this.parentElement.classList.toggle('accordion-open')">
+          <span>İstifa eden kıdem tazminatı alabilir mi?</span><span class="material-symbols-outlined">expand_more</span>
+        </button>
+        <div class="max-h-0 overflow-hidden transition-all duration-300 bg-surface-bright px-4 accordion-content">
+          <div class="py-4 text-body-sm text-on-surface-variant">Genel kural olarak istifa eden işçi kıdem tazminatı alamaz. Ancak askerlik, emeklilik, haklı nedenle fesih gibi özel durumlarda istifa halinde de tazminat hakkı doğabilir.</div>
+        </div>
       </div>
     </div>
   </div>
 </main>
-<div id="footer-placeholder"></div>
-<script src="/js/finansmatik.js"></script>
+<footer class="bg-surface-container-lowest border-t border-outline-variant mt-12">
+  <div class="flex flex-col md:flex-row justify-between items-center py-8 px-4 md:px-10 w-full max-w-[1200px] mx-auto gap-4">
+    <div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-2xl">account_balance</span><span class="font-headline-md text-[20px] font-bold text-primary">FinansMatik</span><span class="text-body-sm text-on-surface-variant ml-4">© 2024 FinansMatik</span></div>
+    <div class="flex gap-6">
+      <a href="/hakkimizda" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">Hakkımızda</a>
+      <a href="/gizlilik" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">Gizlilik</a>
+      <a href="/iletisim" class="font-label-sm text-sm text-secondary hover:text-secondary-container underline transition-all">İletişim</a>
+    </div>
+  </div>
+</footer>
 <script>
-  let ceilingAmount = 43528.50;
-  FINANSMATIK.api.getSeveranceCeiling().then(data => { ceilingAmount = data.ceiling_amount; });
+document.getElementById('menuBtn_kidem')?.addEventListener('click', () => document.getElementById('mobileMenu_kidem')?.classList.toggle('hidden'));
+let ceilingAmount = 43528.50;
+fetch('https://gbgsykjrozmpkpsqukcp.supabase.co/rest/v1/severance_ceilings?select=*&order=valid_from.desc&limit=1', { headers: { 'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdiZ3N5a2pyb3ptcGtwc3F1a2NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM3MDg4NjMsImV4cCI6MjA5OTI4NDg2M30.r9wAql8KLX-TfRdu1PFRjgnuLSV2JjhYlAMV8rcN_1c' } }).then(r => r.json()).then(d => { if(d.length > 0) ceilingAmount = d[0].ceiling_amount; }).catch(() => {});
 
-  document.getElementById('calcForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const grossSalary = parseFloat(document.getElementById('grossSalary').value);
-    const startDate = document.getElementById('startDate').value;
-    const endDate = document.getElementById('endDate').value;
-    if (isNaN(grossSalary)) return;
+document.getElementById('calcForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const g = parseFloat(document.getElementById('grossSalary').value), s = new Date(document.getElementById('startDate').value), en = new Date(document.getElementById('endDate').value);
+  if (isNaN(g)) return;
+  const gun = Math.floor((en - s) / (1000*60*60*24)), yil = gun / 365;
+  if (yil < 1) { document.getElementById('results').classList.remove('hidden'); document.getElementById('placeholder').classList.add('hidden'); document.getElementById('kidem_val').textContent = 'En az 1 yıl gerekli'; document.getElementById('ihbar_val').textContent = '₺0'; document.getElementById('toplam_val').textContent = '₺0'; return; }
+  const tamYil = Math.floor(yil);
+  let kidem = Math.min(g * tamYil, ceilingAmount * tamYil);
+  let ihbar = 0;
+  if (tamYil < 1) ihbar = g * 0.5; else if (tamYil < 5) ihbar = g * 1; else if (tamYil < 10) ihbar = g * 1.5; else ihbar = g * 2;
+  const fmt = n => '₺' + new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2 }).format(n);
+  document.getElementById('results').classList.remove('hidden'); document.getElementById('placeholder').classList.add('hidden');
+  document.getElementById('kidem_val').textContent = fmt(kidem); document.getElementById('ihbar_val').textContent = fmt(ihbar); document.getElementById('toplam_val').textContent = fmt(kidem + ihbar);
+});
 
-    const result = FINANSMATIK.calculate.kidemTazminati(grossSalary, startDate, endDate, ceilingAmount);
-    document.getElementById('results').classList.remove('hidden');
-    document.getElementById('loadingPlaceholder').classList.add('hidden');
-
-    if (result.mesaj) {
-      document.getElementById('kidem_val').textContent = result.mesaj;
-      document.getElementById('ihbar_val').textContent = '₺0';
-      document.getElementById('toplam_val').textContent = '₺0';
-      return;
-    }
-
-    document.getElementById('kidem_val').textContent = FINANSMATIK.format.currency(result.kidem);
-    document.getElementById('ihbar_val').textContent = FINANSMATIK.format.currency(result.ihbar);
-    document.getElementById('toplam_val').textContent = FINANSMATIK.format.currency(result.toplam);
-  });
+document.querySelectorAll('.accordion-open button').forEach(b => b.addEventListener('click', function() { this.nextElementSibling.style.maxHeight = this.nextElementSibling.style.maxHeight === '0px' || this.nextElementSibling.style.maxHeight === '' ? this.nextElementSibling.scrollHeight + 'px' : '0'; }));
 </script>
 </body>
 </html>
