@@ -64,7 +64,7 @@ input:focus { outline: none; border-color: #1B6B6B !important; }
         <button class="w-full bg-[#F4972B] hover:bg-[#e08924] text-white font-headline-md text-[20px] py-4 rounded-xl shadow-lg transition-all active:scale-[0.98]" type="submit">Hesapla</button>
       </form>
     </div>
-    <div class="lg:col-span-7">
+    <div class="lg:col-span-5">
       <div class="hidden space-y-4" id="results">
         <div class="bg-surface-container-lowest rounded-xl border-t-4 border-primary p-6 shadow-[0px_10px_30px_rgba(15,76,76,0.08)]">
           <div class="flex justify-between items-center"><span class="font-label-sm text-label-sm text-on-surface-variant">Net Maaş</span><span class="font-display-num text-display-num text-primary tab-num" id="netSalary">₺0</span></div>
@@ -81,6 +81,54 @@ input:focus { outline: none; border-color: #1B6B6B !important; }
       </div>
       <div id="placeholder" class="calc-card p-12 text-center"><span class="material-symbols-outlined text-5xl text-outline mb-4">percent</span><p class="text-on-surface-variant">Brüt maaşınızı girip hesaplayın.</p></div>
     </div>
+    <aside class="lg:col-span-2 space-y-6 hidden lg:block">
+      <div class="bg-surface-container p-6 rounded-xl space-y-6">
+        <h3 class="font-headline-md text-headline-md">Diğer Hesaplayıcılar</h3>
+        <ul class="space-y-3">
+          <li>
+            <a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/kira-artis">
+              <span class="material-symbols-outlined text-secondary">home</span>
+              <span class="font-label-md text-label-md group-hover:text-primary">Kira Artış</span>
+            </a>
+          </li>
+          <li>
+            <a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/enflasyon-zam">
+              <span class="material-symbols-outlined text-secondary">trending_up</span>
+              <span class="font-label-md text-label-md group-hover:text-primary">Enflasyon</span>
+            </a>
+          </li>
+          <li>
+            <a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/kidem-tazminati">
+              <span class="material-symbols-outlined text-secondary">receipt_long</span>
+              <span class="font-label-md text-label-md group-hover:text-primary">Kıdem Tazminatı</span>
+            </a>
+          </li>
+          <li>
+            <a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/kredi">
+              <span class="material-symbols-outlined text-secondary">calculate</span>
+              <span class="font-label-md text-label-md group-hover:text-primary">Kredi</span>
+            </a>
+          </li>
+          <li>
+            <a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/mevduat">
+              <span class="material-symbols-outlined text-secondary">savings</span>
+              <span class="font-label-md text-label-md group-hover:text-primary">Mevduat</span>
+            </a>
+          </li>
+          <li>
+            <a class="flex items-center gap-3 p-3 rounded-lg bg-white hover:shadow-md transition-all group" href="/doviz-butce">
+              <span class="material-symbols-outlined text-secondary">currency_exchange</span>
+              <span class="font-label-md text-label-md group-hover:text-primary">Döviz Bütçe</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="sticky top-24">
+        <div class="ad-placeholder w-full h-[250px] rounded-lg">
+          <span class="material-symbols-outlined text-2xl mb-1">ads_click</span>Reklam Alanı
+        </div>
+      </div>
+    </aside>
   </div>
 
   <section class="mt-16 space-y-6">
@@ -143,6 +191,24 @@ input:focus { outline: none; border-color: #1B6B6B !important; }
         <summary class="font-headline-md text-headline-md text-on-surface cursor-pointer list-none flex items-center justify-between"><span>Asgari geçim indirimi (AGİ) nedir?</span><span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span></summary>
         <p class="mt-4 text-body-md text-on-surface-variant">Asgari Geçim İndirimi (AGİ), çalışanın kendisi ve bakmakla yükümlü olduğu aile bireyleri için hesaplanan, ödenmesi gereken gelir vergisinden mahsup edilen bir tutardı. 2022 yılında asgari ücretin vergi dışı bırakılmasıyla birlikte AGİ uygulaması fiilen sona ermiştir. Güncel hesaplamalarda AGİ dikkate alınmamaktadır.</p>
       </details>
+    </div>
+  </section>
+
+  <section class="mt-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="relative overflow-hidden rounded-2xl aspect-video group">
+        <img class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" alt="Maaş planlaması görseli" src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&q=80">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+          <h4 class="text-white font-headline-md text-headline-md mb-2">Maaşınızı Yönetin</h4>
+          <p class="text-white/80 font-body-sm text-body-sm">Brüt maaşınızı, kesintileri ve net kazancınızı anlık olarak görün, bütçe planlamanızı bilinçli yapın.</p>
+        </div>
+      </div>
+      <div class="bg-primary-container p-8 rounded-2xl text-white">
+        <span class="material-symbols-outlined text-tertiary-fixed-dim text-4xl mb-4">account_balance_wallet</span>
+        <h4 class="font-headline-md text-headline-md mb-4">Finansal Geleceğiniz İçin</h4>
+        <p class="font-body-md text-body-md opacity-90 mb-6">Maaş artışlarınızı enflasyon karşısında değerlendirmek ve diğer finansal araçlarımızla planlamanızı güçlendirmek için hesaplayıcılarımızı kullanın.</p>
+        <a class="inline-flex items-center gap-2 text-secondary-fixed font-bold hover:gap-4 transition-all" href="/enflasyon-zam">Enflasyon Hesaplamayı Gör<span class="material-symbols-outlined">arrow_forward</span></a>
+      </div>
     </div>
   </section>
 </main>

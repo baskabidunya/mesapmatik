@@ -12,6 +12,10 @@ html { scroll-behavior: smooth; }
 .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
 body { font-family: 'Inter', sans-serif; background: #FAFAF7; }
 .ad-placeholder { background: #F3F4F1; border: 1px solid #bfc8c8; display: flex; align-items: center; justify-content: center; border-radius: 0.75rem; overflow: hidden; }
+details summary .material-symbols-outlined { transition: transform 0.3s ease; }
+details[open] summary .material-symbols-outlined { transform: rotate(180deg); }
+details summary::-webkit-details-marker { display: none; }
+details summary { list-style: none; cursor: pointer; user-select: none; }
 </style>
 </head>
 <body class="text-on-surface font-body-md">
@@ -42,12 +46,15 @@ body { font-family: 'Inter', sans-serif; background: #FAFAF7; }
     <a href="/maas" class="font-headline-md text-on-surface-variant">Maaş</a>
   </div>
 </nav>
-<main class="max-w-[800px] mx-auto px-4 md:px-0 py-16">
-  <div class="mb-12 border-b border-outline-variant pb-8">
-    <h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">Gizlilik Politikası</h1>
-    <p class="font-body-lg text-body-lg text-on-surface-variant">Son güncelleme: 24 Mayıs 2024</p>
-  </div>
-  <article class="space-y-10 bg-surface-container-lowest p-8 md:p-12 rounded-xl shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<div class="ad-placeholder max-w-[320px] h-[50px] mx-auto mt-6 mb-2"><span class="text-label-sm text-outline">320x50 Reklam Alanı</span></div>
+<main class="max-w-[1200px] mx-auto px-4 md:px-10 py-16">
+  <div class="flex flex-col md:flex-row gap-8">
+    <div class="flex-1 min-w-0">
+      <div class="mb-12 border-b border-outline-variant pb-8">
+        <h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">Gizlilik Politikası</h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant">Son güncelleme: 24 Mayıs 2024</p>
+      </div>
+      <article class="space-y-10 bg-surface-container-lowest p-8 md:p-12 rounded-xl shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
     <section>
       <h2 class="font-headline-md text-[20px] text-primary mb-4 flex items-center gap-3"><span class="material-symbols-outlined text-secondary">database</span>Toplanan Veriler</h2>
       <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Hesaplama araçlarımıza girdiğiniz finansal veriler (kredi tutarı, faiz oranları, vade vb.) sunucularımızda kalıcı olarak saklanmaz; sadece anlık hesaplama işlemi için kullanılır. Site performansını artırmak amacıyla IP adresi, tarayıcı tipi, işletim sistemi ve site içi gezinme süreleri gibi teknik veriler toplanabilir. İletişim formunu doldurmanız halinde adınız ve e-posta adresiniz yalnızca talebinize yanıt verebilmek için saklanır.</p>
@@ -80,7 +87,31 @@ body { font-family: 'Inter', sans-serif; background: #FAFAF7; }
       <a href="/iletisim" class="inline-flex items-center gap-2 bg-white text-primary px-6 py-2 rounded-full font-label-md text-label-md hover:shadow-lg transition-all active:scale-95">İletişime Geç</a>
     </div>
   </article>
+    </div>
+    <aside class="w-full md:w-[300px] shrink-0">
+      <div class="ad-placeholder w-full h-[250px] sticky top-24"><span class="text-label-sm text-outline">300x250 Reklam Alanı</span></div>
+    </aside>
+  </div>
 </main>
+<section class="max-w-[800px] mx-auto px-4 md:px-0 mt-12 mb-12">
+  <div class="bg-surface-container-lowest p-8 md:p-12 rounded-xl shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+    <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-6">Sıkça Sorulan Sorular</h2>
+    <div class="space-y-3">
+      <details class="border border-outline-variant rounded-xl p-4 group">
+        <summary class="flex items-center justify-between font-headline-md text-label-md text-primary"><span>Kişisel verilerim ne kadar süreyle saklanıyor?</span><span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span></summary>
+        <p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">Kişisel verileriniz, yalnızca toplanma amacının gerektirdiği süre boyunca saklanır. Finansal hesaplama araçlarımıza girdiğiniz veriler sunucularımızda kalıcı olarak saklanmaz; işlem anında kullanılır ve sonrasında silinir. İletişim formu aracılığıyla paylaştığınız bilgiler ise talebinize yanıt verildikten sonra en fazla 1 yıl içinde anonimleştirilir veya silinir. Yasal yükümlülükler gereği belirli verilerin daha uzun süre saklanması gerekebilir, bu durumda gerekli güvenlik önlemleri alınır.</p>
+      </details>
+      <details class="border border-outline-variant rounded-xl p-4 group">
+        <summary class="flex items-center justify-between font-headline-md text-label-md text-primary"><span>Verilerim yurt dışına aktarılıyor mu?</span><span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span></summary>
+        <p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">FinansMatik, sunucu hizmetlerini Türkiye'de bulunan veri merkezlerinden sağlamaktadır. Kişisel verileriniz, açık rızanız olmaksızın yurt dışına aktarılmaz. Kullandığımız bazı üçüncü taraf hizmet sağlayıcıları (analitik ve reklam hizmetleri) uluslararası sunucular kullanabilir; ancak bu hizmet sağlayıcılarına aktarılan veriler anonimleştirilmiş olup sizi doğrudan tanımlayacak bilgiler içermez. Veri aktarımı durumunda KVKK'nın öngördüğü yeterli koruma önlemleri alınmaktadır.</p>
+      </details>
+      <details class="border border-outline-variant rounded-xl p-4 group">
+        <summary class="flex items-center justify-between font-headline-md text-label-md text-primary"><span>Çerezleri nasıl devre dışı bırakabilirim?</span><span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span></summary>
+        <p class="mt-3 text-body-md text-on-surface-variant leading-relaxed">Çerez tercihlerinizi tarayıcı ayarlarınızdan dilediğiniz zaman yönetebilirsiniz. Google Chrome'da "Ayarlar > Gizlilik ve Güvenlik > Çerezler ve diğer site verileri" bölümünden, Mozilla Firefox'ta "Tercihler > Gizlilik ve Güvenlik > Çerezler ve Site Verileri" bölümünden çerez ayarlarınızı değiştirebilirsiniz. Çerezleri tamamen devre dışı bırakmanız durumunda sitemizin bazı özellikleri düzgün çalışmayabilir. Dilerseniz tarayıcınızın gizli (incognito) modunu kullanarak da çerezlerin kaydedilmesini engelleyebilirsiniz.</p>
+      </details>
+    </div>
+  </div>
+</section>
 <div class="max-w-[1200px] mx-auto px-4 md:px-10 pb-12">
   <div class="ad-placeholder w-full h-24"><span class="text-label-sm text-outline">728x90 Reklam Alanı</span></div>
 </div>
