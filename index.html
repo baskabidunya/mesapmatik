@@ -46,13 +46,51 @@ body { font-family: 'Inter', sans-serif; background: #FAFAF7; }
   </div>
 </nav>
 <main class="max-w-[1200px] mx-auto px-4 md:px-10 pt-24 pb-12">
-  <section class="relative rounded-xl overflow-hidden mb-12 flex flex-col md:flex-row items-center bg-surface-container-low min-h-[400px] p-8 md:p-12">
-    <div class="z-10 w-full md:w-1/2 space-y-6 text-center md:text-left">
-      <h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary leading-tight">Türkiye'nin Finansal Hesaplayıcıları</h1>
-      <p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">Güvenilir, hızlı ve güncel verilerle finansal kararlarınızı kolaylaştırın.</p>
-      <div class="flex flex-wrap gap-4 justify-center md:justify-start">
-        <a href="/kira-artis" class="inline-block bg-[#F4972B] text-white px-8 py-4 rounded-xl font-bold hover:bg-[#e08a27] transition-all hover:scale-105">Hemen Hesapla</a>
-        <a href="#tools" class="inline-block border-2 border-secondary text-secondary px-8 py-4 rounded-xl font-bold hover:bg-secondary-container transition-all">Tüm Araçlar</a>
+  <section class="relative rounded-2xl overflow-hidden mb-12 min-h-[420px] md:min-h-[480px] flex items-center">
+    <div class="absolute inset-0">
+      <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1200&h=500&fit=crop" alt="Finansal grafikler">
+      <div class="absolute inset-0 bg-gradient-to-r from-[#0a2a2a]/95 via-[#0a2a2a]/80 to-transparent"></div>
+    </div>
+    <div class="relative z-10 w-full flex flex-col md:flex-row items-center gap-8 px-8 md:px-12 py-12">
+      <div class="w-full md:w-3/5 space-y-6 text-center md:text-left">
+        <span class="inline-block bg-[#F4972B]/20 text-[#F4972B] px-4 py-1.5 rounded-full text-label-sm font-bold tracking-wide">🚀 7 Araç, Tamamen Ücretsiz</span>
+        <h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white leading-tight">Türkiye'nin Finansal Hesaplayıcıları</h1>
+        <p class="font-body-lg text-body-lg text-white/80 max-w-xl">Güvenilir, hızlı ve güncel verilerle finansal kararlarınızı kolaylaştırın. Kira artışından kıdem tazminatına tüm hesaplamalar tek yerde.</p>
+        <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+          <a href="/kira-artis" class="inline-block bg-[#F4972B] text-white px-8 py-4 rounded-xl font-bold hover:bg-[#e08a27] transition-all hover:scale-105 shadow-lg shadow-[#F4972B]/20">Hemen Hesapla</a>
+          <a href="#tools" class="inline-block border-2 border-white/30 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/10 transition-all backdrop-blur-sm">Tüm Araçlar</a>
+        </div>
+        <div class="flex flex-wrap gap-6 pt-4 text-white/70 text-sm">
+          <span class="flex items-center gap-2"><span class="material-symbols-outlined text-[#F4972B] text-base">check_circle</span>Güncel TÜİK Verileri</span>
+          <span class="flex items-center gap-2"><span class="material-symbols-outlined text-[#F4972B] text-base">check_circle</span>Kayıt Gerekmez</span>
+          <span class="flex items-center gap-2"><span class="material-symbols-outlined text-[#F4972B] text-base">check_circle</span>%100 Gizlilik</span>
+        </div>
+      </div>
+      <div class="hidden md:flex w-full md:w-2/5 gap-4 justify-end">
+        <div class="space-y-4 w-48">
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/10">
+            <p class="text-white/50 text-xs uppercase tracking-wider">Enflasyon (Haz 26)</p>
+            <p class="text-white font-bold text-2xl tab-num">%32,11</p>
+            <p class="text-white/40 text-xs">Yıllık TÜFE</p>
+          </div>
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/10">
+            <p class="text-white/50 text-xs uppercase tracking-wider">Dolar/TL</p>
+            <p class="text-white font-bold text-2xl tab-num">₺47,16</p>
+            <p class="text-white/40 text-xs">Güncel Kur</p>
+          </div>
+        </div>
+        <div class="space-y-4 w-48 pt-8">
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/10">
+            <p class="text-white/50 text-xs uppercase tracking-wider">Kıdem Tavanı</p>
+            <p class="text-white font-bold text-2xl tab-num">₺73.730</p>
+            <p class="text-white/40 text-xs">2026 II. Dönem</p>
+          </div>
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/10">
+            <p class="text-white/50 text-xs uppercase tracking-wider">Euro/TL</p>
+            <p class="text-white font-bold text-2xl tab-num">₺53,93</p>
+            <p class="text-white/40 text-xs">Güncel Kur</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
