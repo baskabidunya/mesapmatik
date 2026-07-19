@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html class="light" lang="tr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kıdem ve İhbar Tazminatı Hesaplayıcı | FinansMatik</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="/js/tailwind-config.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  body { background: #FAFAF7; min-height: 100dvh; }
+  .calc-card { box-shadow: 0px 4px 20px rgba(31,41,55,0.04); }
+  .result-card { box-shadow: 0px 10px 30px rgba(15,76,76,0.08); border-top: 4px solid #003434; }
+</style>
+</head>
+<body class="font-body-md text-on-surface">
+<div id="nav-placeholder"></div>
+<main class="max-w-[1200px] mx-auto px-4 md:px-10 py-8">
+  <header class="mb-8">
+    <h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">Kıdem ve İhbar Tazminatı Hesaplayıcı</h1>
+    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Güncel mevzuat ve tavan fiyatlara göre tazminatınızı hesaplayın.</p>
+  </header>
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <div class="lg:col-span-7">
+      <div class="calc-card bg-surface-container-lowest p-8 rounded-xl">
+        <form class="space-y-6" id="calcForm">
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface-variant mb-2">Brüt Maaş (TL)</label>
+            <div class="relative">
+              <span class="absolute left-4 top-1/2 -translate-y-1/2 text-outline">₺</span>
+              <input class="w-full pl-8 pr-4 py-3 bg-surface-container-low border-2 border-transparent focus:border-secondary outline-none rounded-xl font-body-md" id="grossSalary" placeholder="Örn: 45000" required type="number"/>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block font-label-md text-label-md text-on-surface-variant mb-2">İşe Başlama Tarihi</label>
+              <input class="w-full px-4 py-3 bg-surface-container-low border-2 border-transparent focus:border-secondary outline-none rounded-xl" id="startDate" required type="date"/>
+            </div>
+            <div>
+              <label class="block font-label-md text-label-md text-on-surface-variant mb-2">İşten Ayrılma Tarihi</label>
+              <input class="w-full px-4 py-3 bg-surface-container-low border-2 border-transparent focus:border-secondary outline-none rounded-xl" id="endDate" required type="date"/>
+            </div>
+          </div>
+          <button class="w-full bg-[#F4972B] text-white rounded-xl font-headline-md text-headline-md py-4 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all active:scale-[0.98]" type="submit">Hesapla</button>
+        </form>
+      </div>
+    </div>
+    <div class="lg:col-span-5 space-y-6">
+      <div class="hidden" id="results">
+        <div class="bg-surface-container-lowest rounded-xl result-card p-8">
+          <h3 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-2">
+            <span class="material-symbols-outlined">receipt_long</span> Hesaplama Sonucu
+          </h3>
+          <div class="space-y-4">
+            <div class="flex justify-between items-center pb-3 border-b border-outline-variant">
+              <span class="text-on-surface-variant font-body-md">Kıdem Tazminatı</span>
+              <span class="font-display-num text-display-num text-primary tab-num" id="kidem_val">₺0</span>
+            </div>
+            <div class="flex justify-between items-center pb-3 border-b border-outline-variant">
+              <span class="text-on-surface-variant font-body-md">İhbar Tazminatı</span>
+              <span class="font-display-num text-display-num text-secondary tab-num" id="ihbar_val">₺0</span>
+            </div>
+            <div class="flex justify-between items-center pt-2">
+              <span class="text-primary font-bold font-body-lg">Toplam Ödeme</span>
+              <span class="font-display-num text-display-num text-[#F4972B] tab-num" id="toplam_val">₺0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="loadingPlaceholder" class="bg-surface-container-lowest rounded-xl p-12 text-center">
+        <span class="material-symbols-outlined text-4xl text-outline mb-4">payments</span>
+        <p class="text-on-surface-variant">Brüt maaş ve çalışma tarihlerini girip hesaplayın.</p>
+      </div>
+    </div>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/finansmatik.js"></script>
+<script>
+  let ceilingAmount = 43528.50;
+  FINANSMATIK.api.getSeveranceCeiling().then(data => { ceilingAmount = data.ceiling_amount; });
+
+  document.getElementById('calcForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const grossSalary = parseFloat(document.getElementById('grossSalary').value);
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+    if (isNaN(grossSalary)) return;
+
+    const result = FINANSMATIK.calculate.kidemTazminati(grossSalary, startDate, endDate, ceilingAmount);
+    document.getElementById('results').classList.remove('hidden');
+    document.getElementById('loadingPlaceholder').classList.add('hidden');
+
+    if (result.mesaj) {
+      document.getElementById('kidem_val').textContent = result.mesaj;
+      document.getElementById('ihbar_val').textContent = '₺0';
+      document.getElementById('toplam_val').textContent = '₺0';
+      return;
+    }
+
+    document.getElementById('kidem_val').textContent = FINANSMATIK.format.currency(result.kidem);
+    document.getElementById('ihbar_val').textContent = FINANSMATIK.format.currency(result.ihbar);
+    document.getElementById('toplam_val').textContent = FINANSMATIK.format.currency(result.toplam);
+  });
+</script>
+</body>
+</html>

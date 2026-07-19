@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html class="light" lang="tr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Brüt-Net Maaş Hesaplama | FinansMatik</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="/js/tailwind-config.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  body { background: #FAFAF7; min-height: 100dvh; }
+  .card-s { box-shadow: 0px 4px 20px rgba(31,41,55,0.04); }
+</style>
+</head>
+<body class="font-body-md text-on-surface">
+<div id="nav-placeholder"></div>
+<main class="max-w-[1200px] mx-auto px-4 md:px-10 py-8">
+  <header class="mb-8">
+    <h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">Brüt-Net Maaş Hesaplama</h1>
+    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Brüt maaşınızdan tüm kesintileri hesaplayın, net elinize geçecek tutarı görün.</p>
+  </header>
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <div class="lg:col-span-5 card-s bg-surface-container-lowest p-8 rounded-xl h-fit">
+      <form class="space-y-6" id="salaryForm">
+        <div>
+          <label class="block font-label-md text-label-md text-on-surface-variant mb-2">Brüt Maaş (TL)</label>
+          <div class="relative">
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-outline">₺</span>
+            <input class="w-full pl-10 pr-4 py-3 border-2 border-outline-variant focus:border-secondary outline-none rounded-xl" id="grossSalary" placeholder="Örn: 45000" required type="number"/>
+          </div>
+        </div>
+        <button class="w-full bg-[#F4972B] hover:bg-[#e08924] text-white font-headline-md text-headline-md py-4 rounded-xl shadow-lg transition-all active:scale-[0.98]" type="submit">Hesapla</button>
+      </form>
+    </div>
+    <div class="lg:col-span-7">
+      <div class="hidden space-y-4" id="results">
+        <div class="p-6 rounded-xl bg-surface-container-lowest card-s border-t-4 border-primary">
+          <div class="flex justify-between items-center">
+            <span class="font-label-sm text-label-sm text-on-surface-variant">Net Maaş</span>
+            <span class="font-display-num text-display-num text-primary tab-num" id="netSalary">₺0</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="bg-surface-container p-4 rounded-xl">
+            <span class="material-symbols-outlined text-error text-2xl mb-2">assignment</span>
+            <p class="font-label-sm text-label-sm text-on-surface-variant">SGK İşçi</p>
+            <p class="font-headline-md text-headline-md text-error tab-num" id="sgkDeduction">₺0</p>
+          </div>
+          <div class="bg-surface-container p-4 rounded-xl">
+            <span class="material-symbols-outlined text-error text-2xl mb-2">work</span>
+            <p class="font-label-sm text-label-sm text-on-surface-variant">İşsizlik</p>
+            <p class="font-headline-md text-headline-md text-error tab-num" id="unemploymentDeduction">₺0</p>
+          </div>
+          <div class="bg-surface-container p-4 rounded-xl">
+            <span class="material-symbols-outlined text-tertiary text-2xl mb-2">receipt</span>
+            <p class="font-label-sm text-label-sm text-on-surface-variant">Gelir Vergisi</p>
+            <p class="font-headline-md text-headline-md text-tertiary tab-num" id="taxDeduction">₺0</p>
+          </div>
+          <div class="bg-surface-container p-4 rounded-xl">
+            <span class="material-symbols-outlined text-tertiary text-2xl mb-2">stamp</span>
+            <p class="font-label-sm text-label-sm text-on-surface-variant">Damga Vergisi</p>
+            <p class="font-headline-md text-headline-md text-tertiary tab-num" id="stampDeduction">₺0</p>
+          </div>
+        </div>
+      </div>
+      <div id="loadingPlaceholder" class="bg-surface-container-lowest rounded-xl p-12 text-center">
+        <span class="material-symbols-outlined text-4xl text-outline mb-4">percent</span>
+        <p class="text-on-surface-variant">Brüt maaşınızı girip hesaplayın.</p>
+      </div>
+    </div>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/finansmatik.js"></script>
+<script>
+  document.getElementById('salaryForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const brut = parseFloat(document.getElementById('grossSalary').value);
+    if (isNaN(brut)) return;
+
+    const result = FINANSMATIK.calculate.maas(brut);
+    document.getElementById('results').classList.remove('hidden');
+    document.getElementById('loadingPlaceholder').classList.add('hidden');
+    document.getElementById('netSalary').textContent = FINANSMATIK.format.currency(result.netMaas);
+    document.getElementById('sgkDeduction').textContent = FINANSMATIK.format.currency(result.sgkIsci);
+    document.getElementById('unemploymentDeduction').textContent = FINANSMATIK.format.currency(result.issizlikIsci);
+    document.getElementById('taxDeduction').textContent = FINANSMATIK.format.currency(result.gelirVergisi);
+    document.getElementById('stampDeduction').textContent = FINANSMATIK.format.currency(result.damgaVergisi);
+  });
+</script>
+</body>
+</html>
